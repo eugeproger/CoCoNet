@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">CoCoNet</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="contacts_fragment">Contacts Fragment</string>
+    <string name="chats_fragment">Chats Fragment</string>
+    <string name="groups_fragment">Groups Fragment</string>
+    <string name="space">\u0020</string>
+    <string name="hello">Hello.</string>
+    <string name="login_image">Login image</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgotten_password">Forget password?</string>
+    <string name="click">Click!</string>
+    <string name="log_in">Log in</string>
+    <string name="or">or</string>
+    <string name="log_in_with_phone_number">Log in with phone number</string>
+    <string name="account_no_exist">Don\'t have an account yet?</string>
+    <string name="sign_up">Create account</string>
+    <string name="signup_image">Signup image</string>
+    <string name="start">Let\'s get started!</string>
+    <string name="account_is_exist">Already have an account?</string>
+    <string name="find_user">Find user</string>
+    <string name="log_out">Log out</string>
+    <string name="settings">Settings</string>
+</resources>

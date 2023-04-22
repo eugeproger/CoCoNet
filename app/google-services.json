@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "729264121271",
+    "project_id": "coconet-20230422",
+    "storage_bucket": "coconet-20230422.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729264121271:android:5121163d94408cd7897432",
+        "android_client_info": {
+          "package_name": "com.eugeproger.coconet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "729264121271-e8mpro3ll1mo54evpru899r6kpp7f3o8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCod_cqe7xopB8qgXgD6m20jqedoS7mKLM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "729264121271-e8mpro3ll1mo54evpru899r6kpp7f3o8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

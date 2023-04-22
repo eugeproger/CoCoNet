@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp">
+
+            <ImageView
+                android:id="@+id/login_image"
+                android:layout_width="match_parent"
+                android:layout_height="184dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:scaleType="fitCenter"
+                android:layout_marginVertical="48dp"
+                android:contentDescription="@string/login_image"
+                app:srcCompat="@drawable/log_in_picture" />
+
+            <TextView
+                android:id="@+id/hello_log_in_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/login_image"
+                android:textColor="?attr/colorOnSecondary"
+                android:textStyle="bold"
+                android:textSize="32sp"
+                android:text="@string/hello" />
+
+            <TextView
+                android:id="@+id/welcome_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hello_log_in_textView"
+                android:textColor="?attr/colorOnSecondary"
+                android:textStyle="bold"
+                android:textSize="32sp"
+                android:text="@string/welcome_back" />
+
+            <EditText
+                android:id="@+id/user_login_email_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/welcome_textView"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:drawableStart="@drawable/email"
+                android:layout_marginTop="24dp" />
+
+            <EditText
+                android:id="@+id/user_login_password_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/user_login_email_field"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:drawableStart="@drawable/password"
+                android:layout_marginTop="8dp" />
+
+            <LinearLayout
+                android:id="@+id/forgotten_password_linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_login_password_field"
+                android:layout_marginTop="8dp"
+                android:layout_alignParentEnd="true">
+
+                <TextView
+                    android:id="@+id/create_new_password_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/forgotten_password" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/space" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/click"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorSecondary"/>
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/log_in_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/forgotten_password_linearLayout"
+                android:padding="10dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/log_in"
+                app:backgroundTint="@color/accent_blue"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/or_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/log_in_button"
+                android:layout_marginTop="8dp"
+                android:text="@string/or"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/phone_log_in_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/or_text_view"
+                android:padding="10dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/log_in_with_phone_number"
+                app:backgroundTint="@color/accent_blue"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phone_log_in_button"
+                android:layout_marginVertical="24dp"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:id="@+id/no_have_account_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/account_no_exist"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/space"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/sign_up_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_up"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorSecondary"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

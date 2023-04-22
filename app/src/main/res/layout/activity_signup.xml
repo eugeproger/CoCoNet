@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="16dp"
+    tools:context=".SignupActivity">
+
+    <ImageView
+        android:id="@+id/register_image"
+        android:layout_width="match_parent"
+        android:layout_height="184dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitCenter"
+        android:layout_marginVertical="48dp"
+        android:contentDescription="@string/signup_image"
+        app:srcCompat="@drawable/sign_up_picture"/>
+
+
+    <TextView
+        android:id="@+id/hello_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register_image"
+        android:textColor="?attr/colorOnSecondary"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        android:text="@string/hello" />
+
+    <TextView
+        android:id="@+id/start_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hello_textView"
+        android:textColor="?attr/colorOnSecondary"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        android:text="@string/start" />
+
+
+    <EditText
+        android:id="@+id/user_signup_email_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/start_textView"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:drawableStart="@drawable/email"
+        android:layout_marginTop="24dp"/>
+
+    <EditText
+        android:id="@+id/user_signup_password_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/user_signup_email_field"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:drawableStart="@drawable/password"
+        android:layout_marginTop="8dp"/>
+
+
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_signup_password_field"
+        android:padding="10dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/sign_up"
+        app:backgroundTint="@color/accent_blue"
+        android:textSize="18sp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sign_up_button"
+        android:layout_marginTop="24dp"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/account_is_exist_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_is_exist" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/space"/>
+
+        <TextView
+            android:id="@+id/log_in_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/log_in"
+            android:textStyle="bold"
+            android:textColor="?attr/colorSecondary"/>
+
+    </LinearLayout>
+</RelativeLayout>
