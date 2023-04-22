@@ -48,35 +48,49 @@
                 android:textSize="32sp"
                 android:text="@string/welcome_back" />
 
-            <EditText
-                android:id="@+id/user_login_email_field"
+            <LinearLayout
+                android:id="@+id/login_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/welcome_textView"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                android:padding="10dp"
-                android:drawableStart="@drawable/email"
-                android:layout_marginTop="24dp" />
+                android:layout_below="@+id/welcome_textView"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rounded_corner"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/user_login_password_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/user_login_email_field"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:padding="10dp"
-                android:drawableStart="@drawable/password"
-                android:layout_marginTop="8dp" />
+                <EditText
+                    android:id="@+id/user_login_email_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:padding="8dp"
+                    android:drawableStart="@drawable/email"
+                    android:background="@drawable/field_design"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/theme_silver_dark"
+                    android:layout_marginHorizontal="16dp" />
+
+                <EditText
+                    android:id="@+id/user_login_password_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:padding="8dp"
+                    android:drawableStart="@drawable/password"
+                    android:background="@drawable/field_design" />
+            </LinearLayout>
+
+
 
             <LinearLayout
                 android:id="@+id/forgotten_password_linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/user_login_password_field"
+                android:layout_below="@id/login_box"
                 android:layout_marginTop="8dp"
                 android:layout_alignParentEnd="true">
 
@@ -109,8 +123,9 @@
                 android:padding="10dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/log_in"
-                app:backgroundTint="@color/accent_blue"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:background="@drawable/button_design"
+                app:backgroundTint="@color/black"/>
 
             <TextView
                 android:id="@+id/or_text_view"
@@ -133,8 +148,9 @@
                 android:padding="10dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/log_in_with_phone_number"
-                app:backgroundTint="@color/accent_blue"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:background="@drawable/button_design"
+                app:backgroundTint="@color/black"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -147,8 +163,7 @@
                     android:id="@+id/no_have_account_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/account_no_exist"
-                    android:textSize="16sp"/>
+                    android:text="@string/account_no_exist" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -162,8 +177,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/sign_up"
                     android:textStyle="bold"
-                    android:textColor="?attr/colorSecondary"
-                    android:textSize="16sp"/>
+                    android:textColor="?attr/colorSecondary" />
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
