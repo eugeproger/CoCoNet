@@ -39,42 +39,53 @@
         android:textSize="32sp"
         android:text="@string/start" />
 
-
-    <EditText
-        android:id="@+id/user_signup_email_field"
+    <LinearLayout
+        android:id="@+id/signup_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/start_textView"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:padding="10dp"
-        android:drawableStart="@drawable/email"
-        android:layout_marginTop="24dp"/>
+        android:layout_below="@+id/start_textView"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_corner"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/user_signup_password_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/user_signup_email_field"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:drawableStart="@drawable/password"
-        android:layout_marginTop="8dp"/>
+        <EditText
+            android:id="@+id/user_signup_email_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:padding="8dp"
+            android:drawableStart="@drawable/email"
+            android:background="@drawable/field_design"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/theme_silver_dark"
+            android:layout_marginHorizontal="16dp" />
+
+        <EditText
+            android:id="@+id/user_signup_password_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:padding="8dp"
+            android:drawableStart="@drawable/password"
+            android:background="@drawable/field_design" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/sign_up_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/user_signup_password_field"
-        android:padding="10dp"
+        android:layout_below="@+id/signup_box"
         android:layout_marginTop="24dp"
+        android:background="@drawable/button_design"
+        android:padding="10dp"
         android:text="@string/sign_up"
-        app:backgroundTint="@color/accent_blue"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+        app:backgroundTint="@color/black" />
 
     <LinearLayout
         android:layout_width="wrap_content"
