@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/user_profile_imageView"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/corner_design"
         android:orientation="vertical">
 
         <EditText
