@@ -35,7 +35,8 @@
             android:background="@drawable/field_design"
             android:hint="User name"
             android:inputType="textMultiLine"
-            android:padding="16dp" />
+            android:padding="8dp"
+            android:drawableStart="@drawable/name_3"/>
 
         <View
             android:layout_width="match_parent"
@@ -51,7 +52,8 @@
             android:background="@drawable/field_design"
             android:hint="Bio"
             android:inputType="textMultiLine"
-            android:padding="16dp" />
+            android:padding="8dp"
+            android:drawableStart="@drawable/bio_3"/>
     </LinearLayout>
 
     <Button

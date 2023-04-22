@@ -70,7 +70,7 @@ public class AppActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if ((snapshot.child("name").exists())) {
-                    Utility.showShortToast(AppActivity.this, "Welcome");
+
                 } else {
                     sendUserToSettingsActivity();
                 }
