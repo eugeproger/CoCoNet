@@ -10,19 +10,28 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.eugeproger.coconet.support.Constant;
+import com.eugeproger.coconet.support.Utility;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.eugeproger.coconet.tabs.adapter.TabsAccessorAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AppActivity extends AppCompatActivity {
-
     private Toolbar toolbar;
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private TabsAccessorAdapter tabsAccessorAdapter;
+
     private FirebaseUser currentUser;
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth auth;
+    private DatabaseReference rootReference;
+    private FirebaseDatabase firebaseDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +48,10 @@ public class AppActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.main_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        currentUser = firebaseAuth.getCurrentUser();
+        auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance(Constant.REALTIME_DATABASE_LINK);
+        rootReference = firebaseDatabase.getReference();
     }
 
     @Override
@@ -48,17 +59,40 @@ public class AppActivity extends AppCompatActivity {
         super.onStart();
         if (currentUser == null) {
             sendUserToLoginActivity();
+        } else {
+            VerifyUserExistence();
         }
+    }
+
+    private void VerifyUserExistence() {
+        String currentUserID = auth.getCurrentUser().getUid();
+        rootReference.child("Users").child(currentUserID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if ((snapshot.child("name").exists())) {
+                    Utility.showShortToast(AppActivity.this, "Welcome");
+                } else {
+                    sendUserToSettingsActivity();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     private void sendUserToLoginActivity() {
         Intent loginIntent = new Intent(AppActivity.this, LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(loginIntent);
+        finish();
     }
 
     private void sendUserToSettingsActivity() {
         Intent settingsIntent = new Intent(AppActivity.this, SettingsActivity.class);
+        settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(settingsIntent);
+        finish();
     }
 
 
@@ -74,7 +108,7 @@ public class AppActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
 
         if (item.getItemId() == R.id.main_logout_option) {
-            firebaseAuth.signOut();
+            auth.signOut();
             finish();
             sendUserToLoginActivity();
         }
