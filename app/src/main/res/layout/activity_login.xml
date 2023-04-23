@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
-                    android:padding="8dp"
+                    android:padding="4dp"
                     android:drawableStart="@drawable/email"
                     android:background="@drawable/field_design"/>
 
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:padding="8dp"
+                    android:padding="4dp"
                     android:drawableStart="@drawable/password"
                     android:background="@drawable/field_design" />
             </LinearLayout>
@@ -120,7 +120,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/forgotten_password_linearLayout"
-                android:padding="10dp"
+                android:padding="8dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/log_in"
                 android:textSize="18sp"
@@ -146,7 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/or_text_view"
-                android:padding="10dp"
+                android:padding="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/log_in_with_phone_number"
                 android:textSize="18sp"
