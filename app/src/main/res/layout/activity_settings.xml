@@ -35,7 +35,7 @@
             android:background="@drawable/field_design"
             android:hint="User name"
             android:inputType="textMultiLine"
-            android:padding="8dp"
+            android:padding="4dp"
             android:drawableStart="@drawable/name_3"/>
 
         <View
@@ -52,7 +52,7 @@
             android:background="@drawable/field_design"
             android:hint="Bio"
             android:inputType="textMultiLine"
-            android:padding="8dp"
+            android:padding="4dp"
             android:drawableStart="@drawable/bio_3"/>
     </LinearLayout>
 
@@ -61,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/data_user_box"
-        android:padding="10dp"
+        android:padding="8dp"
         android:layout_marginTop="24dp"
         android:text="Update"
         android:textSize="18sp"

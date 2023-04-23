@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            android:padding="8dp"
+            android:padding="4dp"
             android:drawableStart="@drawable/email"
             android:background="@drawable/field_design"/>
 
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:padding="8dp"
+            android:padding="4dp"
             android:drawableStart="@drawable/password"
             android:background="@drawable/field_design" />
     </LinearLayout>
@@ -82,7 +82,7 @@
         android:layout_below="@+id/signup_box"
         android:layout_marginTop="24dp"
         android:background="@drawable/button_design"
-        android:padding="10dp"
+        android:padding="8dp"
         android:text="@string/sign_up"
         android:textSize="18sp"
         android:textColor="@color/white"
