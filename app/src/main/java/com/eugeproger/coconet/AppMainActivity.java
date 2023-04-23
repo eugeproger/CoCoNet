@@ -1,17 +1,23 @@
 package com.eugeproger.coconet;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.eugeproger.coconet.support.Constant;
 import com.eugeproger.coconet.support.Utility;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,7 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class AppActivity extends AppCompatActivity {
+public class AppMainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -35,7 +41,7 @@ public class AppActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_app);
+        setContentView(R.layout.activity_app_main);
 
         toolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(toolbar);
@@ -82,14 +88,14 @@ public class AppActivity extends AppCompatActivity {
     }
 
     private void sendUserToLoginActivity() {
-        Intent loginIntent = new Intent(AppActivity.this, LoginActivity.class);
+        Intent loginIntent = new Intent(AppMainActivity.this, LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(loginIntent);
         finish();
     }
 
     private void sendUserToSettingsActivity() {
-        Intent settingsIntent = new Intent(AppActivity.this, SettingsActivity.class);
+        Intent settingsIntent = new Intent(AppMainActivity.this, SettingsActivity.class);
         settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(settingsIntent);
         finish();
@@ -105,20 +111,64 @@ public class AppActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        super.onOptionsItemSelected(item);
 
+        super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.main_find_user_option) {
+
+        }
+        if (item.getItemId() == R.id.main_create_group_option) {
+
+            RequestNewGroup();
+        }
+        if (item.getItemId() == R.id.main_settings_option) {
+            sendUserToSettingsActivity();
+        }
         if (item.getItemId() == R.id.main_logout_option) {
             auth.signOut();
             finish();
             sendUserToLoginActivity();
         }
-        if (item.getItemId() == R.id.main_settings_option) {
-            sendUserToSettingsActivity();
-        }
-        if (item.getItemId() == R.id.main_find_user_option) {
-
-        }
         return true;
 
+    }
+
+    private void RequestNewGroup() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AppMainActivity.this, R.style.AlertDialog);
+
+        final EditText groupNameField = new EditText(AppMainActivity.this);
+        groupNameField.setHint("Group name");
+        builder.setView(groupNameField);
+
+        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String groupName = groupNameField.getText().toString();
+                if (TextUtils.isEmpty(groupName)) {
+                    Utility.showLongToast(AppMainActivity.this, "Group is not created. Please, write a name of group.");
+                } else {
+                    createGroup(groupName);
+                }
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+    private void createGroup(String groupName) {
+        rootReference.child(Constant.GROUPS).child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Utility.showLongToast(AppMainActivity.this, groupName + "group is created successfully.");
+                }
+            }
+        });
     }
 }

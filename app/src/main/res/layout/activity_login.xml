@@ -70,7 +70,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/theme_silver_dark"
+                    android:background="@color/silver_dark"
                     android:layout_marginHorizontal="16dp" />
 
                 <EditText
@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/click"
                     android:textStyle="bold"
-                    android:textColor="?attr/colorSecondary"/>
+                    android:textColor="?attr/colorAccent"/>
 
             </LinearLayout>
 
@@ -125,6 +125,7 @@
                 android:text="@string/log_in"
                 android:textSize="18sp"
                 android:background="@drawable/button_design"
+                android:textColor="@color/white"
                 app:backgroundTint="@color/black"/>
 
             <TextView
@@ -150,6 +151,7 @@
                 android:text="@string/log_in_with_phone_number"
                 android:textSize="18sp"
                 android:background="@drawable/button_design"
+                android:textColor="@color/white"
                 app:backgroundTint="@color/black"/>
 
             <LinearLayout
@@ -177,7 +179,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/sign_up"
                     android:textStyle="bold"
-                    android:textColor="?attr/colorSecondary" />
+                    android:textColor="?attr/colorAccent" />
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
