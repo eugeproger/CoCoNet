@@ -25,4 +25,5 @@
     <string name="log_out">Log out</string>
     <string name="settings">Settings</string>
     <string name="create_group">New group</string>
+    <string name="title">Title</string>
 </resources>
