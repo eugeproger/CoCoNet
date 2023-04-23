@@ -18,5 +18,7 @@
         <item name="tabSelectedTextColor">?attr/colorOnPrimary</item>
     </style>
 
-    <style name="AlertDialog" parent="Base.Theme.AppCompat.Light.Dialog"></style>
+    <style name="AlertDialog" parent="Base.Theme.AppCompat.Light.Dialog">
+
+    </style>
 </resources>
