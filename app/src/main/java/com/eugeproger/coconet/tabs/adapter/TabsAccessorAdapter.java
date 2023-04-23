@@ -5,11 +5,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
-import com.eugeproger.coconet.tabs.ChatsFragment;
-import com.eugeproger.coconet.tabs.ContactsFragment;
-import com.eugeproger.coconet.tabs.GroupsFragment;
+import com.eugeproger.coconet.tabs.chat.ChatsFragment;
+import com.eugeproger.coconet.tabs.contact.ContactsFragment;
+import com.eugeproger.coconet.tabs.group.GroupsFragment;
 
 public class TabsAccessorAdapter extends FragmentPagerAdapter {
 

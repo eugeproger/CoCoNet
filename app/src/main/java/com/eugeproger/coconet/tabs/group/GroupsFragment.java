@@ -1,4 +1,4 @@
-package com.eugeproger.coconet.tabs;
+package com.eugeproger.coconet.tabs.group;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,10 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.eugeproger.coconet.GroupChatActivity;
 import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.support.Constant;
-import com.google.firebase.auth.FirebaseAuth;
+import com.eugeproger.coconet.support.DatabaseRealtimeFolderName;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -54,7 +53,7 @@ public class GroupsFragment extends Fragment {
 
 
         firebaseDatabase = FirebaseDatabase.getInstance(Constant.REALTIME_DATABASE_LINK);
-        groupReference = firebaseDatabase.getReference().child(Constant.GROUPS);
+        groupReference = firebaseDatabase.getReference().child(DatabaseRealtimeFolderName.GROUPS);
 
         initializeElements();
 
