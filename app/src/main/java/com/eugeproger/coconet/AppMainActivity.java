@@ -14,7 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.eugeproger.coconet.login.LoginActivity;
+import com.eugeproger.coconet.option.SettingsActivity;
 import com.eugeproger.coconet.support.Constant;
+import com.eugeproger.coconet.support.DatabaseRealtimeFolderName;
 import com.eugeproger.coconet.support.Utility;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -57,6 +60,7 @@ public class AppMainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         currentUser = auth.getCurrentUser();
+
         firebaseDatabase = FirebaseDatabase.getInstance(Constant.REALTIME_DATABASE_LINK);
         rootReference = firebaseDatabase.getReference();
     }
@@ -163,7 +167,7 @@ public class AppMainActivity extends AppCompatActivity {
     }
 
     private void createGroup(String groupName) {
-        rootReference.child(Constant.GROUPS).child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
+        rootReference.child(DatabaseRealtimeFolderName.GROUPS).child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {

@@ -1,4 +1,4 @@
-package com.eugeproger.coconet;
+package com.eugeproger.coconet.option;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.eugeproger.coconet.AppMainActivity;
+import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.support.Constant;
 import com.eugeproger.coconet.support.Utility;
 import com.google.android.gms.tasks.OnCompleteListener;
