@@ -8,8 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="accent_blue">#218aff</color>
-    <color name="theme_silver">#d8d8d8</color>
-    <color name="theme_silver_dark">#aeb9cc</color>
-    <color name="message_green">#39ff5a</color>
+    <color name="blue_dark">#218aff</color>
+    <color name="silver_light">#d8d8d8</color>
+    <color name="silver_dark">#aeb9cc</color>
+    <color name="green">#39ff5a</color>
+    <color name="red">#FF0000</color>
+    <color name="yellow">#FFDD00</color>
+    <color name="blue_light">#FF03DAC5</color>
 </resources>

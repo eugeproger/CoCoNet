@@ -89,7 +89,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void sendUserToAppActivity() {
-        Intent appIntent = new Intent(SignupActivity.this, AppActivity.class);
+        Intent appIntent = new Intent(SignupActivity.this, AppMainActivity.class);
         appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(appIntent);
         finish();

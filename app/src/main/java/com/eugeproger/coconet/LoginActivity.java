@@ -15,7 +15,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.eugeproger.coconet.support.Utility;
 
 public class LoginActivity extends AppCompatActivity {
@@ -79,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void sendUserToAppActivity() {
-        Intent appIntent = new Intent(LoginActivity.this, AppActivity.class);
+        Intent appIntent = new Intent(LoginActivity.this, AppMainActivity.class);
         appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(appIntent);
         finish();

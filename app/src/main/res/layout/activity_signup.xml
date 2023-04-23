@@ -61,7 +61,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/theme_silver_dark"
+            android:background="@color/silver_dark"
             android:layout_marginHorizontal="16dp" />
 
         <EditText
@@ -85,6 +85,7 @@
         android:padding="10dp"
         android:text="@string/sign_up"
         android:textSize="18sp"
+        android:textColor="@color/white"
         app:backgroundTint="@color/black" />
 
     <LinearLayout
@@ -111,7 +112,7 @@
             android:layout_height="wrap_content"
             android:text="@string/log_in"
             android:textStyle="bold"
-            android:textColor="?attr/colorSecondary"/>
+            android:textColor="?attr/colorAccent"/>
 
     </LinearLayout>
 </RelativeLayout>
