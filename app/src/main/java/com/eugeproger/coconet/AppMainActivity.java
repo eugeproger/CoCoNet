@@ -45,7 +45,7 @@ public class AppMainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("CoCoNet");
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         viewPager = findViewById(R.id.main_tabs_pager);
         tabsAccessorAdapter = new TabsAccessorAdapter(getSupportFragmentManager());

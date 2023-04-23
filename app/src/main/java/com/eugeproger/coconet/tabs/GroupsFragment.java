@@ -1,5 +1,6 @@
 package com.eugeproger.coconet.tabs;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.eugeproger.coconet.GroupChatActivity;
 import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.support.Constant;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,6 +59,14 @@ public class GroupsFragment extends Fragment {
         initializeElements();
 
         retrieveAndDisplayGroups();
+
+        listView.setOnItemClickListener((adapterView, view, position, id) -> {
+            String currentGroupName = adapterView.getItemAtPosition(position).toString();
+
+            Intent groupChatIntent = new Intent(getContext(), GroupChatActivity.class);
+            groupChatIntent.putExtra(Constant.GROUP_NAME, currentGroupName);
+            startActivity(groupChatIntent);
+        });
 
         return groupFragmentView;
     }
