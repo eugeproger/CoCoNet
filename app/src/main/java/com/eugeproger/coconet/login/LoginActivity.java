@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        sendUserToAppActivity();
+                        sendUserToAppMainActivity();
                         Utility.showShortToast(LoginActivity.this, "Logged in successful");
                         progressDialog.dismiss();
                     } else {
@@ -83,10 +83,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void sendUserToAppActivity() {
-        Intent appIntent = new Intent(LoginActivity.this, AppMainActivity.class);
-        appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(appIntent);
+    private void sendUserToAppMainActivity() {
+        Intent appMainIntent = new Intent(LoginActivity.this, AppMainActivity.class);
+        appMainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(appMainIntent);
         finish();
     }
 
