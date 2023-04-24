@@ -14,6 +14,9 @@
         android:theme="@style/Theme.CoCoNet"
         tools:targetApi="31">
         <activity
+            android:name=".login.PhoneLoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".tabs.group.GroupChatActivity"
             android:exported="false" />
         <activity

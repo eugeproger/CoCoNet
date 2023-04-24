@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login.SignupActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp">
+
+        <ImageView
+            android:id="@+id/phone_login_imageView"
+            android:layout_width="match_parent"
+            android:layout_height="184dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitCenter"
+            android:layout_marginVertical="48dp"
+            android:contentDescription="@string/login_image"
+            app:srcCompat="@drawable/phone_login" />
+
+            <EditText
+                android:id="@+id/phone_number_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phone_login_imageView"
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:padding="4dp"
+                android:drawableStart="@drawable/phone_4"
+                android:background="@drawable/field_design"/>
+
+        <EditText
+            android:id="@+id/verification_code_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phone_login_imageView"
+            android:background="@drawable/field_design"
+            android:drawableStart="@drawable/code_3"
+            android:hint="@string/verification_code"
+            android:padding="4dp"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/phone_number_field" />
+
+        <Button
+            android:id="@+id/verification_code_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phone_number_field"
+            android:padding="8dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/send_code"
+            android:textSize="18sp"
+            android:background="@drawable/button_design"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/black"/>
+
+        <Button
+            android:id="@+id/verify_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phone_number_field"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_design"
+            android:padding="8dp"
+            android:text="@string/verify"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:visibility="invisible"
+            app:backgroundTint="@color/black" />
+
+        </RelativeLayout>
+</RelativeLayout>
