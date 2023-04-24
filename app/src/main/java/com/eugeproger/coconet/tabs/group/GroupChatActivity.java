@@ -6,18 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.widget.NestedScrollView;
 
 import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.support.Constant;
-import com.eugeproger.coconet.support.DatabaseRealtimeFolderName;
+import com.eugeproger.coconet.support.FirebaseFolderName;
 import com.eugeproger.coconet.support.FirebaseConfiguration;
 import com.eugeproger.coconet.support.Utility;
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,8 +64,8 @@ public class GroupChatActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         currentUserID = auth.getCurrentUser().getUid();
-        userReference = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(DatabaseRealtimeFolderName.USERS);
-        groupNameReference = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(DatabaseRealtimeFolderName.GROUPS).child(currentGroupName);
+        userReference = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.USERS);
+        groupNameReference = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.GROUPS).child(currentGroupName);
 
         initializeElements();
 

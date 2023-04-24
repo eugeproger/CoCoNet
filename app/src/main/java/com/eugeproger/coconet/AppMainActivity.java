@@ -17,7 +17,7 @@ import android.widget.EditText;
 import com.eugeproger.coconet.login.LoginActivity;
 import com.eugeproger.coconet.option.SettingsActivity;
 import com.eugeproger.coconet.support.Constant;
-import com.eugeproger.coconet.support.DatabaseRealtimeFolderName;
+import com.eugeproger.coconet.support.FirebaseFolderName;
 import com.eugeproger.coconet.support.Utility;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -167,7 +167,7 @@ public class AppMainActivity extends AppCompatActivity {
     }
 
     private void createGroup(String groupName) {
-        rootReference.child(DatabaseRealtimeFolderName.GROUPS).child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
+        rootReference.child(FirebaseFolderName.GROUPS).child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {

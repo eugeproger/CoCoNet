@@ -9,5 +9,7 @@ public class Constant {
     public static final String DATE = "date";
     public static final String TIME = "time";
 
+    public static final int GALLERY_PICK = 1;
+
 
 }
