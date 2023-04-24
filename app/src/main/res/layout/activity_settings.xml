@@ -25,14 +25,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/user_profile_imageView"
-        android:background="@drawable/corner_design"
+        android:background="@drawable/field_design"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/user_name_set"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/field_design"
+            android:background="@drawable/field_empty_design"
             android:hint="User name"
             android:inputType="textMultiLine"
             android:padding="4dp"
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:background="@drawable/field_design"
+            android:background="@drawable/field_empty_design"
             android:hint="Bio"
             android:inputType="textMultiLine"
             android:padding="4dp"
