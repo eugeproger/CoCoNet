@@ -14,7 +14,7 @@ import android.widget.ListView;
 
 import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.support.Constant;
-import com.eugeproger.coconet.support.DatabaseRealtimeFolderName;
+import com.eugeproger.coconet.support.FirebaseFolderName;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,7 +53,7 @@ public class GroupsFragment extends Fragment {
 
 
         firebaseDatabase = FirebaseDatabase.getInstance(Constant.REALTIME_DATABASE_LINK);
-        groupReference = firebaseDatabase.getReference().child(DatabaseRealtimeFolderName.GROUPS);
+        groupReference = firebaseDatabase.getReference().child(FirebaseFolderName.GROUPS);
 
         initializeElements();
 
