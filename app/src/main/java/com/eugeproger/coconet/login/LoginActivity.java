@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                     } else {
                         String message = task.getException().toString();
-                        Utility.showLongToast(LoginActivity.this, "Error: " + message);
+                        Utility.showLengthToast(LoginActivity.this, "Error: " + message);
                         progressDialog.dismiss();
                     }
                 }

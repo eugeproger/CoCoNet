@@ -9,7 +9,11 @@ public class Utility {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
 
-    public static void showLongToast(Context context, String text) {
+    public static void showLengthToast(Context context, String text) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showErrorToast(Context context, String errorMessage) {
+        Toast.makeText(context, "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 }

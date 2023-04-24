@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.eugeproger.coconet.login.LoginActivity;
-import com.eugeproger.coconet.option.SettingsActivity;
+import com.eugeproger.coconet.option.ProfileActivity;
 import com.eugeproger.coconet.support.Constant;
 import com.eugeproger.coconet.support.FirebaseFolderName;
 import com.eugeproger.coconet.support.Utility;
@@ -41,6 +41,7 @@ public class AppMainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference rootReference;
     private FirebaseDatabase firebaseDatabase;
+    private String currentUserID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,27 +64,27 @@ public class AppMainActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance(Constant.REALTIME_DATABASE_LINK);
         rootReference = firebaseDatabase.getReference();
+        currentUserID = auth.getCurrentUser().getUid();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         if (currentUser == null) {
-            sendUserToLoginActivity();
+            holdUserToLoginActivity();
         } else {
             VerifyUserExistence();
         }
     }
 
     private void VerifyUserExistence() {
-        String currentUserID = auth.getCurrentUser().getUid();
         rootReference.child("Users").child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if ((snapshot.child("name").exists())) {
+                if (snapshot.child(Constant.NAME).exists()) {
 
                 } else {
-                    sendUserToSettingsActivity();
+                    holdUserToProfileActivity();
                 }
             }
             @Override
@@ -92,21 +93,24 @@ public class AppMainActivity extends AppCompatActivity {
         });
     }
 
-    private void sendUserToLoginActivity() {
+    private void sendUserToProfileActivity() {
+        Intent profileIntent = new Intent(AppMainActivity.this, ProfileActivity.class);
+        startActivity(profileIntent);
+    }
+
+    private void holdUserToProfileActivity() {
+        Intent profileIntent = new Intent(AppMainActivity.this, ProfileActivity.class);
+        startActivity(profileIntent);
+        profileIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        finish();
+    }
+
+    private void holdUserToLoginActivity() {
         Intent loginIntent = new Intent(AppMainActivity.this, LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(loginIntent);
         finish();
     }
-
-    private void sendUserToSettingsActivity() {
-        Intent settingsIntent = new Intent(AppMainActivity.this, SettingsActivity.class);
-        settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(settingsIntent);
-        finish();
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -125,13 +129,13 @@ public class AppMainActivity extends AppCompatActivity {
 
             RequestNewGroup();
         }
-        if (item.getItemId() == R.id.main_settings_option) {
-            sendUserToSettingsActivity();
+        if (item.getItemId() == R.id.main_profile_option) {
+            sendUserToProfileActivity();
         }
         if (item.getItemId() == R.id.main_logout_option) {
             auth.signOut();
             finish();
-            sendUserToLoginActivity();
+            holdUserToLoginActivity();
         }
         return true;
 
@@ -149,7 +153,7 @@ public class AppMainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 String groupName = groupNameField.getText().toString();
                 if (TextUtils.isEmpty(groupName)) {
-                    Utility.showLongToast(AppMainActivity.this, "Group is not created. Please, write a name of group.");
+                    Utility.showLengthToast(AppMainActivity.this, "Group is not created. Please, write a name of group.");
                 } else {
                     createGroup(groupName);
                 }
@@ -171,7 +175,7 @@ public class AppMainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Utility.showLongToast(AppMainActivity.this, groupName + "group is created successfully.");
+                    Utility.showLengthToast(AppMainActivity.this, groupName + "group is created successfully.");
                 }
             }
         });

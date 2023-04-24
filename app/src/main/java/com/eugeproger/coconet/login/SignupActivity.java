@@ -78,11 +78,11 @@ public class SignupActivity extends AppCompatActivity {
                         rootReference.child("Users").child(currentUserID).setValue("");
 
                         sendUserToAppActivity();
-                        Utility.showLongToast(SignupActivity.this, "Account created successfully");
+                        Utility.showLengthToast(SignupActivity.this, "Account created successfully");
                         progressDialog.dismiss();
                     } else {
                         String message = task.getException().toString();
-                        Utility.showLongToast(SignupActivity.this, "Error: " + message);
+                        Utility.showLengthToast(SignupActivity.this, "Error: " + message);
                         progressDialog.dismiss();
                     }
                 }
