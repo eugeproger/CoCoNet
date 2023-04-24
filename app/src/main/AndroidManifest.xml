@@ -15,7 +15,7 @@
         tools:targetApi="31">
         <activity
             android:name=".login.PhoneLoginActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".tabs.group.GroupChatActivity"
             android:exported="false" />
