@@ -13,7 +13,6 @@
         android:textSize="22sp"
         android:textColor="@android:color/black"
         android:textStyle="bold"
-        android:layout_gravity="center"
-        android:text="@string/title"/>
+        android:layout_gravity="center" />
 
 </androidx.appcompat.widget.Toolbar>

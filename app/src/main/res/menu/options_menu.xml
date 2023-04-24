@@ -13,9 +13,9 @@
         android:title="@string/create_group">
     </item>
     <item
-        android:id="@+id/main_settings_option"
+        android:id="@+id/main_profile_option"
         app:showAsAction="never"
-        android:title="@string/settings">
+        android:title="@string/profile">
     </item>
     <item
         android:id="@+id/main_logout_option"

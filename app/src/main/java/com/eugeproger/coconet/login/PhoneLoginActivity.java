@@ -66,7 +66,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
             public void onVerificationFailed(@NonNull FirebaseException e) {
                 loadingBar.dismiss();
                 String message = e.toString();
-                Utility.showLongToast(PhoneLoginActivity.this, "Error: " + message);
+                Utility.showLengthToast(PhoneLoginActivity.this, "Error: " + message);
                 //Utility.showLongToast(PhoneLoginActivity.this, "Enter correct phone number with country code.");
 
                 sendCode.setVisibility(View.VISIBLE);
@@ -85,7 +85,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
                 resendToken = token;
 
                 loadingBar.dismiss();
-                Utility.showLongToast(PhoneLoginActivity.this, "Code has been send. Please, check your SMS-messages.");
+                Utility.showLengthToast(PhoneLoginActivity.this, "Code has been send. Please, check your SMS-messages.");
 
                 sendCode.setVisibility(View.INVISIBLE);
                 inputPhoneNumber.setVisibility(View.INVISIBLE);
@@ -102,7 +102,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
         String phoneNumber = inputPhoneNumber.getText().toString();
 
         if (TextUtils.isEmpty(phoneNumber)) {
-            Utility.showLongToast(PhoneLoginActivity.this, "Enter your phone number first.");
+            Utility.showLengthToast(PhoneLoginActivity.this, "Enter your phone number first.");
         } else {
             loadingBar.setTitle("Phone verification");
             loadingBar.setMessage("Authenticating your phone number...");
@@ -122,7 +122,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
                     sendUserToAppMainActivity();
                 } else {
                     String message = task.getException().toString();
-                    Utility.showLongToast(PhoneLoginActivity.this, message);
+                    Utility.showLengthToast(PhoneLoginActivity.this, message);
                 }
             }
         });
@@ -135,7 +135,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
         String verificationCode = code.getText().toString();
 
         if (TextUtils.isEmpty(verificationCode)) {
-            Utility.showLongToast(PhoneLoginActivity.this, "Enter verification code.");
+            Utility.showLengthToast(PhoneLoginActivity.this, "Enter verification code.");
         } else {
             loadingBar.setTitle("Code verification");
             loadingBar.setMessage("Verification code is being checked...");

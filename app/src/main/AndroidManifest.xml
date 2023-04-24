@@ -20,7 +20,7 @@
             android:name=".tabs.group.GroupChatActivity"
             android:exported="false" />
         <activity
-            android:name=".option.SettingsActivity"
+            android:name=".option.ProfileActivity"
             android:exported="true" />
         <activity
             android:name=".login.SignupActivity"
