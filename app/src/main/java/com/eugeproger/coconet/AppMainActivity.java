@@ -79,7 +79,7 @@ public class AppMainActivity extends AppCompatActivity {
     }
 
     private void VerifyUserExistence() {
-        rootReference.child("Users").child(currentUserID).addValueEventListener(new ValueEventListener() {
+        rootReference.child(FirebaseFolderName.USERS).child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(Constant.NAME).exists()) {
@@ -133,7 +133,6 @@ public class AppMainActivity extends AppCompatActivity {
             sendUserToSearchUserActivity();
         }
         if (item.getItemId() == R.id.main_create_group_option) {
-
             RequestNewGroup();
         }
         if (item.getItemId() == R.id.main_profile_option) {
@@ -173,7 +172,6 @@ public class AppMainActivity extends AppCompatActivity {
                 dialogInterface.cancel();
             }
         });
-
         builder.show();
     }
 

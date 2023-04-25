@@ -49,7 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
         updateAccountSettings = (Button) findViewById(R.id.update_settings_button);
         userName = (EditText) findViewById(R.id.user_name_set);
         userBio = (EditText) findViewById(R.id.user_bio_set);
-        userProfileImage = findViewById(R.id.user_profile_imageView);
+        userProfileImage = findViewById(R.id.user_profileActivity_imageView);
         loadingBar = new ProgressDialog(this);
     }
 
