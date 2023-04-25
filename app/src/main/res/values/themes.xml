@@ -16,6 +16,7 @@
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
         <item name="tabSelectedTextColor">?attr/colorOnPrimary</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="AlertDialog" parent="Base.Theme.AppCompat.Light.Dialog">

@@ -46,10 +46,10 @@ public class MyProfileActivity extends AppCompatActivity {
     private StorageReference filePath;
 
     private void initializeElements() {
-        updateAccountSettings = (Button) findViewById(R.id.update_settings_button);
-        userName = (EditText) findViewById(R.id.user_name_set);
-        userBio = (EditText) findViewById(R.id.user_bio_set);
-        userProfileImage = findViewById(R.id.user_profileActivity_imageView);
+        updateAccountSettings = (Button) findViewById(R.id.my_update_settings_button);
+        userName = (EditText) findViewById(R.id.my_user_name_set);
+        userBio = (EditText) findViewById(R.id.my_user_bio_set);
+        userProfileImage = findViewById(R.id.my_profileActivity_imageView);
         loadingBar = new ProgressDialog(this);
     }
 
