@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.eugeproger.coconet.ProfileActivity;
 import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.simple.Contact;
+import com.eugeproger.coconet.support.Constant;
 import com.eugeproger.coconet.support.FirebaseConfiguration;
 import com.eugeproger.coconet.support.FirebaseFolderName;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -74,6 +77,13 @@ public class SearchUserActivity extends AppCompatActivity {
                 if (holder.profileImage != null && model.getImage() != null) {
                     Glide.with(SearchUserActivity.this).load(model.getImage()).placeholder(R.drawable.profile_image).into(holder.profileImage);
                 }
+
+                holder.itemView.setOnClickListener(view -> {
+                    String visitUserID = getRef(position).getKey();
+                    Intent profileIntent = new Intent(SearchUserActivity.this, ProfileActivity.class);
+                    profileIntent.putExtra(Constant.VISIT_USER_ID, visitUserID);
+                    startActivity(profileIntent);
+                });
             }
         };
         searchUsersRecyclerView.setAdapter(adapter);

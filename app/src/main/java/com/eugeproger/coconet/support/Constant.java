@@ -13,6 +13,7 @@ public class Constant {
     public static final String IMAGE = "image";
     public static final String BIO = "bio";
     public static final String UID = "uid";
+    public static final String VISIT_USER_ID = "visitUserID";
 
 
 

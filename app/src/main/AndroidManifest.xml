@@ -14,9 +14,12 @@
         android:theme="@style/Theme.CoCoNet"
         tools:targetApi="31">
         <activity
-            android:name=".option.SearchUserActivity"
-            android:parentActivityName=".AppMainActivity"
+            android:name=".ProfileActivity"
             android:exported="false" />
+        <activity
+            android:name=".option.SearchUserActivity"
+            android:exported="false"
+            android:parentActivityName=".AppMainActivity" />
         <activity
             android:name=".login.PhoneLoginActivity"
             android:exported="true" />
@@ -24,7 +27,7 @@
             android:name=".tabs.group.GroupChatActivity"
             android:exported="false" />
         <activity
-            android:name=".option.ProfileActivity"
+            android:name=".option.MyProfileActivity"
             android:exported="true" />
         <activity
             android:name=".login.SignupActivity"
