@@ -100,7 +100,6 @@ public class MyProfileActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 Utility.showShortToast(MyProfileActivity.this, "Image is saved in database successfully!");
-                                                retrieveUserInfo();
                                                 loadingBar.dismiss();
                                             } else {
                                                 String message = task.getException().toString();
@@ -172,10 +171,6 @@ public class MyProfileActivity extends AppCompatActivity {
 
                     userName.setText(retrieveUserName);
                     userBio.setText(retrievesStatus);
-                } else if ((dataSnapshot.exists()) && (dataSnapshot.hasChild(Constant.IMAGE))) {
-
-                    String retrieveProfileImage = dataSnapshot.child(Constant.IMAGE).getValue().toString();
-                    Glide.with(MyProfileActivity.this).load(retrieveProfileImage).centerCrop().circleCrop().into(userProfileImage);
                 } else {
                     Utility.showLengthToast(MyProfileActivity.this, "Set and update your profile information.");
                 }
