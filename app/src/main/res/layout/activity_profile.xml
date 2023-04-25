@@ -8,22 +8,22 @@
     tools:context=".ProfileActivity">
 
 
-    <ImageView
-        android:id="@+id/profileActivity_imageView"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/avatar_activity_profile"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="48dp"
         android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
-        app:srcCompat="@drawable/profile_image" />
+        android:src="@drawable/profile_image"
+        android:contentDescription="TODO" />
 
     <TextView
-        android:id="@+id/user_name_set"
+        android:id="@+id/user_name_activity_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profileActivity_imageView"
+        android:layout_below="@id/avatar_activity_profile"
         android:layout_marginTop="24dp"
         android:textAlignment="center"
         android:text="User name"
@@ -32,10 +32,10 @@
 
 
     <TextView
-        android:id="@+id/user_bio_set"
+        android:id="@+id/user_bio_activity_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/user_name_set"
+        android:layout_below="@+id/user_name_activity_profile"
         android:layout_marginTop="24dp"
         android:hint="Bio"
         android:textSize="20sp"
@@ -43,10 +43,10 @@
         android:background="@drawable/field_design"/>
 
     <Button
-        android:id="@+id/update_settings_button"
+        android:id="@+id/send_message_button_activity_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/user_bio_set"
+        android:layout_below="@+id/user_bio_activity_profile"
         android:padding="8dp"
         android:layout_marginTop="24dp"
         android:text="Send message"
