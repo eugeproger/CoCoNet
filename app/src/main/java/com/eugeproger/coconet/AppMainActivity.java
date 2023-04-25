@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.eugeproger.coconet.login.LoginActivity;
-import com.eugeproger.coconet.option.ProfileActivity;
+import com.eugeproger.coconet.option.MyProfileActivity;
 import com.eugeproger.coconet.option.SearchUserActivity;
 import com.eugeproger.coconet.support.Constant;
 import com.eugeproger.coconet.support.FirebaseFolderName;
@@ -95,12 +95,12 @@ public class AppMainActivity extends AppCompatActivity {
     }
 
     private void sendUserOnProfileActivity() {
-        Intent profileIntent = new Intent(AppMainActivity.this, ProfileActivity.class);
+        Intent profileIntent = new Intent(AppMainActivity.this, MyProfileActivity.class);
         startActivity(profileIntent);
     }
 
     private void holdUserOnProfileActivity() {
-        Intent profileIntent = new Intent(AppMainActivity.this, ProfileActivity.class);
+        Intent profileIntent = new Intent(AppMainActivity.this, MyProfileActivity.class);
         startActivity(profileIntent);
         profileIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         finish();

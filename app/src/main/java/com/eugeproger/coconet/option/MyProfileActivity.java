@@ -34,7 +34,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 
-public class ProfileActivity extends AppCompatActivity {
+public class MyProfileActivity extends AppCompatActivity {
     private Button updateAccountSettings;
     private EditText userName, userBio;
     private ImageView userProfileImage;
@@ -63,7 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_my_profile);
         initializeElements();
         databaseConfigurations();
 
@@ -89,7 +89,7 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if (task.isSuccessful()) {
-                            Utility.showShortToast(ProfileActivity.this, "Profile image is uploaded successfully!");
+                            Utility.showShortToast(MyProfileActivity.this, "Profile image is uploaded successfully!");
 
                             filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 public void onSuccess(Uri uri) {
@@ -99,12 +99,12 @@ public class ProfileActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Utility.showShortToast(ProfileActivity.this, "Image is saved in database successfully!");
+                                                Utility.showShortToast(MyProfileActivity.this, "Image is saved in database successfully!");
                                                 retrieveUserInfo();
                                                 loadingBar.dismiss();
                                             } else {
                                                 String message = task.getException().toString();
-                                                Utility.showErrorToast(ProfileActivity.this, message);
+                                                Utility.showErrorToast(MyProfileActivity.this, message);
                                                 loadingBar.dismiss();
                                             }
                                         }
@@ -115,7 +115,7 @@ public class ProfileActivity extends AppCompatActivity {
                         } else {
                             String message = task.getException().toString();
 
-                            Utility.showErrorToast(ProfileActivity.this, message);
+                            Utility.showErrorToast(MyProfileActivity.this, message);
                             loadingBar.dismiss();
                         }
                     }
@@ -143,10 +143,10 @@ public class ProfileActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
                         sendUserToMainActivity();
-                        Utility.showShortToast(ProfileActivity.this, "Profile is updated successfully!");
+                        Utility.showShortToast(MyProfileActivity.this, "Profile is updated successfully!");
                     } else {
                         String message = task.getException().toString();
-                        Utility.showErrorToast(ProfileActivity.this, message);
+                        Utility.showErrorToast(MyProfileActivity.this, message);
                     }
                 }
             });
@@ -164,7 +164,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                     userName.setText(retrieveUserName);
                     userBio.setText(retrievesStatus);
-                    Glide.with(ProfileActivity.this).load(retrieveProfileImage).centerCrop().circleCrop().into(userProfileImage);
+                    Glide.with(MyProfileActivity.this).load(retrieveProfileImage).centerCrop().circleCrop().into(userProfileImage);
 
                 } else if ((dataSnapshot.exists()) && (dataSnapshot.hasChild(Constant.NAME))) {
                     String retrieveUserName = dataSnapshot.child(Constant.NAME).getValue().toString();
@@ -175,9 +175,9 @@ public class ProfileActivity extends AppCompatActivity {
                 } else if ((dataSnapshot.exists()) && (dataSnapshot.hasChild(Constant.IMAGE))) {
 
                     String retrieveProfileImage = dataSnapshot.child(Constant.IMAGE).getValue().toString();
-                    Glide.with(ProfileActivity.this).load(retrieveProfileImage).centerCrop().circleCrop().into(userProfileImage);
+                    Glide.with(MyProfileActivity.this).load(retrieveProfileImage).centerCrop().circleCrop().into(userProfileImage);
                 } else {
-                    Utility.showLengthToast(ProfileActivity.this, "Set and update your profile information.");
+                    Utility.showLengthToast(MyProfileActivity.this, "Set and update your profile information.");
                 }
             }
             @Override
@@ -187,7 +187,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void sendUserToMainActivity() {
-        Intent mainIntent = new Intent(ProfileActivity.this, AppMainActivity.class);
+        Intent mainIntent = new Intent(MyProfileActivity.this, AppMainActivity.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
         finish();
