@@ -23,7 +23,6 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
-
     private String receiverUserID, currentState, senderUserID;
     private CircleImageView userProfileImage;
     private TextView userProfileName, userProfileBio;
@@ -42,7 +41,6 @@ public class ProfileActivity extends AppCompatActivity {
         sendMessageRequestButton = findViewById(R.id.send_message_button_activity_profile);
         declineMessageRequestButton = findViewById(R.id.decline_message_button_activity_profile);
         currentState = Constant.NEW_REQUEST;
-
 
         receiverUserID = getIntent().getExtras().get(Constant.VISIT_USER_ID).toString();
         userRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.USERS);
@@ -69,6 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
                     userProfileBio.setText(userBio);
 
                     manageChatRequests();
+
                 } else {
 
                     String userName = snapshot.child(Constant.NAME).getValue().toString();
@@ -78,12 +77,11 @@ public class ProfileActivity extends AppCompatActivity {
                     userProfileBio.setText(userBio);
 
                     manageChatRequests();
+
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
@@ -116,7 +114,6 @@ public class ProfileActivity extends AppCompatActivity {
                                 sendMessageRequestButton.setText("Remove contact");
                             }
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
@@ -141,11 +138,40 @@ public class ProfileActivity extends AppCompatActivity {
                 if (currentState.equals(Constant.RECEIVED_REQUEST)) {
                     acceptChatRequest();
                 }
+                if (currentState.equals(Constant.CONTACT)) {
+                    removeContact();
+                }
             });
         } else {
             sendMessageRequestButton.setVisibility(View.INVISIBLE);
         }
     }
+
+    private void removeContact() {
+        contactsRef.child(senderUserID).child(receiverUserID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if (task.isSuccessful()) {
+                    contactsRef.child(receiverUserID).child(senderUserID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task1) {
+                            if (task1.isSuccessful()) {
+                                sendMessageRequestButton.setEnabled(true);
+                                currentState = Constant.NEW_REQUEST;
+                                sendMessageRequestButton.setText("Send message");
+
+                                declineMessageRequestButton.setVisibility(View.INVISIBLE);
+                                declineMessageRequestButton.setEnabled(false);
+                            }
+
+                        }
+                    });
+                }
+            }
+        });
+    }
+
 
     private void acceptChatRequest() {
         contactsRef.child(senderUserID).child(receiverUserID).child(FirebaseFolderName.CONTACTS).setValue(Constant.SAVED).addOnCompleteListener(new OnCompleteListener<Void>() {
