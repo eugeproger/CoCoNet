@@ -10,17 +10,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.simple.Contact;
 import com.eugeproger.coconet.support.FirebaseConfiguration;
-import com.eugeproger.coconet.support.FirebaseFolder;
+import com.eugeproger.coconet.support.FirebaseFolderName;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -29,7 +29,6 @@ public class SearchUserActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private RecyclerView searchUsersRecyclerView;
     private TextView titleToolBar;
-    private LayoutInflater inflater;
     private DatabaseReference userRef;
 
     @Override
@@ -37,7 +36,7 @@ public class SearchUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_user);
 
-        userRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolder.USERS);
+        userRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.USERS);
 
         searchUsersRecyclerView = findViewById(R.id.search_user_recyclerView);
         searchUsersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -63,7 +62,7 @@ public class SearchUserActivity extends AppCompatActivity {
             @NonNull
             @Override
             public SearchUserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = inflater.inflate(R.layout.users_display_layout, parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_box_layout, parent,false);
                 SearchUserViewHolder viewHolder = new SearchUserViewHolder(view);
                 return viewHolder;
             }
@@ -72,7 +71,9 @@ public class SearchUserActivity extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull SearchUserViewHolder holder, int position, @NonNull Contact model) {
                 holder.userName.setText(model.getName());
                 holder.userBio.setText(model.getBio());
-                Picasso.get().load(model.getImage()).placeholder(R.drawable.profile_image).into(holder.profileImage);
+                if (holder.profileImage != null && model.getImage() != null) {
+                    Glide.with(SearchUserActivity.this).load(model.getImage()).placeholder(R.drawable.profile_image).into(holder.profileImage);
+                }
             }
         };
         searchUsersRecyclerView.setAdapter(adapter);
@@ -90,7 +91,7 @@ public class SearchUserActivity extends AppCompatActivity {
 
             userName = itemView.findViewById(R.id.user_profile_name);
             userBio = itemView.findViewById(R.id.user_profile_bio);
-            profileImage = itemView.findViewById(R.id.user_profile_imageView);
+            profileImage = itemView.findViewById(R.id.user_profile_image);
         }
     }
 }
