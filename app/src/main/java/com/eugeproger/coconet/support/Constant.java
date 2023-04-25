@@ -19,6 +19,9 @@ public class Constant {
     public static final String RECEIVED = "received";
     public static final String NEW_REQUEST = "newRequest";
     public static final String SENT_REQUEST = "sentRequest";
+    public static final String RECEIVED_REQUEST = "receivedRequest";
+    public static final String SAVED = "saved";
+    public static final String CONTACT = "contact";
 
 
 
