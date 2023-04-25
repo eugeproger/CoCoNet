@@ -16,6 +16,7 @@ import android.widget.EditText;
 
 import com.eugeproger.coconet.login.LoginActivity;
 import com.eugeproger.coconet.option.ProfileActivity;
+import com.eugeproger.coconet.option.SearchUserActivity;
 import com.eugeproger.coconet.support.Constant;
 import com.eugeproger.coconet.support.FirebaseFolderName;
 import com.eugeproger.coconet.support.Utility;
@@ -84,7 +85,7 @@ public class AppMainActivity extends AppCompatActivity {
                 if (snapshot.child(Constant.NAME).exists()) {
 
                 } else {
-                    holdUserToProfileActivity();
+                    holdUserOnProfileActivity();
                 }
             }
             @Override
@@ -93,12 +94,12 @@ public class AppMainActivity extends AppCompatActivity {
         });
     }
 
-    private void sendUserToProfileActivity() {
+    private void sendUserOnProfileActivity() {
         Intent profileIntent = new Intent(AppMainActivity.this, ProfileActivity.class);
         startActivity(profileIntent);
     }
 
-    private void holdUserToProfileActivity() {
+    private void holdUserOnProfileActivity() {
         Intent profileIntent = new Intent(AppMainActivity.this, ProfileActivity.class);
         startActivity(profileIntent);
         profileIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -111,6 +112,12 @@ public class AppMainActivity extends AppCompatActivity {
         startActivity(loginIntent);
         finish();
     }
+
+    private void sendUserToSearchUserActivity() {
+        Intent searchUserIntent= new Intent(AppMainActivity.this, SearchUserActivity.class);
+        startActivity(searchUserIntent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -122,15 +129,15 @@ public class AppMainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         super.onOptionsItemSelected(item);
-        if (item.getItemId() == R.id.main_find_user_option) {
-
+        if (item.getItemId() == R.id.main_search_user_option) {
+            sendUserToSearchUserActivity();
         }
         if (item.getItemId() == R.id.main_create_group_option) {
 
             RequestNewGroup();
         }
         if (item.getItemId() == R.id.main_profile_option) {
-            sendUserToProfileActivity();
+            sendUserOnProfileActivity();
         }
         if (item.getItemId() == R.id.main_logout_option) {
             auth.signOut();
