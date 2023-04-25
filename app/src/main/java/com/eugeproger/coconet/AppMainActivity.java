@@ -65,7 +65,7 @@ public class AppMainActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance(Constant.REALTIME_DATABASE_LINK);
         rootReference = firebaseDatabase.getReference();
-        currentUserID = auth.getCurrentUser().getUid();
+
     }
 
     @Override
@@ -79,6 +79,7 @@ public class AppMainActivity extends AppCompatActivity {
     }
 
     private void VerifyUserExistence() {
+        currentUserID = auth.getCurrentUser().getUid();
         rootReference.child(FirebaseFolderName.USERS).child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

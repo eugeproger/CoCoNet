@@ -141,6 +141,9 @@ public class ProfileActivity extends AppCompatActivity {
                                 sendMessageRequestButton.setEnabled(true);
                                 currentState = Constant.NEW_REQUEST;
                                 sendMessageRequestButton.setText("Send message");
+
+                                declineMessageRequestButton.setVisibility(View.INVISIBLE);
+                                declineMessageRequestButton.setEnabled(false);
                             }
 
                         }
