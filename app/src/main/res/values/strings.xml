@@ -21,7 +21,7 @@
     <string name="signup_image">Signup image</string>
     <string name="start">Let\'s get started!</string>
     <string name="account_is_exist">Already have an account?</string>
-    <string name="find_user">Find user</string>
+    <string name="search_user">Search user</string>
     <string name="log_out">Log out</string>
     <string name="profile">Profile</string>
     <string name="create_group">New group</string>
