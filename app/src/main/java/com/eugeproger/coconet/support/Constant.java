@@ -14,6 +14,12 @@ public class Constant {
     public static final String BIO = "bio";
     public static final String UID = "uid";
     public static final String VISIT_USER_ID = "visitUserID";
+    public static final String REQUEST_TYPE = "requestType";
+    public static final String SENT = "sent";
+    public static final String RECEIVED = "received";
+    public static final String NEW_REQUEST = "newRequest";
+    public static final String SENT_REQUEST = "sentRequest";
+
 
 
 

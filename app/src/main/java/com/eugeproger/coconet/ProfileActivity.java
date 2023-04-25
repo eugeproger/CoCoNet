@@ -4,16 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.eugeproger.coconet.option.MyProfileActivity;
-import com.eugeproger.coconet.option.SearchUserActivity;
 import com.eugeproger.coconet.support.Constant;
 import com.eugeproger.coconet.support.FirebaseConfiguration;
 import com.eugeproger.coconet.support.FirebaseFolderName;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,11 +24,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private String receiverUserID;
+    private String receiverUserID, currentState, senderUserID;
     private CircleImageView userProfileImage;
     private TextView userProfileName, userProfileBio;
     private Button sendMessageRequestButton;
-    private DatabaseReference userRef;
+    private DatabaseReference userRef, chatRequestRef;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +40,14 @@ public class ProfileActivity extends AppCompatActivity {
         userProfileName = findViewById(R.id.user_name_activity_profile);
         userProfileBio = findViewById(R.id.user_bio_activity_profile);
         sendMessageRequestButton = findViewById(R.id.send_message_button_activity_profile);
+        currentState = Constant.NEW_REQUEST;
 
 
         receiverUserID = getIntent().getExtras().get(Constant.VISIT_USER_ID).toString();
         userRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.USERS);
+        chatRequestRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.CHAT_REQUESTS);
+        auth = FirebaseAuth.getInstance();
+        senderUserID = auth.getCurrentUser().getUid();
 
         retrieveUserInformation();
     }
@@ -60,6 +65,8 @@ public class ProfileActivity extends AppCompatActivity {
                     Picasso.get().load(userImage).placeholder(R.drawable.profile_image).into(userProfileImage);
                     userProfileName.setText(userName);
                     userProfileBio.setText(userBio);
+
+                    manageChatRequests();
                 } else {
 
                     String userName = snapshot.child(Constant.NAME).getValue().toString();
@@ -67,12 +74,56 @@ public class ProfileActivity extends AppCompatActivity {
 
                     userProfileName.setText(userName);
                     userProfileBio.setText(userBio);
+
+                    manageChatRequests();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
+
+    private void manageChatRequests() {
+        chatRequestRef.child(senderUserID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChild(receiverUserID)) {
+                    String requestType = snapshot.child(receiverUserID).child(Constant.REQUEST_TYPE).getValue().toString();
+
+                    if (requestType.equals(Constant.SENT)) {
+                        currentState = Constant.SENT_REQUEST;
+                        sendMessageRequestButton.setText("Cancel chat request");
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        if (!senderUserID.equals(receiverUserID)) {
+            sendMessageRequestButton.setOnClickListener(view -> {
+                sendMessageRequestButton.setEnabled(false);
+                if (currentState.equals(Constant.NEW_REQUEST)) {
+                    sendChatRequest();
+                }
+            });
+        } else {
+            sendMessageRequestButton.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void sendChatRequest() {
+        chatRequestRef.child(senderUserID).child(receiverUserID).child(Constant.REQUEST_TYPE).setValue(Constant.SENT).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                chatRequestRef.child(receiverUserID).child(senderUserID).child(Constant.REQUEST_TYPE).setValue(Constant.RECEIVED).addOnCompleteListener(task1 -> {
+                    sendMessageRequestButton.setEnabled(true);
+//                    currentState = "request_sent";
+//                    sendMessageRequestButton.setText("Cancel chat request");
+                });
             }
         });
     }
