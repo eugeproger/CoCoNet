@@ -18,7 +18,7 @@ import com.eugeproger.coconet.login.LoginActivity;
 import com.eugeproger.coconet.option.ProfileActivity;
 import com.eugeproger.coconet.option.SearchUserActivity;
 import com.eugeproger.coconet.support.Constant;
-import com.eugeproger.coconet.support.FirebaseFolderName;
+import com.eugeproger.coconet.support.FirebaseFolder;
 import com.eugeproger.coconet.support.Utility;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -79,7 +79,7 @@ public class AppMainActivity extends AppCompatActivity {
     }
 
     private void VerifyUserExistence() {
-        rootReference.child("Users").child(currentUserID).addValueEventListener(new ValueEventListener() {
+        rootReference.child(FirebaseFolder.GROUPS).child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(Constant.NAME).exists()) {
@@ -133,7 +133,6 @@ public class AppMainActivity extends AppCompatActivity {
             sendUserToSearchUserActivity();
         }
         if (item.getItemId() == R.id.main_create_group_option) {
-
             RequestNewGroup();
         }
         if (item.getItemId() == R.id.main_profile_option) {
@@ -173,12 +172,11 @@ public class AppMainActivity extends AppCompatActivity {
                 dialogInterface.cancel();
             }
         });
-
         builder.show();
     }
 
     private void createGroup(String groupName) {
-        rootReference.child(FirebaseFolderName.GROUPS).child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
+        rootReference.child(FirebaseFolder.GROUPS).child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
