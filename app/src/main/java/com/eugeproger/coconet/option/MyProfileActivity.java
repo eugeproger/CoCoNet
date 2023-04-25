@@ -31,13 +31,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyProfileActivity extends AppCompatActivity {
     private Button updateAccountSettings;
     private EditText userName, userBio;
-    private ImageView userProfileImage;
+    private CircleImageView userProfileImage;
     private String currentUserID;
     private FirebaseAuth mAuth;
     private DatabaseReference rootRef;
@@ -163,7 +166,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
                     userName.setText(retrieveUserName);
                     userBio.setText(retrievesStatus);
-                    Glide.with(MyProfileActivity.this).load(retrieveProfileImage).centerCrop().circleCrop().into(userProfileImage);
+                    Picasso.get().load(retrieveProfileImage).placeholder(R.drawable.profile_image).into(userProfileImage);
 
                 } else if ((dataSnapshot.exists()) && (dataSnapshot.hasChild(Constant.NAME))) {
                     String retrieveUserName = dataSnapshot.child(Constant.NAME).getValue().toString();

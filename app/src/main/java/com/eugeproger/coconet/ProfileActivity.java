@@ -18,11 +18,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
 
     private String receiverUserID;
-    private ImageView userProfileImage;
+    private CircleImageView userProfileImage;
     private TextView userProfileName, userProfileBio;
     private Button sendMessageRequestButton;
     private DatabaseReference userRef;
@@ -38,39 +41,39 @@ public class ProfileActivity extends AppCompatActivity {
         sendMessageRequestButton = findViewById(R.id.send_message_button_activity_profile);
 
 
-//        receiverUserID = getIntent().getExtras().get(Constant.VISIT_USER_ID).toString();
-//        userRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.USERS);
-//
-//        retrieveUserInformation();
+        receiverUserID = getIntent().getExtras().get(Constant.VISIT_USER_ID).toString();
+        userRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.USERS);
+
+        retrieveUserInformation();
     }
 
-//    private void retrieveUserInformation() {
-//        userRef.child(receiverUserID).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if ((snapshot.exists()) && (snapshot.hasChild(Constant.IMAGE))) {
-//
-//                    String userImage = snapshot.child(Constant.IMAGE).getValue().toString();
-//                    String userName = snapshot.child(Constant.NAME).getValue().toString();
-//                    String userBio = snapshot.child(Constant.BIO).getValue().toString();
-//
-//                    Glide.with(ProfileActivity.this).load(userImage).placeholder(R.drawable.profile_image).centerCrop().circleCrop().into(userProfileImage);
-//                    userProfileName.setText(userName);
-//                    userProfileBio.setText(userBio);
-//                } else {
-//
-//                    String userName = snapshot.child(Constant.NAME).getValue().toString();
-//                    String userBio = snapshot.child(Constant.BIO).getValue().toString();
-//
-//                    userProfileName.setText(userName);
-//                    userProfileBio.setText(userBio);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
+    private void retrieveUserInformation() {
+        userRef.child(receiverUserID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if ((snapshot.exists()) && (snapshot.hasChild(Constant.IMAGE))) {
+
+                    String userImage = snapshot.child(Constant.IMAGE).getValue().toString();
+                    String userName = snapshot.child(Constant.NAME).getValue().toString();
+                    String userBio = snapshot.child(Constant.BIO).getValue().toString();
+
+                    Picasso.get().load(userImage).placeholder(R.drawable.profile_image).into(userProfileImage);
+                    userProfileName.setText(userName);
+                    userProfileBio.setText(userBio);
+                } else {
+
+                    String userName = snapshot.child(Constant.NAME).getValue().toString();
+                    String userBio = snapshot.child(Constant.BIO).getValue().toString();
+
+                    userProfileName.setText(userName);
+                    userProfileBio.setText(userBio);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }

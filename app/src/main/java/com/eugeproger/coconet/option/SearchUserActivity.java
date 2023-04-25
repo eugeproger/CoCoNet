@@ -24,6 +24,7 @@ import com.eugeproger.coconet.support.FirebaseFolderName;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -75,7 +76,7 @@ public class SearchUserActivity extends AppCompatActivity {
                 holder.userName.setText(model.getName());
                 holder.userBio.setText(model.getBio());
                 if (holder.profileImage != null && model.getImage() != null) {
-                    Glide.with(SearchUserActivity.this).load(model.getImage()).placeholder(R.drawable.profile_image).into(holder.profileImage);
+                    Picasso.get().load(model.getImage()).placeholder(R.drawable.profile_image).into(holder.profileImage);
                 }
 
                 holder.itemView.setOnClickListener(view -> {
