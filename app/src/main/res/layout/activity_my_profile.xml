@@ -9,7 +9,7 @@
 
 
     <ImageView
-        android:id="@+id/user_profileActivity_imageView"
+        android:id="@+id/my_profileActivity_imageView"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_alignParentTop="true"
@@ -21,15 +21,15 @@
 
 
     <LinearLayout
-        android:id="@+id/data_user_box"
+        android:id="@+id/my_data_user_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/user_profileActivity_imageView"
+        android:layout_below="@+id/my_profileActivity_imageView"
         android:background="@drawable/field_design"
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/user_name_set"
+            android:id="@+id/my_user_name_set"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/field_empty_design"
@@ -45,7 +45,7 @@
             android:layout_marginHorizontal="16dp" />
 
         <EditText
-            android:id="@+id/user_bio_set"
+            android:id="@+id/my_user_bio_set"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
@@ -57,10 +57,10 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/update_settings_button"
+        android:id="@+id/my_update_settings_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/data_user_box"
+        android:layout_below="@+id/my_data_user_box"
         android:padding="8dp"
         android:layout_marginTop="24dp"
         android:text="Update"
@@ -68,9 +68,4 @@
         android:background="@drawable/button_design"
         android:textColor="@color/white"
         app:backgroundTint="@color/black"/>
-
-
-
-
-
 </RelativeLayout>
