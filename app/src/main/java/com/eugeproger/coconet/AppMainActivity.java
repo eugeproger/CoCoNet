@@ -65,7 +65,7 @@ public class AppMainActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance(Constant.REALTIME_DATABASE_LINK);
         rootReference = firebaseDatabase.getReference();
-        currentUserID = auth.getCurrentUser().getUid();
+
     }
 
     @Override
@@ -79,6 +79,7 @@ public class AppMainActivity extends AppCompatActivity {
     }
 
     private void VerifyUserExistence() {
+        currentUserID = auth.getCurrentUser().getUid();
         rootReference.child(FirebaseFolderName.USERS).child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -94,7 +95,7 @@ public class AppMainActivity extends AppCompatActivity {
         });
     }
 
-    private void sendUserOnProfileActivity() {
+    private void sendUserToMyProfileActivity() {
         Intent profileIntent = new Intent(AppMainActivity.this, MyProfileActivity.class);
         startActivity(profileIntent);
     }
@@ -136,7 +137,7 @@ public class AppMainActivity extends AppCompatActivity {
             RequestNewGroup();
         }
         if (item.getItemId() == R.id.main_profile_option) {
-            sendUserOnProfileActivity();
+            sendUserToMyProfileActivity();
         }
         if (item.getItemId() == R.id.main_logout_option) {
             auth.signOut();

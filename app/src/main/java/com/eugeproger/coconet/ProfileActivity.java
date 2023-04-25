@@ -27,7 +27,7 @@ public class ProfileActivity extends AppCompatActivity {
     private String receiverUserID, currentState, senderUserID;
     private CircleImageView userProfileImage;
     private TextView userProfileName, userProfileBio;
-    private Button sendMessageRequestButton;
+    private Button sendMessageRequestButton, declineMessageRequestButton;
     private DatabaseReference userRef, chatRequestRef;
     private FirebaseAuth auth;
 
@@ -40,6 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
         userProfileName = findViewById(R.id.user_name_activity_profile);
         userProfileBio = findViewById(R.id.user_bio_activity_profile);
         sendMessageRequestButton = findViewById(R.id.send_message_button_activity_profile);
+        declineMessageRequestButton = findViewById(R.id.decline_message_button_activity_profile);
         currentState = Constant.NEW_REQUEST;
 
 
@@ -96,6 +97,14 @@ public class ProfileActivity extends AppCompatActivity {
                     if (requestType.equals(Constant.SENT)) {
                         currentState = Constant.SENT_REQUEST;
                         sendMessageRequestButton.setText("Cancel chat request");
+                    } else if (requestType.equals(Constant.RECEIVED)) {
+                        currentState = "request_received";
+                        sendMessageRequestButton.setText("Accept chat request");
+                        declineMessageRequestButton.setVisibility(View.VISIBLE);
+                        declineMessageRequestButton.setEnabled(true);
+                        declineMessageRequestButton.setOnClickListener(view -> {
+                            cancelChatRequest();
+                        });
                     }
                 }
             }
@@ -132,6 +141,9 @@ public class ProfileActivity extends AppCompatActivity {
                                 sendMessageRequestButton.setEnabled(true);
                                 currentState = Constant.NEW_REQUEST;
                                 sendMessageRequestButton.setText("Send message");
+
+                                declineMessageRequestButton.setVisibility(View.INVISIBLE);
+                                declineMessageRequestButton.setEnabled(false);
                             }
 
                         }
