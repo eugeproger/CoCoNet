@@ -94,7 +94,7 @@ public class AppMainActivity extends AppCompatActivity {
         });
     }
 
-    private void sendUserOnProfileActivity() {
+    private void sendUserToMyProfileActivity() {
         Intent profileIntent = new Intent(AppMainActivity.this, MyProfileActivity.class);
         startActivity(profileIntent);
     }
@@ -136,7 +136,7 @@ public class AppMainActivity extends AppCompatActivity {
             RequestNewGroup();
         }
         if (item.getItemId() == R.id.main_profile_option) {
-            sendUserOnProfileActivity();
+            sendUserToMyProfileActivity();
         }
         if (item.getItemId() == R.id.main_logout_option) {
             auth.signOut();
