@@ -52,13 +52,17 @@
             android:background="@drawable/field_design"
             android:padding="14dp"/>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/send_message_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="bottom"
+<<<<<<< HEAD
             android:src="@drawable/mess_24"
             android:background="@drawable/ring_black_design"
+=======
+            android:src="@drawable/send"
+>>>>>>> 99721e95a2c32ad8415d961e2fce9a59304b9090
             android:layout_marginLeft="8dp"/>
     </LinearLayout>
 </RelativeLayout>

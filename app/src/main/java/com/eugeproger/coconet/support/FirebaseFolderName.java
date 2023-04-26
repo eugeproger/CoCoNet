@@ -1,6 +1,6 @@
 package com.eugeproger.coconet.support;
 
-public class NameFolderFirebase {
+public class FirebaseFolderName {
 
     public static final String GROUPS = "Groups";
     public static final String USERS = "Users";
