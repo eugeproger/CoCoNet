@@ -11,10 +11,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.eugeproger.coconet.ProfileActivity;
 import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.simple.Contact;
@@ -100,9 +98,9 @@ public class SearchUserActivity extends AppCompatActivity {
         public SearchUserViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            userName = itemView.findViewById(R.id.user_profile_name);
-            userBio = itemView.findViewById(R.id.user_profile_bio);
-            profileImage = itemView.findViewById(R.id.user_profile_image);
+            userName = itemView.findViewById(R.id.name_user_box_layout);
+            userBio = itemView.findViewById(R.id.bio_user_box_layout);
+            profileImage = itemView.findViewById(R.id.profile_image_user_box_layout);
         }
     }
 }
