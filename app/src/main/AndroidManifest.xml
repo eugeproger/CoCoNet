@@ -27,8 +27,9 @@
             android:name=".tabs.group.GroupChatActivity"
             android:exported="false" />
         <activity
-            android:name=".option.my_profile.MyProfileActivity"
-            android:exported="true" />
+            android:name=".option.profile_settings.ProfileSettingsActivity"
+            android:exported="true"
+            android:parentActivityName=".AppMainActivity" />
         <activity
             android:name=".login.SignupActivity"
             android:exported="false" />

@@ -4,13 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".option.my_profile.MyProfileActivity">
+    tools:context=".option.profile_settings.ProfileSettingsActivity">
+
+    <include
+        layout="@layout/app_bar_layout"
+        android:id="@+id/tool_bar_settingsAct"
+        >
+
+    </include>
 
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/tool_bar_settingsAct"
         android:layout_alignParentStart="true">
 
         <RelativeLayout
