@@ -4,19 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".option.my_profile.MyProfileActivity">
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp">
+    android:layout_marginHorizontal="16dp"
+    tools:context=".option.MyProfileActivity">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -72,12 +61,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/my_data_user_box"
         android:padding="8dp"
-        android:layout_marginVertical="24dp"
+        android:layout_marginTop="24dp"
         android:text="Update"
         android:textSize="18sp"
         android:background="@drawable/button_design"
         android:textColor="@color/white"
         app:backgroundTint="@color/black"/>
-        </RelativeLayout>
-    </ScrollView>
 </RelativeLayout>
