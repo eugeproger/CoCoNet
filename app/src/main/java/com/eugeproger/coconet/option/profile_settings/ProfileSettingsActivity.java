@@ -1,4 +1,4 @@
-package com.eugeproger.coconet.option.my_profile;
+package com.eugeproger.coconet.option.profile_settings;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.eugeproger.coconet.AppMainActivity;
 import com.eugeproger.coconet.R;
@@ -35,9 +37,10 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MyProfileActivity extends AppCompatActivity {
+public class ProfileSettingsActivity extends AppCompatActivity {
     private Button updateAccountSettings;
     private EditText userName, userBio;
+    private TextView titleActivity;
     private CircleImageView userProfileImage;
     private String currentUserID;
     private FirebaseAuth mAuth;
@@ -45,13 +48,25 @@ public class MyProfileActivity extends AppCompatActivity {
     private StorageReference userProfileImagesRef;
     private ProgressDialog loadingBar;
     private StorageReference filePath;
+    private Toolbar toolbar;
 
     private void initializeElements() {
         updateAccountSettings = (Button) findViewById(R.id.my_update_settings_button);
         userName = (EditText) findViewById(R.id.my_user_name_set);
         userBio = (EditText) findViewById(R.id.my_user_bio_set);
         userProfileImage = findViewById(R.id.my_profileActivity_imageView);
+
+
+        toolbar =findViewById(R.id.tool_bar_settingsAct);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        titleActivity = toolbar.findViewById(R.id.title);
+        titleActivity.setText("Profile settings");
+
         loadingBar = new ProgressDialog(this);
+
     }
 
     private void databaseConfigurations() {
@@ -64,7 +79,7 @@ public class MyProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_profile);
+        setContentView(R.layout.activity_profile_settings);
         initializeElements();
         databaseConfigurations();
 
@@ -90,7 +105,7 @@ public class MyProfileActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if (task.isSuccessful()) {
-                            Utility.showShortToast(MyProfileActivity.this, "Profile image is uploaded successfully!");
+                            Utility.showShortToast(ProfileSettingsActivity.this, "Profile image is uploaded successfully!");
 
                             filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 public void onSuccess(Uri uri) {
@@ -100,11 +115,11 @@ public class MyProfileActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Utility.showShortToast(MyProfileActivity.this, "Image is saved in database successfully!");
+                                                Utility.showShortToast(ProfileSettingsActivity.this, "Image is saved in database successfully!");
                                                 loadingBar.dismiss();
                                             } else {
                                                 String message = task.getException().toString();
-                                                Utility.showErrorToast(MyProfileActivity.this, message);
+                                                Utility.showErrorToast(ProfileSettingsActivity.this, message);
                                                 loadingBar.dismiss();
                                             }
                                         }
@@ -115,7 +130,7 @@ public class MyProfileActivity extends AppCompatActivity {
                         } else {
                             String message = task.getException().toString();
 
-                            Utility.showErrorToast(MyProfileActivity.this, message);
+                            Utility.showErrorToast(ProfileSettingsActivity.this, message);
                             loadingBar.dismiss();
                         }
                     }
@@ -143,10 +158,10 @@ public class MyProfileActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
                         sendUserToMainActivity();
-                        Utility.showShortToast(MyProfileActivity.this, "Profile is updated successfully!");
+                        Utility.showShortToast(ProfileSettingsActivity.this, "Profile is updated successfully!");
                     } else {
                         String message = task.getException().toString();
-                        Utility.showErrorToast(MyProfileActivity.this, message);
+                        Utility.showErrorToast(ProfileSettingsActivity.this, message);
                     }
                 }
             });
@@ -173,7 +188,7 @@ public class MyProfileActivity extends AppCompatActivity {
                     userName.setText(retrieveUserName);
                     userBio.setText(retrievesStatus);
                 } else {
-                    Utility.showLengthToast(MyProfileActivity.this, "Set and update your profile information.");
+                    Utility.showLengthToast(ProfileSettingsActivity.this, "Set and update your profile information.");
                 }
             }
             @Override
@@ -183,7 +198,7 @@ public class MyProfileActivity extends AppCompatActivity {
     }
 
     private void sendUserToMainActivity() {
-        Intent mainIntent = new Intent(MyProfileActivity.this, AppMainActivity.class);
+        Intent mainIntent = new Intent(ProfileSettingsActivity.this, AppMainActivity.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
         finish();
