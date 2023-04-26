@@ -28,6 +28,9 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
 
 public class ContactsFragment extends Fragment {
 
@@ -36,6 +39,10 @@ public class ContactsFragment extends Fragment {
     private DatabaseReference contactsRef, usersRef;
     private FirebaseAuth auth;
     private String currentUserID;
+
+    public ContactsFragment() {
+        // Required empty public constructor
+    }
 
 
     @Override
@@ -51,9 +58,12 @@ public class ContactsFragment extends Fragment {
         mContactsList = (RecyclerView) contactsView.findViewById(R.id.contacts_list_frag_contacts);
         mContactsList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        contactsRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.CONTACTS).child(currentUserID);
-        usersRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration();
+        auth = FirebaseAuth.getInstance();
         currentUserID = auth.getCurrentUser().getUid();
+
+        contactsRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.CONTACTS).child(currentUserID);
+        usersRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.USERS);
+
 
         return contactsView;
     }
