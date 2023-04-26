@@ -1,4 +1,4 @@
-package com.eugeproger.coconet.option;
+package com.eugeproger.coconet.option.search;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.eugeproger.coconet.ProfileActivity;
 import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.simple.Contact;
 import com.eugeproger.coconet.support.Constant;
-import com.eugeproger.coconet.support.FirebaseConfiguration;
-import com.eugeproger.coconet.support.FirebaseFolderName;
+import com.eugeproger.coconet.support.ConfigurationFirebase;
+import com.eugeproger.coconet.support.NameFolderFirebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +37,7 @@ public class SearchUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_user);
 
-        userRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.USERS);
+        userRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.USERS);
 
         searchUsersRecyclerView = findViewById(R.id.search_user_recyclerView);
         searchUsersRecyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.eugeproger.coconet.RequestFragment;
+import com.eugeproger.coconet.tabs.request.RequestFragment;
 import com.eugeproger.coconet.tabs.chat.ChatsFragment;
 import com.eugeproger.coconet.tabs.contact.ContactsFragment;
 import com.eugeproger.coconet.tabs.group.GroupsFragment;

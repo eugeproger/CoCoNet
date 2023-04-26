@@ -1,4 +1,4 @@
-package com.eugeproger.coconet;
+package com.eugeproger.coconet.option.search;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,9 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.support.Constant;
-import com.eugeproger.coconet.support.FirebaseConfiguration;
-import com.eugeproger.coconet.support.FirebaseFolderName;
+import com.eugeproger.coconet.support.ConfigurationFirebase;
+import com.eugeproger.coconet.support.NameFolderFirebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,9 +44,9 @@ public class ProfileActivity extends AppCompatActivity {
         currentState = Constant.NEW_REQUEST;
 
         receiverUserID = getIntent().getExtras().get(Constant.VISIT_USER_ID).toString();
-        userRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.USERS);
-        chatRequestRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.CHAT_REQUESTS);
-        contactsRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.CONTACTS);
+        userRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.USERS);
+        chatRequestRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.CHAT_REQUESTS);
+        contactsRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.CONTACTS);
         auth = FirebaseAuth.getInstance();
         senderUserID = auth.getCurrentUser().getUid();
 
@@ -174,10 +175,10 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     private void acceptChatRequest() {
-        contactsRef.child(senderUserID).child(receiverUserID).child(FirebaseFolderName.CONTACTS).setValue(Constant.SAVED).addOnCompleteListener(new OnCompleteListener<Void>() {
+        contactsRef.child(senderUserID).child(receiverUserID).child(NameFolderFirebase.CONTACTS).setValue(Constant.SAVED).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                contactsRef.child(receiverUserID).child(senderUserID).child(FirebaseFolderName.CONTACTS).setValue(Constant.SAVED).addOnCompleteListener(new OnCompleteListener<Void>() {
+                contactsRef.child(receiverUserID).child(senderUserID).child(NameFolderFirebase.CONTACTS).setValue(Constant.SAVED).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task1) {
                         if (task1.isSuccessful()) {

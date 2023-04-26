@@ -1,4 +1,4 @@
-package com.eugeproger.coconet.option;
+package com.eugeproger.coconet.option.my_profile;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -9,16 +9,14 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
 import com.eugeproger.coconet.AppMainActivity;
 import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.support.Constant;
-import com.eugeproger.coconet.support.FirebaseConfiguration;
-import com.eugeproger.coconet.support.FirebaseFolderName;
+import com.eugeproger.coconet.support.ConfigurationFirebase;
+import com.eugeproger.coconet.support.NameFolderFirebase;
 import com.eugeproger.coconet.support.Utility;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -59,8 +57,8 @@ public class MyProfileActivity extends AppCompatActivity {
     private void databaseConfigurations() {
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
-        rootRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration();
-        userProfileImagesRef = FirebaseStorage.getInstance().getReference().child(FirebaseFolderName.PROFILE_IMAGES);
+        rootRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration();
+        userProfileImagesRef = FirebaseStorage.getInstance().getReference().child(NameFolderFirebase.PROFILE_IMAGES);
     }
 
     @Override
@@ -98,7 +96,7 @@ public class MyProfileActivity extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     final String downloadUrl = uri.toString();
 
-                                    rootRef.child(FirebaseFolderName.USERS).child(currentUserID).child(Constant.IMAGE).setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    rootRef.child(NameFolderFirebase.USERS).child(currentUserID).child(Constant.IMAGE).setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
@@ -140,7 +138,7 @@ public class MyProfileActivity extends AppCompatActivity {
             profileMap.put(Constant.UID, currentUserID);
             profileMap.put(Constant.NAME, setUserName);
             profileMap.put(Constant.BIO, setStatus);
-            rootRef.child(FirebaseFolderName.USERS).child(currentUserID).updateChildren(profileMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            rootRef.child(NameFolderFirebase.USERS).child(currentUserID).updateChildren(profileMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
@@ -156,7 +154,7 @@ public class MyProfileActivity extends AppCompatActivity {
     }
 
     private void retrieveUserInfo() {
-        rootRef.child(FirebaseFolderName.USERS).child(currentUserID).addValueEventListener(new ValueEventListener() {
+        rootRef.child(NameFolderFirebase.USERS).child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if ((dataSnapshot.exists()) && (dataSnapshot.hasChild(Constant.NAME) && (dataSnapshot.hasChild(Constant.IMAGE)))) {
