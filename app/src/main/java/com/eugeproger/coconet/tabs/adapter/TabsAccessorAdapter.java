@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.eugeproger.coconet.tabs.request.RequestFragment;
+import com.eugeproger.coconet.tabs.request.RequestsFragment;
 import com.eugeproger.coconet.tabs.chat.ChatsFragment;
 import com.eugeproger.coconet.tabs.contact.ContactsFragment;
 import com.eugeproger.coconet.tabs.group.GroupsFragment;
@@ -29,8 +29,8 @@ public class TabsAccessorAdapter extends FragmentPagerAdapter {
                 ContactsFragment contactsFragment = new ContactsFragment();
                 return contactsFragment;
             case 1:
-                RequestFragment requestFragment = new RequestFragment();
-                return requestFragment;
+                RequestsFragment requestsFragment = new RequestsFragment();
+                return requestsFragment;
             case 2:
                 ChatsFragment chatsFragment = new ChatsFragment();
                 return chatsFragment;

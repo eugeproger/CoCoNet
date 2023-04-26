@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -21,7 +20,6 @@ import com.eugeproger.coconet.support.Constant;
 import com.eugeproger.coconet.support.NameFolderFirebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +29,7 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RequestFragment extends Fragment {
+public class RequestsFragment extends Fragment {
 
     private View requestsFragment;
     private RecyclerView mRequestList;
@@ -39,7 +37,7 @@ public class RequestFragment extends Fragment {
     private FirebaseAuth auth;
     private String currentUserID;
 
-    public RequestFragment() {
+    public RequestsFragment() {
         // Required empty public constructor
     }
 
@@ -79,6 +77,7 @@ public class RequestFragment extends Fragment {
             @Override
             protected void onBindViewHolder(@NonNull RequestViewHolder holder, int position, @NonNull Contact model) {
 
+                holder.itemView.findViewById(R.id.buttons_box_user_box_layout).setVisibility(View.VISIBLE);
                 holder.itemView.findViewById(R.id.add_button_user_box_layout).setVisibility(View.VISIBLE);
                 holder.itemView.findViewById(R.id.cancel_button_user_box_layout).setVisibility(View.VISIBLE);
 
@@ -93,22 +92,22 @@ public class RequestFragment extends Fragment {
                             String type = snapshot.getValue().toString();
 
                             if (type.equals(Constant.RECEIVED)) {
-                                usersRef.child(Constant.LIST_USER_ID).addValueEventListener(new ValueEventListener() {
+                                usersRef.child(listUserId).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                                         if (snapshot.hasChild(Constant.IMAGE)) {
-                                            final String requestUserName = snapshot.child(Constant.NAME).getValue().toString();
-                                            final String requestUserBio = snapshot.child(Constant.BIO).getValue().toString();
-                                            final String requestUserImage = snapshot.child(Constant.IMAGE).getValue().toString();
+                                            String requestUserName = snapshot.child(Constant.NAME).getValue().toString();
+                                            String requestUserBio = snapshot.child(Constant.BIO).getValue().toString();
+                                            String requestUserImage = snapshot.child(Constant.IMAGE).getValue().toString();
 
                                             holder.userName.setText(requestUserName);
                                             holder.userBio.setText(requestUserBio);
                                             Picasso.get().load(requestUserImage).placeholder(R.drawable.profile_image).into(holder.userProfileImage);
 
                                         } else {
-                                            final String requestUserName = snapshot.child(Constant.NAME).getValue().toString();
-                                            final String requestUserBio = snapshot.child(Constant.BIO).getValue().toString();
+                                            String requestUserName = snapshot.child(Constant.NAME).getValue().toString();
+                                            String requestUserBio = snapshot.child(Constant.BIO).getValue().toString();
                                             holder.userName.setText(requestUserName);
                                             holder.userBio.setText(requestUserBio);
                                         }

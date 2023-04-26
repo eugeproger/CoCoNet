@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ import java.util.Iterator;
 public class GroupChatActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private ImageView sendMessageButton;
+    private ImageButton sendMessageButton;
     private EditText userMessageInput;
     private ScrollView scrollView;
     private TextView displayTextMessages, title;
