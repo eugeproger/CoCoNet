@@ -1,5 +1,6 @@
 package com.eugeproger.coconet.support;
 
+
 public class NameFolderFirebase {
 
     public static final String GROUPS = "Groups";

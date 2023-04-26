@@ -1,5 +1,6 @@
 package com.eugeproger.coconet.simple;
 
+
 public class Contact {
 
     public String name, bio, image;
