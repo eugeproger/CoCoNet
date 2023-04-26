@@ -15,8 +15,8 @@ import android.widget.TextView;
 import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.simple.Contact;
 import com.eugeproger.coconet.support.Constant;
-import com.eugeproger.coconet.support.FirebaseConfiguration;
-import com.eugeproger.coconet.support.FirebaseFolderName;
+import com.eugeproger.coconet.support.ConfigurationFirebase;
+import com.eugeproger.coconet.support.NameFolderFirebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,8 +61,8 @@ public class ContactsFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         currentUserID = auth.getCurrentUser().getUid();
 
-        contactsRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.CONTACTS).child(currentUserID);
-        usersRef = FirebaseConfiguration.setRealtimeDatabaseConfiguration().child(FirebaseFolderName.USERS);
+        contactsRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.CONTACTS).child(currentUserID);
+        usersRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.USERS);
 
 
         return contactsView;
