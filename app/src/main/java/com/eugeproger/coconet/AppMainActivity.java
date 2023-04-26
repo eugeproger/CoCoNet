@@ -15,10 +15,10 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.eugeproger.coconet.login.LoginActivity;
-import com.eugeproger.coconet.option.my_profile.MyProfileActivity;
-import com.eugeproger.coconet.option.search.SearchUserActivity;
+import com.eugeproger.coconet.option.MyProfileActivity;
+import com.eugeproger.coconet.option.SearchUserActivity;
 import com.eugeproger.coconet.support.Constant;
-import com.eugeproger.coconet.support.NameFolderFirebase;
+import com.eugeproger.coconet.support.FirebaseFolderName;
 import com.eugeproger.coconet.support.Utility;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -81,7 +81,7 @@ public class AppMainActivity extends AppCompatActivity {
 
     private void VerifyUserExistence() {
         currentUserID = auth.getCurrentUser().getUid();
-        rootReference.child(NameFolderFirebase.USERS).child(currentUserID).addValueEventListener(new ValueEventListener() {
+        rootReference.child(FirebaseFolderName.USERS).child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(Constant.NAME).exists()) {
@@ -178,7 +178,7 @@ public class AppMainActivity extends AppCompatActivity {
     }
 
     private void createGroup(String groupName) {
-        rootReference.child(NameFolderFirebase.GROUPS).child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
+        rootReference.child(FirebaseFolderName.GROUPS).child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
