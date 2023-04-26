@@ -1,5 +1,7 @@
 package com.eugeproger.coconet.tabs.request;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,8 +20,11 @@ import com.eugeproger.coconet.simple.Contact;
 import com.eugeproger.coconet.support.ConfigurationFirebase;
 import com.eugeproger.coconet.support.Constant;
 import com.eugeproger.coconet.support.NameFolderFirebase;
+import com.eugeproger.coconet.support.Utility;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +38,7 @@ public class RequestsFragment extends Fragment {
 
     private View requestsFragment;
     private RecyclerView mRequestList;
-    private DatabaseReference chatRequestRef, usersRef;
+    private DatabaseReference chatRequestRef, usersRef, contactsRef;
     private FirebaseAuth auth;
     private String currentUserID;
 
@@ -49,6 +54,7 @@ public class RequestsFragment extends Fragment {
 
         chatRequestRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.CHAT_REQUESTS);
         usersRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.USERS);
+        contactsRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.CONTACTS);
         auth = FirebaseAuth.getInstance();
         currentUserID = auth.getCurrentUser().getUid();
 
@@ -81,7 +87,7 @@ public class RequestsFragment extends Fragment {
                 holder.itemView.findViewById(R.id.add_button_user_box_layout).setVisibility(View.VISIBLE);
                 holder.itemView.findViewById(R.id.cancel_button_user_box_layout).setVisibility(View.VISIBLE);
 
-                final String listUserId = getRef(position).getKey();
+                final String listUserID = getRef(position).getKey();
 
                 DatabaseReference getTypeRef = getRef(position).child(Constant.REQUEST_TYPE).getRef();
 
@@ -92,25 +98,84 @@ public class RequestsFragment extends Fragment {
                             String type = snapshot.getValue().toString();
 
                             if (type.equals(Constant.RECEIVED)) {
-                                usersRef.child(listUserId).addValueEventListener(new ValueEventListener() {
+                                usersRef.child(listUserID).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                                         if (snapshot.hasChild(Constant.IMAGE)) {
-                                            String requestUserName = snapshot.child(Constant.NAME).getValue().toString();
-                                            String requestUserBio = snapshot.child(Constant.BIO).getValue().toString();
+
                                             String requestUserImage = snapshot.child(Constant.IMAGE).getValue().toString();
 
-                                            holder.userName.setText(requestUserName);
-                                            holder.userBio.setText(requestUserBio);
-                                            Picasso.get().load(requestUserImage).placeholder(R.drawable.profile_image).into(holder.userProfileImage);
 
-                                        } else {
-                                            String requestUserName = snapshot.child(Constant.NAME).getValue().toString();
-                                            String requestUserBio = snapshot.child(Constant.BIO).getValue().toString();
-                                            holder.userName.setText(requestUserName);
-                                            holder.userBio.setText(requestUserBio);
+                                            Picasso.get().load(requestUserImage).placeholder(R.drawable.profile_image).into(holder.userProfileImage);
                                         }
+                                        String requestUserName = snapshot.child(Constant.NAME).getValue().toString();
+                                        String requestUserBio = snapshot.child(Constant.BIO).getValue().toString();
+                                        holder.userName.setText(requestUserName);
+                                        holder.userBio.setText("wants to connect with you.");
+                                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                CharSequence options[] = new CharSequence[] {
+                                                        "Accept",
+                                                        "Reject"
+                                                };
+
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                                builder.setTitle(requestUserName + " chat request");
+
+                                                builder.setItems(options, new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                        if (i == 0) {
+                                                            contactsRef.child(currentUserID).child(listUserID).child(NameFolderFirebase.CONTACTS).setValue(Constant.SAVED).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        contactsRef.child(listUserID).child(currentUserID).child(NameFolderFirebase.CONTACTS).setValue(Constant.SAVED).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                            @Override
+                                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                                if (task.isSuccessful()) {
+                                                                                    chatRequestRef.child(currentUserID).child(listUserID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                        @Override
+                                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                                            if (task.isSuccessful()) {
+                                                                                                chatRequestRef.child(listUserID).child(currentUserID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                    @Override
+                                                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                                                        Utility.showShortToast(getContext(), "Contact added!");
+                                                                                                    }
+                                                                                                });
+                                                                                            }
+                                                                                        }
+                                                                                    });
+                                                                                }
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
+                                                        if (i == 1) {
+                                                            chatRequestRef.child(currentUserID).child(listUserID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        chatRequestRef.child(listUserID).child(currentUserID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                            @Override
+                                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                                Utility.showLengthToast(getContext(), "Contact deleted!");
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+                                                builder.show();
+                                            }
+                                        });
                                     }
 
                                     @Override
