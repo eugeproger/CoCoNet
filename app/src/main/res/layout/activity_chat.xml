@@ -7,36 +7,19 @@
     tools:context=".tabs.group.GroupChatActivity">
 
     <include
-        android:id="@+id/group_chat_bar_toolbar"
+        android:id="@+id/tollBar_chatAct"
         layout="@layout/app_bar_layout">
     </include>
-    
-    <ScrollView
-        android:id="@+id/scroll_group_chat"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chats_chatAct"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/group_chat_bar_toolbar"
-        android:layout_above="@+id/layout_group_chat_linearLayout">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tollBar_chatAct" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="16dp">
-
-            <TextView
-                android:id="@+id/display_group_chat_message"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textSize="18sp"
-                android:textColor="@android:color/background_dark"
-                android:layout_marginBottom="60dp"/>
-        </LinearLayout>
-    </ScrollView>
 
     <LinearLayout
-        android:id="@+id/layout_group_chat_linearLayout"
+        android:id="@+id/input_bar_box_chatAct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -45,7 +28,7 @@
         android:layout_marginHorizontal="8dp">
 
         <EditText
-            android:id="@+id/input_group_message"
+            android:id="@+id/input_field_chatAct"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -53,7 +36,7 @@
             android:padding="14dp"/>
 
         <ImageButton
-            android:id="@+id/send_message_button"
+            android:id="@+id/send_message_button_chatAct"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom"
