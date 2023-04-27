@@ -83,7 +83,7 @@ public class ChatsFragment extends Fragment {
                         if (snapshot.exists()) {
                             if (snapshot.hasChild(Constant.IMAGE)) {
                                 image[0] = snapshot.child(Constant.IMAGE).getValue().toString();
-                                Picasso.get().load(image[0]).placeholder(R.drawable.profile_image).into(holder.profileImage);
+                                Picasso.get().load(image[0]).placeholder(R.drawable.avatar_profile).into(holder.profileImage);
                             }
                             final String name = snapshot.child(Constant.NAME).getValue().toString();
                             final String bio = snapshot.child(Constant.BIO).getValue().toString();

@@ -17,7 +17,7 @@
             android:id="@+id/profile_image_user_box_layout"
             android:layout_width="77dp"
             android:layout_height="77dp"
-            android:src="@drawable/profile_image">
+            android:src="@drawable/avatar_profile">
 
         </de.hdodenhof.circleimageview.CircleImageView>
 
@@ -38,7 +38,7 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/online"
+                    android:src="@drawable/indicator_online"
                     android:visibility="gone"
                     tools:visibility="gone" />
 
@@ -82,20 +82,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
-                android:background="@drawable/button_design"
+                android:background="@drawable/design_button_regular"
                 android:paddingVertical="2dp"
                 android:visibility="gone"
-                app:srcCompat="@drawable/add_24" />
+                app:srcCompat="@drawable/icon_add_24" />
 
             <ImageButton
                 android:id="@+id/cancel_button_user_box_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/button_design"
+                android:background="@drawable/design_button_regular"
                 android:paddingVertical="2dp"
                 android:visibility="gone"
-                app:srcCompat="@drawable/minus_24" />
+                app:srcCompat="@drawable/icon_minus_24" />
 
         </LinearLayout>
     </LinearLayout>

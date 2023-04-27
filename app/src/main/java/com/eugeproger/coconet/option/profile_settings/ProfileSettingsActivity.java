@@ -179,7 +179,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
                     userName.setText(retrieveUserName);
                     userBio.setText(retrievesStatus);
-                    Picasso.get().load(retrieveProfileImage).placeholder(R.drawable.profile_image).into(userProfileImage);
+                    Picasso.get().load(retrieveProfileImage).placeholder(R.drawable.avatar_profile).into(userProfileImage);
 
                 } else if ((dataSnapshot.exists()) && (dataSnapshot.hasChild(Constant.NAME))) {
                     String retrieveUserName = dataSnapshot.child(Constant.NAME).getValue().toString();

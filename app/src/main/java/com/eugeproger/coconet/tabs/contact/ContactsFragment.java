@@ -96,7 +96,7 @@ public class ContactsFragment extends Fragment {
 
                             holder.userName.setText(profileName);
                             holder.userBio.setText(profileBio);
-                            Picasso.get().load(profileImage).placeholder(R.drawable.profile_image).into(holder.userImage);
+                            Picasso.get().load(profileImage).placeholder(R.drawable.avatar_profile).into(holder.userImage);
                         }
                         else {
                             String profileBio = snapshot.child(Constant.BIO).getValue().toString();

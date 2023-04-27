@@ -73,7 +73,7 @@ public class SearchUserActivity extends AppCompatActivity {
                 holder.userName.setText(model.getName());
                 holder.userBio.setText(model.getBio());
                 if (holder.profileImage != null && model.getImage() != null) {
-                    Picasso.get().load(model.getImage()).placeholder(R.drawable.profile_image).into(holder.profileImage);
+                    Picasso.get().load(model.getImage()).placeholder(R.drawable.avatar_profile).into(holder.profileImage);
                 }
 
                 holder.itemView.setOnClickListener(view -> {

@@ -107,7 +107,7 @@ public class RequestsFragment extends Fragment {
                                             String requestUserImage = snapshot.child(Constant.IMAGE).getValue().toString();
 
 
-                                            Picasso.get().load(requestUserImage).placeholder(R.drawable.profile_image).into(holder.userProfileImage);
+                                            Picasso.get().load(requestUserImage).placeholder(R.drawable.avatar_profile).into(holder.userProfileImage);
                                         }
                                         String requestUserName = snapshot.child(Constant.NAME).getValue().toString();
                                         String requestUserBio = snapshot.child(Constant.BIO).getValue().toString();
