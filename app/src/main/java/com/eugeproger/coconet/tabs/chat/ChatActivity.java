@@ -1,9 +1,12 @@
 package com.eugeproger.coconet.tabs.chat;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,7 +17,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.eugeproger.coconet.MessageAdapter;
 import com.eugeproger.coconet.R;
+import com.eugeproger.coconet.simple.Message;
 import com.eugeproger.coconet.support.ConfigurationFirebase;
 import com.eugeproger.coconet.support.Constant;
 import com.eugeproger.coconet.support.NameFolderFirebase;
@@ -22,10 +27,15 @@ import com.eugeproger.coconet.support.Utility;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -39,6 +49,10 @@ public class ChatActivity extends AppCompatActivity {
     private EditText messageInputText;
     private FirebaseAuth auth;
     private DatabaseReference rootRef;
+    private final List<Message> messages = new ArrayList<>();
+    private LinearLayoutManager linearLayoutManager;
+    private MessageAdapter messageAdapter;
+    private RecyclerView userMessages;
 
     private void initializeElements() {
 
@@ -59,6 +73,12 @@ public class ChatActivity extends AppCompatActivity {
 
         sendMessageButton = findViewById(R.id.send_message_button_chatAct);
         messageInputText = findViewById(R.id.input_field_chatAct);
+
+        messageAdapter = new MessageAdapter(messages);
+        userMessages = findViewById(R.id.chats_chatAct);
+        linearLayoutManager = new LinearLayoutManager(this);
+        userMessages.setLayoutManager(linearLayoutManager);
+        userMessages.setAdapter(messageAdapter);
     }
 
     @Override
@@ -82,6 +102,42 @@ public class ChatActivity extends AppCompatActivity {
 
         sendMessageButton.setOnClickListener(view -> sendMessage());
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        rootRef.child(NameFolderFirebase.MESSAGES).child(messageSenderID).child(messageReceiverID).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Message message = snapshot.getValue(Message.class);
+                messages.add(message);
+                messageAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        }); {
+
+        }
     }
 
     private void sendMessage() {
