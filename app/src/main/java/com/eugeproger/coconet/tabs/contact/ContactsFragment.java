@@ -78,7 +78,7 @@ public class ContactsFragment extends Fragment {
             @NonNull
             @Override
             public ContactsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_box_layout, parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_user, parent,false);
                 ContactsViewHolder viewHolder = new ContactsViewHolder(view);
                 return viewHolder;
             }

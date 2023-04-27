@@ -75,7 +75,7 @@ public class RequestsFragment extends Fragment {
             @NonNull
             @Override
             public RequestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_box_layout,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_user,parent,false);
                 RequestViewHolder holder = new RequestViewHolder(view);
                 return holder;
             }
@@ -121,7 +121,7 @@ public class RequestsFragment extends Fragment {
                                                         "Reject"
                                                 };
 
-                                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AlertDialog);
                                                 builder.setTitle(requestUserName + " chat request");
 
                                                 builder.setItems(options, new DialogInterface.OnClickListener() {

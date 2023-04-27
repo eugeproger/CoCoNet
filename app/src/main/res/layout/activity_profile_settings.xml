@@ -7,7 +7,7 @@
     tools:context=".option.profile_settings.ProfileSettingsActivity">
 
     <include
-        layout="@layout/app_bar_layout"
+        layout="@layout/layout_app_bar"
         android:id="@+id/tool_bar_settingsAct"
         >
 
@@ -58,7 +58,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/silver_dark"
+            android:background="@color/silver"
             android:layout_marginHorizontal="16dp" />
 
         <EditText

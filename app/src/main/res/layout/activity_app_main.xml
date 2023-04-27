@@ -14,7 +14,7 @@
 
         <include
             android:id="@+id/main_page_toolbar"
-            layout="@layout/app_bar_layout" >
+            layout="@layout/layout_app_bar" >
         </include>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -22,7 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp">
+        android:layout_marginBottom="0dp"
+        app:elevation="200dp">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/main_tabs"
@@ -30,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabIndicatorColor="?attr/tabSelectedTextColor"
-            app:tabTextAppearance="@style/TabTextStyle"/>
+            app:tabTextAppearance="@style/TabTextStyle" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager

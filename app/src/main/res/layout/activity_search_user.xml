@@ -7,7 +7,7 @@
     tools:context=".option.search.SearchUserActivity">
 
     <include
-        layout="@layout/app_bar_layout"
+        layout="@layout/layout_app_bar"
         android:id="@+id/search_user_toolbar"/>
 
     <androidx.recyclerview.widget.RecyclerView
