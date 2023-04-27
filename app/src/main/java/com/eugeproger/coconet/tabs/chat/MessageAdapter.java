@@ -1,4 +1,4 @@
-package com.eugeproger.coconet;
+package com.eugeproger.coconet.tabs.chat;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.simple.Message;
 import com.eugeproger.coconet.support.ConfigurationFirebase;
 import com.eugeproger.coconet.support.Constant;
@@ -70,12 +71,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Messages
         if (fromMessageType.equals(Constant.TEXT)) {
             holder.receiverMessageText.setVisibility(View.INVISIBLE);
             holder.receiverProfileImage.setVisibility(View.INVISIBLE);
+            holder.senderMessageText.setVisibility(View.INVISIBLE);
 
             if (fromUserID.equals(messageSenderID)) {
+                holder.senderMessageText.setVisibility(View.VISIBLE);
                 holder.senderMessageText.setBackgroundResource(R.drawable.design_messages_sender);
                 holder.senderMessageText.setText(message.getMessage());
             } else {
-                holder.senderMessageText.setVisibility(View.INVISIBLE);
 
                 holder.receiverMessageText.setVisibility(View.VISIBLE);
                 holder.receiverProfileImage.setVisibility(View.VISIBLE);

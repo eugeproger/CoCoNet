@@ -11,11 +11,15 @@
         layout="@layout/layout_app_bar">
     </include>
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chats_chatAct"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tollBar_chatAct" />
+        android:layout_marginHorizontal="16dp"
+        android:layout_below="@+id/tollBar_chatAct"
+        android:layout_above="@id/input_bar_box_chatAct"/>
 
 
     <LinearLayout
@@ -24,25 +28,29 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginHorizontal="8dp">
+        android:background="?attr/colorPrimary">
 
         <EditText
             android:id="@+id/input_field_chatAct"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/design_field_text"
+            android:background="@drawable/design_field_message"
             android:padding="10dp"
-            android:layout_gravity="center"/>
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            />
 
         <ImageButton
             android:id="@+id/send_message_button_chatAct"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_gravity="bottom"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
             android:src="@drawable/icon_mess_24"
-            android:background="@drawable/design_button_send_message"
-            android:layout_marginLeft="8dp"/>
+            android:background="@drawable/design_button_send_message" />
     </LinearLayout>
 </RelativeLayout>
