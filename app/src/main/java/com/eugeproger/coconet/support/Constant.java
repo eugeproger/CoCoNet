@@ -23,10 +23,6 @@ public class Constant {
     public static final String SAVED = "saved";
     public static final String CONTACT = "contact";
 
-    public static final String LIST_USER_ID = "listUserID";
 
-
-
-
-
+    public static final String VISIT_USER_NAME = "visit_user_name";
 }
