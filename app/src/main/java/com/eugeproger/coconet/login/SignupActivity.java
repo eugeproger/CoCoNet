@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.eugeproger.coconet.support.Utility;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -75,8 +76,12 @@ public class SignupActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
 
+                        String deviceToken = FirebaseInstanceId.getInstance().getToken();
+
                         String currentUserID = firebaseAuth.getCurrentUser().getUid();
                         rootReference.child(NameFolderFirebase.USERS).child(currentUserID).setValue("");
+
+                        rootReference.child(NameFolderFirebase.USERS).child(currentUserID).child(Constant.DEVICE_TOKEN).setValue(deviceToken);
 
                         sendUserToAppActivity();
                         Utility.showLengthToast(SignupActivity.this, "Account created successfully");
