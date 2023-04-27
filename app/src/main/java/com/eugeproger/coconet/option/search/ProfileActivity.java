@@ -44,9 +44,9 @@ public class ProfileActivity extends AppCompatActivity {
         currentState = Constant.NEW_REQUEST;
 
         receiverUserID = getIntent().getExtras().get(Constant.VISIT_USER_ID).toString();
-        userRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.USERS);
-        chatRequestRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.CHAT_REQUESTS);
-        contactsRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.CONTACTS);
+        userRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.USERS);
+        chatRequestRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.CHAT_REQUESTS);
+        contactsRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.CONTACTS);
         auth = FirebaseAuth.getInstance();
         senderUserID = auth.getCurrentUser().getUid();
 

@@ -61,8 +61,8 @@ public class ContactsFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         currentUserID = auth.getCurrentUser().getUid();
 
-        contactsRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.CONTACTS).child(currentUserID);
-        usersRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.USERS);
+        contactsRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.CONTACTS).child(currentUserID);
+        usersRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.USERS);
 
 
         return contactsView;
