@@ -70,7 +70,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/silver_dark"
+                    android:background="@color/silver"
                     android:layout_marginHorizontal="16dp" />
 
                 <EditText

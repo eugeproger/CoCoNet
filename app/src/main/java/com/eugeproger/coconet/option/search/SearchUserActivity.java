@@ -63,7 +63,7 @@ public class SearchUserActivity extends AppCompatActivity {
             @NonNull
             @Override
             public SearchUserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_box_layout, parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_user, parent,false);
                 SearchUserViewHolder viewHolder = new SearchUserViewHolder(view);
                 return viewHolder;
             }

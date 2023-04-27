@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.eugeproger.coconet.AppMainActivity;
 import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.support.Constant;
+import com.eugeproger.coconet.support.NameFolderFirebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -75,7 +76,7 @@ public class SignupActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
 
                         String currentUserID = firebaseAuth.getCurrentUser().getUid();
-                        rootReference.child("Users").child(currentUserID).setValue("");
+                        rootReference.child(NameFolderFirebase.USERS).child(currentUserID).setValue("");
 
                         sendUserToAppActivity();
                         Utility.showLengthToast(SignupActivity.this, "Account created successfully");

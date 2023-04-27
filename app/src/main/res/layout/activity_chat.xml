@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/tollBar_chatAct"
-        layout="@layout/app_bar_layout">
+        layout="@layout/layout_app_bar">
     </include>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -33,7 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/field_design"
-            android:padding="14dp"/>
+            android:padding="10dp"
+            android:layout_gravity="center"/>
 
         <ImageButton
             android:id="@+id/send_message_button_chatAct"

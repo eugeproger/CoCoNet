@@ -1,6 +1,5 @@
 package com.eugeproger.coconet.tabs.chat;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -35,7 +34,7 @@ public class ChatsFragment extends Fragment {
     private RecyclerView chats;
     private DatabaseReference chatsRef, usersRef;
     private FirebaseAuth auth;
-    private String currentUserID;
+    private String currentUserID = "";
 
 
     public ChatsFragment() {
@@ -70,20 +69,21 @@ public class ChatsFragment extends Fragment {
             @Override
             public ChatsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_box_layout, parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_user, parent,false);
                 return new ChatsViewHolder(view);
             }
 
             @Override
             protected void onBindViewHolder(@NonNull ChatsViewHolder holder, int position, @NonNull Contact model) {
                 final String userIDs = getRef(position).getKey();
+                final String[] image = {Constant.DEFAULT_IMAGE};
                 usersRef.child(userIDs).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             if (snapshot.hasChild(Constant.IMAGE)) {
-                                final String image = snapshot.child(Constant.IMAGE).getValue().toString();
-                                Picasso.get().load(image).placeholder(R.drawable.profile_image).into(holder.profileImage);
+                                image[0] = snapshot.child(Constant.IMAGE).getValue().toString();
+                                Picasso.get().load(image[0]).placeholder(R.drawable.profile_image).into(holder.profileImage);
                             }
                             final String name = snapshot.child(Constant.NAME).getValue().toString();
                             final String bio = snapshot.child(Constant.BIO).getValue().toString();
@@ -96,6 +96,7 @@ public class ChatsFragment extends Fragment {
                                     Intent chatIntent = new Intent(getContext(), ChatActivity.class);
                                     chatIntent.putExtra(Constant.VISIT_USER_ID, userIDs);
                                     chatIntent.putExtra(Constant.VISIT_USER_NAME, name);
+                                    chatIntent.putExtra(Constant.VISIT_USER_IMAGE, image[0]);
                                     startActivity(chatIntent);
                                 }
                             });
