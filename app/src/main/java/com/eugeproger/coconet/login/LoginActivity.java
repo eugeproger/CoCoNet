@@ -13,11 +13,17 @@ import android.widget.TextView;
 
 import com.eugeproger.coconet.AppMainActivity;
 import com.eugeproger.coconet.R;
+import com.eugeproger.coconet.support.ConfigurationFirebase;
+import com.eugeproger.coconet.support.Constant;
+import com.eugeproger.coconet.support.NameFolderFirebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.eugeproger.coconet.support.Utility;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdReceiver;
 
 public class LoginActivity extends AppCompatActivity {
     private Button logInButton, phoneLogInButton;
@@ -25,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView signUpLink, createNewPasswordLink;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
+    private DatabaseReference usersRef;
 
     private void initializeElements() {
         logInButton = findViewById(R.id.log_in_button);
@@ -41,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         firebaseAuth = FirebaseAuth.getInstance();
+        usersRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.USERS);
 
 
         initializeElements();
@@ -72,9 +80,22 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        sendUserToAppMainActivity();
-                        Utility.showShortToast(LoginActivity.this, "Logged in successful");
-                        progressDialog.dismiss();
+
+                        String currentUserID = firebaseAuth.getCurrentUser().getUid();
+                        String deviceToken = FirebaseInstanceId.getInstance().getToken();
+
+                        usersRef.child(currentUserID).child(Constant.DEVICE_TOKEN).setValue(deviceToken).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    sendUserToAppMainActivity();
+                                    Utility.showShortToast(LoginActivity.this, "Logged in successful");
+                                    progressDialog.dismiss();
+                                }
+                            }
+                        });
+
+
                     } else {
                         String message = task.getException().toString();
                         Utility.showLengthToast(LoginActivity.this, "Error: " + message);

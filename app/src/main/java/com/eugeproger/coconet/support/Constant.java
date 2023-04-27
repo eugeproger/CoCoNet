@@ -27,4 +27,6 @@ public class Constant {
     public static final String TYPE = "type";
     public static final String TEXT = "text";
     public static final String FROM = "from";
+    public static final String REQUEST = "request";
+    public static final String DEVICE_TOKEN = "device_token";
 }
