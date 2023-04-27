@@ -1,6 +1,7 @@
 package com.eugeproger.coconet.tabs.chat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -79,14 +80,26 @@ public class ChatsFragment extends Fragment {
                 usersRef.child(userIDs).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.hasChild(Constant.IMAGE)) {
-                            final String image = snapshot.child(Constant.IMAGE).getValue().toString();
-                            Picasso.get().load(image).placeholder(R.drawable.profile_image).into(holder.profileImage);
+                        if (snapshot.exists()) {
+                            if (snapshot.hasChild(Constant.IMAGE)) {
+                                final String image = snapshot.child(Constant.IMAGE).getValue().toString();
+                                Picasso.get().load(image).placeholder(R.drawable.profile_image).into(holder.profileImage);
+                            }
+                            final String name = snapshot.child(Constant.NAME).getValue().toString();
+                            final String bio = snapshot.child(Constant.BIO).getValue().toString();
+                            holder.userName.setText(name);
+                            holder.userBio.setText("last seen ");
+
+                            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+                                    chatIntent.putExtra(Constant.VISIT_USER_ID, userIDs);
+                                    chatIntent.putExtra(Constant.VISIT_USER_NAME, name);
+                                    startActivity(chatIntent);
+                                }
+                            });
                         }
-                        final String name = snapshot.child(Constant.NAME).getValue().toString();
-                        final String bio = snapshot.child(Constant.BIO).getValue().toString();
-                        holder.userName.setText(name);
-                        holder.userBio.setText("last seen ");
                     }
 
                     @Override
