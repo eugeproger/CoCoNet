@@ -52,9 +52,9 @@ public class RequestsFragment extends Fragment {
         // Inflate the layout for this fragment
         requestsFragment = inflater.inflate(R.layout.fragment_request, container, false);
 
-        chatRequestRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.CHAT_REQUESTS);
-        usersRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.USERS);
-        contactsRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.CONTACTS);
+        chatRequestRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.CHAT_REQUESTS);
+        usersRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.USERS);
+        contactsRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.CONTACTS);
         auth = FirebaseAuth.getInstance();
         currentUserID = auth.getCurrentUser().getUid();
 

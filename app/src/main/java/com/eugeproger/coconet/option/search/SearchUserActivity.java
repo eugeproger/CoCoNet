@@ -37,7 +37,7 @@ public class SearchUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_user);
 
-        userRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration().child(NameFolderFirebase.USERS);
+        userRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.USERS);
 
         searchUsersRecyclerView = findViewById(R.id.search_user_recyclerView);
         searchUsersRecyclerView.setLayoutManager(new LinearLayoutManager(this));

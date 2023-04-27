@@ -72,7 +72,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     private void databaseConfigurations() {
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
-        rootRef = ConfigurationFirebase.setRealtimeDatabaseConfiguration();
+        rootRef = ConfigurationFirebase.setRealtimeDatabaseRef();
         userProfileImagesRef = FirebaseStorage.getInstance().getReference().child(NameFolderFirebase.PROFILE_IMAGES);
     }
 
