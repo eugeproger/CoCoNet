@@ -4,7 +4,6 @@ public class Constant {
 
     public static final String REALTIME_DATABASE_LINK = "https://coconet-20230422-default-rtdb.europe-west1.firebasedatabase.app/";
     public static final int GALLERY_PICK = 1;
-
     public static final String GROUP_NAME = "group_name";
     public static final String NAME = "name";
     public static final String MESSAGE = "message";
@@ -25,4 +24,7 @@ public class Constant {
     public static final String VISIT_USER_NAME = "visit_user_name";
     public static final String DEFAULT_IMAGE = "default_image";
     public static final String VISIT_USER_IMAGE = "visit_user_image";
+    public static final String TYPE = "type";
+    public static final String TEXT = "text";
+    public static final String FROM = "from";
 }
