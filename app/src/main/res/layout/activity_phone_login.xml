@@ -20,7 +20,7 @@
             android:scaleType="fitCenter"
             android:layout_marginVertical="48dp"
             android:contentDescription="@string/login_image"
-            android:src="@drawable/phone_login" />
+            android:src="@drawable/avatar_phone" />
 
         <EditText
             android:id="@+id/phone_number_field"
@@ -30,16 +30,16 @@
             android:hint="@string/phone_number"
             android:inputType="phone"
             android:padding="4dp"
-            android:drawableStart="@drawable/phone_4"
-            android:background="@drawable/field_design"/>
+            android:drawableStart="@drawable/icon_phone_4"
+            android:background="@drawable/design_field_text"/>
 
         <EditText
             android:id="@+id/verification_code_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/phone_login_imageView"
-            android:background="@drawable/field_design"
-            android:drawableStart="@drawable/code_3"
+            android:background="@drawable/design_field_text"
+            android:drawableStart="@drawable/icon_code_3"
             android:hint="@string/verification_code"
             android:padding="4dp"
             android:visibility="invisible"
@@ -54,7 +54,7 @@
             android:layout_marginTop="24dp"
             android:text="@string/send_code"
             android:textSize="18sp"
-            android:background="@drawable/button_design"
+            android:background="@drawable/design_button_regular"
             android:textColor="@color/white"
             app:backgroundTint="@color/black"/>
 
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/phone_number_field"
             android:layout_marginTop="24dp"
-            android:background="@drawable/button_design"
+            android:background="@drawable/design_button_regular"
             android:padding="8dp"
             android:text="@string/verify"
             android:textColor="@color/white"

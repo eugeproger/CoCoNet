@@ -63,7 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
                     String userName = snapshot.child(Constant.NAME).getValue().toString();
                     String userBio = snapshot.child(Constant.BIO).getValue().toString();
 
-                    Picasso.get().load(userImage).placeholder(R.drawable.profile_image).into(userProfileImage);
+                    Picasso.get().load(userImage).placeholder(R.drawable.avatar_profile).into(userProfileImage);
                     userProfileName.setText(userName);
                     userProfileBio.setText(userBio);
 

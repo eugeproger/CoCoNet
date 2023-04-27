@@ -26,7 +26,7 @@
                 android:scaleType="fitCenter"
                 android:layout_marginVertical="48dp"
                 android:contentDescription="@string/login_image"
-                app:srcCompat="@drawable/log_in_picture" />
+                app:srcCompat="@drawable/avatar_login" />
 
             <TextView
                 android:id="@+id/hello_log_in_textView"
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/welcome_textView"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/field_design"
+                android:background="@drawable/design_field_text"
                 android:orientation="vertical">
 
                 <EditText
@@ -64,13 +64,13 @@
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:padding="4dp"
-                    android:drawableStart="@drawable/email"
-                    android:background="@drawable/field_empty_design"/>
+                    android:drawableStart="@drawable/icon_email"
+                    android:background="@drawable/design_empty"/>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/silver"
+                    android:background="@color/gray_3"
                     android:layout_marginHorizontal="16dp" />
 
                 <EditText
@@ -80,8 +80,8 @@
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:padding="4dp"
-                    android:drawableStart="@drawable/password"
-                    android:background="@drawable/field_empty_design" />
+                    android:drawableStart="@drawable/icon_password"
+                    android:background="@drawable/design_empty" />
             </LinearLayout>
 
 
@@ -124,7 +124,7 @@
                 android:layout_marginTop="24dp"
                 android:text="@string/log_in"
                 android:textSize="18sp"
-                android:background="@drawable/button_design"
+                android:background="@drawable/design_button_regular"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/black"/>
 
@@ -150,7 +150,7 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/log_in_with_phone_number"
                 android:textSize="18sp"
-                android:background="@drawable/button_design"
+                android:background="@drawable/design_button_regular"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/black"/>
 

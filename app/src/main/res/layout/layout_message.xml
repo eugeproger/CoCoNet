@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_layMessages"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image_layMessage"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:src="@drawable/avatar_profile"
+        android:cropToPadding="true" />
+
+    <EditText
+        android:id="@+id/receiver_layMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/design_messages_receiver"
+        android:paddingVertical="6dp"
+        android:paddingHorizontal="12dp"
+        android:layout_toEndOf="@id/image_layMessage"
+        android:layout_centerVertical="true"
+        android:text="Receiver" />
+
+    <EditText
+        android:id="@+id/sender_layMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/design_messages_sender"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="6dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="@+id/receiver_layMessage"
+        android:text="Sender"
+        android:textColor="@color/white"/>
+
+</RelativeLayout>

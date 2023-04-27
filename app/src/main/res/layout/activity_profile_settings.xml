@@ -34,7 +34,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginVertical="48dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/profile_image" />
+        android:src="@drawable/avatar_profile" />
 
 
     <LinearLayout
@@ -42,23 +42,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/my_profileActivity_imageView"
-        android:background="@drawable/field_design"
+        android:background="@drawable/design_field_text"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/my_user_name_set"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/field_empty_design"
+            android:background="@drawable/design_empty"
             android:hint="User name"
             android:inputType="textMultiLine"
             android:padding="4dp"
-            android:drawableStart="@drawable/name_3"/>
+            android:drawableStart="@drawable/icon_name_3"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/silver"
+            android:background="@color/gray_3"
             android:layout_marginHorizontal="16dp" />
 
         <EditText
@@ -66,11 +66,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:background="@drawable/field_empty_design"
+            android:background="@drawable/design_empty"
             android:hint="Bio"
             android:inputType="textMultiLine"
             android:padding="4dp"
-            android:drawableStart="@drawable/bio_3"/>
+            android:drawableStart="@drawable/icon_bio_3"/>
     </LinearLayout>
 
     <Button
@@ -82,7 +82,7 @@
         android:layout_marginVertical="24dp"
         android:text="Update"
         android:textSize="18sp"
-        android:background="@drawable/button_design"
+        android:background="@drawable/design_button_regular"
         android:textColor="@color/white"
         app:backgroundTint="@color/black"/>
         </RelativeLayout>

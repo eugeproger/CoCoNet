@@ -44,7 +44,7 @@
             android:layout_height="45dp"
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
-            android:src="@drawable/profile_image"
+            android:src="@drawable/avatar_profile"
             android:cropToPadding="true" />
 
     </LinearLayout>

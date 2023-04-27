@@ -27,7 +27,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="48dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/profile_image"
+        android:src="@drawable/avatar_profile"
         android:contentDescription="TODO" />
 
     <TextView
@@ -51,7 +51,7 @@
         android:hint="Bio"
         android:textSize="20sp"
         android:padding="12dp"
-        android:background="@drawable/field_design"/>
+        android:background="@drawable/design_field_text"/>
 
     <Button
         android:id="@+id/send_message_button_activity_profile"
@@ -62,7 +62,7 @@
         android:layout_marginTop="24dp"
         android:text="Send message"
         android:textSize="18sp"
-        android:background="@drawable/button_design"
+        android:background="@drawable/design_button_regular"
         android:textColor="@color/white"
         app:backgroundTint="@color/black"/>
 
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/send_message_button_activity_profile"
         android:layout_marginTop="8dp"
-        android:background="@drawable/button_design"
+        android:background="@drawable/design_button_regular"
         android:padding="8dp"
         android:text="Cancel chat request"
         android:textColor="@color/white"
