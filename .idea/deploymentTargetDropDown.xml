@@ -7,19 +7,29 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\Euge Jabl\.android\avd\Pixel_3a_API_28_1.avd" />
+            <value value="C:\Users\Euge Jabl\.android\avd\Pixel_3a_API_30_1.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2023-04-27T13:40:44.345927500Z" />
+    <timeTargetWasSelectedWithDropDown value="2023-04-27T17:01:26.738487200Z" />
+    <multipleDevicesSelectedInDropDown value="true" />
     <targetsSelectedWithDialog>
       <Target>
         <type value="QUICK_BOOT_TARGET" />
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\Euge Jabl\.android\avd\Nexus_5_API_28_1.avd" />
+            <value value="C:\Users\Euge Jabl\.android\avd\Pixel_3a_API_30_1.avd" />
+          </Key>
+        </deviceKey>
+      </Target>
+      <Target>
+        <type value="QUICK_BOOT_TARGET" />
+        <deviceKey>
+          <Key>
+            <type value="VIRTUAL_DEVICE_PATH" />
+            <value value="C:\Users\Euge Jabl\.android\avd\Pixel_API_28.avd" />
           </Key>
         </deviceKey>
       </Target>
