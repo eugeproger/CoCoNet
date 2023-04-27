@@ -1,13 +1,15 @@
-package com.eugeproger.coconet;
+package com.eugeproger.coconet.tabs.chat;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.simple.Message;
 import com.eugeproger.coconet.support.ConfigurationFirebase;
 import com.eugeproger.coconet.support.Constant;
@@ -68,22 +70,36 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Messages
         });
 
         if (fromMessageType.equals(Constant.TEXT)) {
-            holder.receiverMessageText.setVisibility(View.INVISIBLE);
-            holder.receiverProfileImage.setVisibility(View.INVISIBLE);
+            holder.receiverMessageText.setVisibility(View.GONE);
+            holder.receiverProfileImage.setVisibility(View.GONE);
+            holder.senderMessageText.setVisibility(View.GONE);
 
             if (fromUserID.equals(messageSenderID)) {
-                holder.senderMessageText.setBackgroundResource(R.drawable.design_messages_sender);
+                holder.senderMessageText.setVisibility(View.VISIBLE);
+                //holder.senderMessageText.setBackgroundResource(R.drawable.design_messages_sender);
                 holder.senderMessageText.setText(message.getMessage());
             } else {
-                holder.senderMessageText.setVisibility(View.INVISIBLE);
 
                 holder.receiverMessageText.setVisibility(View.VISIBLE);
-                holder.receiverProfileImage.setVisibility(View.VISIBLE);
+                //holder.receiverProfileImage.setVisibility(View.VISIBLE);
 
-                holder.receiverMessageText.setBackgroundResource(R.drawable.design_messages_receiver);
+                //holder.receiverMessageText.setBackgroundResource(R.drawable.design_messages_receiver);
                 holder.receiverMessageText.setText(message.getMessage());
             }
         }
+        if (position == 0) {
+            // Ustawienie marginesu dla pierwszego elementu
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0, 24, 0, 0);
+            holder.itemView.setLayoutParams(params);
+        } else {
+            // Ustawienie zerowego marginesu dla pozostałych elementów
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0, 0, 0, 24);
+            holder.itemView.setLayoutParams(params);
+        }
+
+
     }
 
     @Override

@@ -36,30 +36,34 @@
     </ScrollView>
 
     <LinearLayout
-        android:id="@+id/layout_group_chat_linearLayout"
+        android:id="@+id/input_bar_box_actGroupChat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginHorizontal="8dp">
+        android:background="?attr/colorPrimary">
 
         <EditText
-            android:id="@+id/input_group_message"
+            android:id="@+id/input_field_actGroupChat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/design_field_text"
-            android:layout_gravity="center"
-            android:padding="10dp"/>
+            android:background="@drawable/design_field_message"
+            android:padding="10dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            />
 
         <ImageButton
-            android:id="@+id/send_message_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:id="@+id/send_message_button_actGroupChat"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_gravity="bottom"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
             android:src="@drawable/icon_mess_24"
-            android:background="@drawable/design_button_send_message"
-            android:layout_marginLeft="8dp"/>
+            android:background="@drawable/design_button_send_message" />
     </LinearLayout>
 </RelativeLayout>

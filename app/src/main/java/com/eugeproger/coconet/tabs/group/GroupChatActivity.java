@@ -48,8 +48,8 @@ public class GroupChatActivity extends AppCompatActivity {
         title = toolbar.findViewById(R.id.title);
         title.setText(currentGroupName);
 
-        sendMessageButton = findViewById(R.id.send_message_button);
-        userMessageInput = findViewById(R.id.input_group_message);
+        sendMessageButton = findViewById(R.id.send_message_button_actGroupChat);
+        userMessageInput = findViewById(R.id.input_field_actGroupChat);
         displayTextMessages = findViewById(R.id.display_group_chat_message);
         scrollView = findViewById(R.id.scroll_group_chat);
 

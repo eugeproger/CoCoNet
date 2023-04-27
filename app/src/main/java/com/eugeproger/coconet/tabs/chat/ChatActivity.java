@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.eugeproger.coconet.MessageAdapter;
 import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.simple.Message;
 import com.eugeproger.coconet.support.ConfigurationFirebase;
@@ -114,6 +113,8 @@ public class ChatActivity extends AppCompatActivity {
                 Message message = snapshot.getValue(Message.class);
                 messages.add(message);
                 messageAdapter.notifyDataSetChanged();
+
+                userMessages.smoothScrollToPosition(userMessages.getAdapter().getItemCount());
             }
 
             @Override
