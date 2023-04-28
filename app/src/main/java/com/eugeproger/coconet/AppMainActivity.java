@@ -32,12 +32,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+
 public class AppMainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private TabsAccessorAdapter tabsAccessorAdapter;
-
     private FirebaseUser currentUser;
     private FirebaseAuth auth;
     private DatabaseReference rootReference;
@@ -75,11 +78,29 @@ public class AppMainActivity extends AppCompatActivity {
         if (currentUser == null) {
             holdUserToLoginActivity();
         } else {
-            VerifyUserExistence();
+            updateUserStatus(Constant.ONLINE);
+            verifyUserExistence();
         }
     }
 
-    private void VerifyUserExistence() {
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (currentUser != null) {
+            updateUserStatus(Constant.OFFLINE);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (currentUser != null) {
+            updateUserStatus(Constant.OFFLINE);
+        }
+    }
+
+    private void verifyUserExistence() {
         currentUserID = auth.getCurrentUser().getUid();
         rootReference.child(NameFolderFirebase.USERS).child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -187,5 +208,24 @@ public class AppMainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void updateUserStatus(String state) {
+        String saveCurrentTime, saveCurrentDate;
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd, mm, yyyy");
+        saveCurrentDate = currentDate.format(calendar.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm");
+        saveCurrentTime = currentTime.format(calendar.getTime());
+
+        HashMap<String, Object> onlineStates = new HashMap<>();
+        onlineStates.put(Constant.TIME, saveCurrentTime);
+        onlineStates.put(Constant.DATE, saveCurrentDate);
+        onlineStates.put(Constant.STATE, state);
+
+        currentUserID = auth.getCurrentUser().getUid();
+        rootReference.child(NameFolderFirebase.USERS).child(currentUserID).child(NameFolderFirebase.USER_STATE).updateChildren(onlineStates);
     }
 }

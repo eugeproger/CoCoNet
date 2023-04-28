@@ -15,8 +15,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image_user_box_layout"
-            android:layout_width="77dp"
-            android:layout_height="77dp"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
             android:src="@drawable/avatar_profile">
 
         </de.hdodenhof.circleimageview.CircleImageView>
@@ -62,40 +62,48 @@
                 android:layout_marginStart="16dp"
                 android:text="Bio"
                 android:textAlignment="textStart"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="?attr/colorPrimaryDark"/>
 
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/buttons_box_user_box_layout"
-            android:layout_width="77dp"
+            android:id="@+id/buttons_box_layUser"
+            android:layout_width="78dp"
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"
-            android:gravity="right"
+            android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
 
             <ImageButton
-                android:id="@+id/add_button_user_box_layout"
+                android:id="@+id/add_btn_layUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:layout_weight="1"
                 android:background="@drawable/design_button_regular"
-                android:paddingVertical="2dp"
+                android:paddingVertical="5dp"
                 android:visibility="gone"
                 app:srcCompat="@drawable/icon_add_24" />
 
             <ImageButton
-                android:id="@+id/cancel_button_user_box_layout"
+                android:id="@+id/cancel_btn_layUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:background="@drawable/design_button_regular"
-                android:paddingVertical="2dp"
+                android:paddingVertical="5dp"
                 android:visibility="gone"
                 app:srcCompat="@drawable/icon_minus_24" />
+
+            <ImageButton
+                android:id="@+id/request_btn_layUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/design_button_regular"
+                android:paddingVertical="5dp"
+                android:visibility="gone"
+                app:srcCompat="@drawable/icon_request" />
 
         </LinearLayout>
     </LinearLayout>
