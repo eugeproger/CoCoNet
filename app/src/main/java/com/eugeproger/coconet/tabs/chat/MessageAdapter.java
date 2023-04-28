@@ -77,7 +77,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Messages
 
         if (fromMessageType.equals(Constant.TEXT)) {
 
-
             if (fromUserID.equals(messageSenderID)) {
                 holder.senderMessageText.setVisibility(View.VISIBLE);
                 holder.senderMessageText.setText(message.getMessage() + "\n\n" + message.getTime() + " - " + message.getDate());
@@ -86,7 +85,18 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Messages
                 holder.receiverMessageText.setVisibility(View.VISIBLE);
                 holder.receiverMessageText.setText(message.getMessage() + "\n\n" + message.getTime() + " - " + message.getDate());
             }
+
+        } else if (fromMessageType.equals(Constant.IMAGE)) {
+            if (fromUserID.equals(messageSenderID)) {
+                holder.messageSenderPicture.setVisibility(View.VISIBLE);
+                Picasso.get().load(message.getMessage()).into(holder.messageSenderPicture);
+            } else {
+                holder.messageReceiverPicture.setVisibility(View.VISIBLE);
+                Picasso.get().load(message.getMessage()).into(holder.messageReceiverPicture);
+            }
         }
+
+
         if (position == 0) {
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.setMargins(0, 24, 0, 0);

@@ -31,6 +31,7 @@
                 android:background="@drawable/design_messages_receiver"
                 android:paddingVertical="6dp"
                 android:paddingHorizontal="12dp"
+                android:layout_gravity="center"
                 android:text="Receiver" />
     
         </LinearLayout>
@@ -50,12 +51,14 @@
         <ImageView
             android:id="@+id/message_sender_image_view_layChatting"
             android:layout_width="150dp"
-            android:layout_height="150dp"/>
+            android:layout_height="150dp"
+            android:layout_gravity="right"/>
 
         <ImageView
             android:id="@+id/message_receiver_image_view_layChatting"
             android:layout_width="150dp"
-            android:layout_height="150dp"/>
+            android:layout_height="150dp"
+            android:layout_gravity="left"/>
 
     </LinearLayout>
 </RelativeLayout>

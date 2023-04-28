@@ -3,7 +3,8 @@ package com.eugeproger.coconet.support;
 public class Constant {
 
     public static final String REALTIME_DATABASE_LINK = "https://coconet-20230422-default-rtdb.europe-west1.firebasedatabase.app/";
-    public static final int GALLERY_PICK = 1;
+    public static final int REQUEST_CODE_1 = 1;
+    public static final int REQUEST_CODE_2 = 2;
     public static final String GROUP_NAME = "group_name";
     public static final String NAME = "name";
     public static final String MESSAGE = "message";
@@ -34,4 +35,6 @@ public class Constant {
     public static final String OFFLINE = "offline";
     public static final String TO = "to";
     public static final String MESSAGE_ID = "message_ID";
+    public static final String PDF = "pdf";
+    public static final String DOCX = "docx";
 }
