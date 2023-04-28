@@ -85,10 +85,26 @@ public class ChatsFragment extends Fragment {
                                 image[0] = snapshot.child(Constant.IMAGE).getValue().toString();
                                 Picasso.get().load(image[0]).placeholder(R.drawable.avatar_profile).into(holder.profileImage);
                             }
+
                             final String name = snapshot.child(Constant.NAME).getValue().toString();
                             final String bio = snapshot.child(Constant.BIO).getValue().toString();
                             holder.userName.setText(name);
-                            holder.userBio.setText("last seen ");
+                            //holder.userBio.setText("last seen ");
+
+                            if (snapshot.child(NameFolderFirebase.USER_STATE).hasChild(Constant.STATE)) {
+                                String state = snapshot.child(NameFolderFirebase.USER_STATE).child(Constant.STATE).getValue().toString();
+                                String date = snapshot.child(NameFolderFirebase.USER_STATE).child(Constant.DATE).getValue().toString();
+                                String time = snapshot.child(NameFolderFirebase.USER_STATE).child(Constant.TIME).getValue().toString();
+
+                                if (state.equals(Constant.ONLINE)) {
+                                    holder.userBio.setText(Constant.ONLINE);
+                                } else if (state.equals(Constant.OFFLINE)) {
+                                    holder.userBio.setText("last seen " + date + " at " + time);
+                                }
+                            } else {
+                                holder.userBio.setText(Constant.OFFLINE);
+
+                            }
 
                             holder.itemView.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -120,9 +136,9 @@ public class ChatsFragment extends Fragment {
         public ChatsViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            profileImage = itemView.findViewById(R.id.profile_image_user_box_layout);
-            userName = itemView.findViewById(R.id.name_user_box_layout);
-            userBio = itemView.findViewById(R.id.bio_user_box_layout);
+            profileImage = itemView.findViewById(R.id.profile_image_layUser);
+            userName = itemView.findViewById(R.id.name_layUser);
+            userBio = itemView.findViewById(R.id.bio_layUser);
         }
     }
 }

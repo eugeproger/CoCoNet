@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eugeproger.coconet.R;
@@ -89,21 +90,39 @@ public class ContactsFragment extends Fragment {
                 usersRef.child(userIDs).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.hasChild(Constant.IMAGE)) {
-                            String profileImage = snapshot.child(Constant.IMAGE).getValue().toString();
-                            String profileBio = snapshot.child(Constant.BIO).getValue().toString();
-                            String profileName = snapshot.child(Constant.NAME).getValue().toString();
 
-                            holder.userName.setText(profileName);
-                            holder.userBio.setText(profileBio);
-                            Picasso.get().load(profileImage).placeholder(R.drawable.avatar_profile).into(holder.userImage);
-                        }
-                        else {
-                            String profileBio = snapshot.child(Constant.BIO).getValue().toString();
-                            String profileName = snapshot.child(Constant.NAME).getValue().toString();
+                        if (snapshot.exists()) {
 
-                            holder.userName.setText(profileName);
-                            holder.userBio.setText(profileBio);
+                            if (snapshot.child(NameFolderFirebase.USER_STATE).hasChild(Constant.STATE)) {
+                                String state = snapshot.child(NameFolderFirebase.USER_STATE).child(Constant.STATE).getValue().toString();
+                                String date = snapshot.child(NameFolderFirebase.USER_STATE).child(Constant.DATE).getValue().toString();
+                                String time = snapshot.child(NameFolderFirebase.USER_STATE).child(Constant.TIME).getValue().toString();
+
+                                if (state.equals(Constant.ONLINE)) {
+                                    holder.onlineImage.setVisibility(View.VISIBLE);
+                                } else if (state.equals(Constant.OFFLINE)) {
+                                    holder.onlineImage.setVisibility(View.GONE);
+                                }
+                            } else {
+                                holder.onlineImage.setVisibility(View.GONE);
+
+                            }
+
+                            if (snapshot.hasChild(Constant.IMAGE)) {
+                                String profileImage = snapshot.child(Constant.IMAGE).getValue().toString();
+                                String profileBio = snapshot.child(Constant.BIO).getValue().toString();
+                                String profileName = snapshot.child(Constant.NAME).getValue().toString();
+
+                                holder.userName.setText(profileName);
+                                holder.userBio.setText(profileBio);
+                                Picasso.get().load(profileImage).placeholder(R.drawable.avatar_profile).into(holder.userImage);
+                            } else {
+                                String profileBio = snapshot.child(Constant.BIO).getValue().toString();
+                                String profileName = snapshot.child(Constant.NAME).getValue().toString();
+
+                                holder.userName.setText(profileName);
+                                holder.userBio.setText(profileBio);
+                            }
                         }
                     }
 
@@ -123,13 +142,15 @@ public class ContactsFragment extends Fragment {
 
         TextView userName, userBio;
         CircleImageView userImage;
+        ImageView onlineImage;
 
         public ContactsViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            userName = itemView.findViewById(R.id.name_user_box_layout);
-            userBio = itemView.findViewById(R.id.bio_user_box_layout);
-            userImage = itemView.findViewById(R.id.profile_image_user_box_layout);
+            userName = itemView.findViewById(R.id.name_layUser);
+            userBio = itemView.findViewById(R.id.bio_layUser);
+            userImage = itemView.findViewById(R.id.profile_image_layUser);
+            onlineImage = itemView.findViewById(R.id.online_image_layUser);
 
         }
     }

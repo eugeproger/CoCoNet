@@ -30,6 +30,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -100,7 +101,7 @@ public class ChatActivity extends AppCompatActivity {
         Picasso.get().load(messageReceiverImage).placeholder(R.drawable.avatar_profile).into(userImage);
 
         sendMessageButton.setOnClickListener(view -> sendMessage());
-
+        displayLastSeen();
     }
 
     @Override
@@ -180,10 +181,34 @@ public class ChatActivity extends AppCompatActivity {
                     messageInputText.setText("");
                 }
             });
-
-
         }
     }
 
+    private void displayLastSeen() {
+        rootRef.child(NameFolderFirebase.USERS).child(messageReceiverID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.child(NameFolderFirebase.USER_STATE).hasChild(Constant.STATE)) {
+                    String state = snapshot.child(NameFolderFirebase.USER_STATE).child(Constant.STATE).getValue().toString();
+                    String date = snapshot.child(NameFolderFirebase.USER_STATE).child(Constant.DATE).getValue().toString();
+                    String time = snapshot.child(NameFolderFirebase.USER_STATE).child(Constant.TIME).getValue().toString();
+
+                    if (state.equals(Constant.ONLINE)) {
+                        userLastSeen.setText(Constant.ONLINE);
+                    } else if (state.equals(Constant.OFFLINE)) {
+                        userLastSeen.setText("last seen " + date + " at " + time);
+                    }
+                } else {
+                    userLastSeen.setText(Constant.OFFLINE);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 }
