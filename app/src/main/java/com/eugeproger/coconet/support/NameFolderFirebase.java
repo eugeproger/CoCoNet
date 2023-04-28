@@ -9,4 +9,5 @@ public class NameFolderFirebase {
     public static final String CONTACTS = "Contacts";
     public static final String MESSAGES = "Messages";
     public static final String NOTIFICATIONS = "Notifications";
+    public static final String USER_STATE = "User_state";
 }
