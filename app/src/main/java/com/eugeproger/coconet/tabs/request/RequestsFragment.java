@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -83,9 +84,9 @@ public class RequestsFragment extends Fragment {
             @Override
             protected void onBindViewHolder(@NonNull RequestViewHolder holder, int position, @NonNull Contact model) {
 
-                holder.itemView.findViewById(R.id.buttons_box_user_box_layout).setVisibility(View.VISIBLE);
-                holder.itemView.findViewById(R.id.add_button_user_box_layout).setVisibility(View.VISIBLE);
-                holder.itemView.findViewById(R.id.cancel_button_user_box_layout).setVisibility(View.VISIBLE);
+                holder.itemView.findViewById(R.id.buttons_box_layUser).setVisibility(View.VISIBLE);
+                holder.itemView.findViewById(R.id.add_btn_layUser).setVisibility(View.VISIBLE);
+                holder.itemView.findViewById(R.id.cancel_btn_layUser).setVisibility(View.VISIBLE);
 
                 final String listUserID = getRef(position).getKey();
 
@@ -113,6 +114,7 @@ public class RequestsFragment extends Fragment {
                                         String requestUserBio = snapshot.child(Constant.BIO).getValue().toString();
                                         holder.userName.setText(requestUserName);
                                         holder.userBio.setText("wants to connect with you.");
+                                        holder.userBio.setTextColor(ContextCompat.getColor(getContext(), android.R.color.black));
                                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
@@ -183,6 +185,67 @@ public class RequestsFragment extends Fragment {
 
                                     }
                                 });
+                            } else if (type.equals(Constant.SENT)) {
+                                holder.itemView.findViewById(R.id.add_btn_layUser).setVisibility(View.GONE);
+                                holder.itemView.findViewById(R.id.cancel_btn_layUser).setVisibility(View.GONE);
+                                holder.itemView.findViewById(R.id.buttons_box_layUser).setVisibility(View.VISIBLE);
+                                holder.itemView.findViewById(R.id.request_btn_layUser).setVisibility(View.VISIBLE);
+
+                                usersRef.child(listUserID).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                        if (snapshot.hasChild(Constant.IMAGE)) {
+
+                                            String requestUserImage = snapshot.child(Constant.IMAGE).getValue().toString();
+
+
+                                            Picasso.get().load(requestUserImage).placeholder(R.drawable.avatar_profile).into(holder.userProfileImage);
+                                        }
+                                        String requestUserName = snapshot.child(Constant.NAME).getValue().toString();
+                                        String requestUserBio = snapshot.child(Constant.BIO).getValue().toString();
+                                        holder.userName.setText(requestUserName);
+                                        holder.userBio.setText("Request sent.");
+                                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                CharSequence options[] = new CharSequence[] {
+                                                        "Recall"
+                                                };
+
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AlertDialog);
+                                                builder.setTitle("A request has been sent to " + requestUserName + ".");
+
+                                                builder.setItems(options, new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                        if (i == 0) {
+                                                            chatRequestRef.child(currentUserID).child(listUserID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        chatRequestRef.child(listUserID).child(currentUserID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                            @Override
+                                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                                Utility.showLengthToast(getContext(), "Chat request is cancelled.");
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+                                                builder.show();
+                                            }
+                                        });
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
                             }
                         }
                     }
@@ -211,8 +274,8 @@ public class RequestsFragment extends Fragment {
         userName = itemView.findViewById(R.id.name_user_box_layout);
         userBio = itemView.findViewById(R.id.bio_user_box_layout);
         userProfileImage = itemView.findViewById(R.id.profile_image_user_box_layout);
-        addButton = itemView.findViewById(R.id.add_button_user_box_layout);
-        cancelButton = itemView.findViewById(R.id.cancel_button_user_box_layout);
+        addButton = itemView.findViewById(R.id.add_btn_layUser);
+        cancelButton = itemView.findViewById(R.id.cancel_btn_layUser);
 
         }
     }
