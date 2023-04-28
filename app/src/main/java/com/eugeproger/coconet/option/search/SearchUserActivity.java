@@ -97,9 +97,9 @@ public class SearchUserActivity extends AppCompatActivity {
         public SearchUserViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            userName = itemView.findViewById(R.id.name_user_box_layout);
-            userBio = itemView.findViewById(R.id.bio_user_box_layout);
-            profileImage = itemView.findViewById(R.id.profile_image_user_box_layout);
+            userName = itemView.findViewById(R.id.name_layUser);
+            userBio = itemView.findViewById(R.id.bio_layUser);
+            profileImage = itemView.findViewById(R.id.profile_image_layUser);
         }
     }
 }

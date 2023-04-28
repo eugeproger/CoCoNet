@@ -41,7 +41,6 @@ public class AppMainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private TabsAccessorAdapter tabsAccessorAdapter;
-    private FirebaseUser currentUser;
     private FirebaseAuth auth;
     private DatabaseReference rootReference;
     private FirebaseDatabase firebaseDatabase;
@@ -65,7 +64,7 @@ public class AppMainActivity extends AppCompatActivity {
 
 
         auth = FirebaseAuth.getInstance();
-        currentUser = auth.getCurrentUser();
+
 
         firebaseDatabase = FirebaseDatabase.getInstance(Constant.REALTIME_DATABASE_LINK);
         rootReference = firebaseDatabase.getReference();
@@ -75,6 +74,8 @@ public class AppMainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        FirebaseUser currentUser = auth.getCurrentUser();
         if (currentUser == null) {
             holdUserToLoginActivity();
         } else {
@@ -86,6 +87,7 @@ public class AppMainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        FirebaseUser currentUser = auth.getCurrentUser();
         if (currentUser != null) {
             updateUserStatus(Constant.OFFLINE);
         }
@@ -94,7 +96,7 @@ public class AppMainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        FirebaseUser currentUser = auth.getCurrentUser();
         if (currentUser != null) {
             updateUserStatus(Constant.OFFLINE);
         }
@@ -163,6 +165,8 @@ public class AppMainActivity extends AppCompatActivity {
             sendUserToMyProfileActivity();
         }
         if (item.getItemId() == R.id.main_logout_option) {
+            FirebaseUser currentUser = auth.getCurrentUser();
+            updateUserStatus(Constant.OFFLINE);
             auth.signOut();
             finish();
             holdUserToLoginActivity();
@@ -214,7 +218,7 @@ public class AppMainActivity extends AppCompatActivity {
         String saveCurrentTime, saveCurrentDate;
         Calendar calendar = Calendar.getInstance();
 
-        SimpleDateFormat currentDate = new SimpleDateFormat("dd, mm, yyyy");
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
         saveCurrentDate = currentDate.format(calendar.getTime());
 
         SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm");

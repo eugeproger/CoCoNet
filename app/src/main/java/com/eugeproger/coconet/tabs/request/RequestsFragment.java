@@ -113,7 +113,7 @@ public class RequestsFragment extends Fragment {
                                         String requestUserName = snapshot.child(Constant.NAME).getValue().toString();
                                         String requestUserBio = snapshot.child(Constant.BIO).getValue().toString();
                                         holder.userName.setText(requestUserName);
-                                        holder.userBio.setText("wants to connect with you.");
+                                        holder.userBio.setText("wants to connect with you");
                                         holder.userBio.setTextColor(ContextCompat.getColor(getContext(), android.R.color.black));
                                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                                             @Override
@@ -205,7 +205,7 @@ public class RequestsFragment extends Fragment {
                                         String requestUserName = snapshot.child(Constant.NAME).getValue().toString();
                                         String requestUserBio = snapshot.child(Constant.BIO).getValue().toString();
                                         holder.userName.setText(requestUserName);
-                                        holder.userBio.setText("Request sent.");
+                                        holder.userBio.setText("request sent");
                                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
@@ -271,9 +271,9 @@ public class RequestsFragment extends Fragment {
         public RequestViewHolder(@NonNull View itemView) {
             super(itemView);
 
-        userName = itemView.findViewById(R.id.name_user_box_layout);
-        userBio = itemView.findViewById(R.id.bio_user_box_layout);
-        userProfileImage = itemView.findViewById(R.id.profile_image_user_box_layout);
+        userName = itemView.findViewById(R.id.name_layUser);
+        userBio = itemView.findViewById(R.id.bio_layUser);
+        userProfileImage = itemView.findViewById(R.id.profile_image_layUser);
         addButton = itemView.findViewById(R.id.add_btn_layUser);
         cancelButton = itemView.findViewById(R.id.cancel_btn_layUser);
 
