@@ -29,4 +29,7 @@ public class Constant {
     public static final String FROM = "from";
     public static final String REQUEST = "request";
     public static final String DEVICE_TOKEN = "device_token";
+    public static final String STATE = "state";
+    public static final String ONLINE = "online";
+    public static final String OFFLINE = "offline";
 }
