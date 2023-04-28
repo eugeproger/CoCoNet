@@ -32,4 +32,6 @@ public class Constant {
     public static final String STATE = "state";
     public static final String ONLINE = "online";
     public static final String OFFLINE = "offline";
+    public static final String TO = "to";
+    public static final String MESSAGE_ID = "message_ID";
 }

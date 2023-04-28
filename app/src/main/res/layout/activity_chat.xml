@@ -30,6 +30,16 @@
         android:layout_alignParentBottom="true"
         android:background="?attr/colorPrimary">
 
+        <ImageButton
+            android:id="@+id/attach_button_actChatting"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="16dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/icon_attach_48_2"/>
+
         <EditText
             android:id="@+id/input_field_chatAct"
             android:layout_width="match_parent"
@@ -37,7 +47,6 @@
             android:layout_weight="1"
             android:background="@drawable/design_field_message"
             android:padding="10dp"
-            android:layout_marginHorizontal="8dp"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="8dp"
             />
@@ -48,7 +57,7 @@
             android:layout_height="45dp"
             android:layout_gravity="bottom"
             android:layout_marginBottom="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginHorizontal="8dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/icon_mess_24"
             android:background="@drawable/design_button_send_message" />

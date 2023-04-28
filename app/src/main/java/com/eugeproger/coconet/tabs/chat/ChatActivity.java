@@ -33,7 +33,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +47,7 @@ public class ChatActivity extends AppCompatActivity {
     private TextView userName, userLastSeen;
     private CircleImageView userImage;
     private Toolbar chatToolBar;
-    private ImageButton sendMessageButton;
+    private ImageButton sendMessageButton, attachFileButton;
     private EditText messageInputText;
     private FirebaseAuth auth;
     private DatabaseReference rootRef;
@@ -53,6 +55,7 @@ public class ChatActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private MessageAdapter messageAdapter;
     private RecyclerView userMessages;
+    private String saveCurrentTime, saveCurrentDate;
 
     private void initializeElements() {
 
@@ -73,12 +76,21 @@ public class ChatActivity extends AppCompatActivity {
 
         sendMessageButton = findViewById(R.id.send_message_button_chatAct);
         messageInputText = findViewById(R.id.input_field_chatAct);
+        attachFileButton = findViewById(R.id.attach_button_actChatting);
 
         messageAdapter = new MessageAdapter(messages);
         userMessages = findViewById(R.id.chats_chatAct);
         linearLayoutManager = new LinearLayoutManager(this);
         userMessages.setLayoutManager(linearLayoutManager);
         userMessages.setAdapter(messageAdapter);
+
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+        saveCurrentDate = currentDate.format(calendar.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm");
+        saveCurrentTime = currentTime.format(calendar.getTime());
     }
 
     @Override
@@ -163,6 +175,10 @@ public class ChatActivity extends AppCompatActivity {
             messageTextBody.put(Constant.MESSAGE, messageText);
             messageTextBody.put(Constant.TYPE, Constant.TEXT);
             messageTextBody.put(Constant.FROM, messageSenderID);
+            messageTextBody.put(Constant.TO, messageReceiverID);
+            messageTextBody.put(Constant.MESSAGE_ID, messagePushID);
+            messageTextBody.put(Constant.TIME, saveCurrentTime);
+            messageTextBody.put(Constant.DATE, saveCurrentDate);
 
             Map messageBodyDetails = new HashMap();
             messageBodyDetails.put(messageSenderRef + "/" + messagePushID, messageTextBody);
