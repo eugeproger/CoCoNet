@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_layMessages"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+    
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image_layMessage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:layout_gravity="bottom"
+                android:src="@drawable/avatar_profile"
+                android:cropToPadding="true" />
+    
+            <EditText
+                android:id="@+id/receiver_layMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="250dp"
+                android:background="@drawable/design_messages_receiver"
+                android:paddingVertical="6dp"
+                android:paddingHorizontal="12dp"
+                android:text="Receiver" />
+    
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/sender_layMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="250dp"
+            android:background="@drawable/design_messages_sender"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:text="Sender"
+            android:layout_gravity="right"
+            android:textColor="@color/white"/>
+        
+        <ImageView
+            android:id="@+id/message_sender_image_view_layChatting"
+            android:layout_width="150dp"
+            android:layout_height="150dp"/>
+
+        <ImageView
+            android:id="@+id/message_receiver_image_view_layChatting"
+            android:layout_width="150dp"
+            android:layout_height="150dp"/>
+
+    </LinearLayout>
+</RelativeLayout>

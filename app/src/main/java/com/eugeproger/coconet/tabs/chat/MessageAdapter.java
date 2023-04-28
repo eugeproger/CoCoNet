@@ -3,6 +3,7 @@ package com.eugeproger.coconet.tabs.chat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -30,7 +31,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Messages
     private List<Message> userMessages;
     private FirebaseAuth auth;
     private DatabaseReference usersRef;
-
     public MessageAdapter(List<Message> userMessages) {
         this.userMessages = userMessages;
     }
@@ -38,7 +38,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Messages
     @NonNull
     @Override
     public MessagesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_message, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_chatting, parent,false);
 
         auth = FirebaseAuth.getInstance();
 
@@ -69,31 +69,29 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Messages
             }
         });
 
+        holder.receiverMessageText.setVisibility(View.GONE);
+        holder.receiverProfileImage.setVisibility(View.GONE);
+        holder.senderMessageText.setVisibility(View.GONE);
+        holder.messageSenderPicture.setVisibility(View.GONE);
+        holder.messageReceiverPicture.setVisibility(View.GONE);
+
         if (fromMessageType.equals(Constant.TEXT)) {
-            holder.receiverMessageText.setVisibility(View.GONE);
-            holder.receiverProfileImage.setVisibility(View.GONE);
-            holder.senderMessageText.setVisibility(View.GONE);
+
 
             if (fromUserID.equals(messageSenderID)) {
                 holder.senderMessageText.setVisibility(View.VISIBLE);
-                //holder.senderMessageText.setBackgroundResource(R.drawable.design_messages_sender);
-                holder.senderMessageText.setText(message.getMessage());
+                holder.senderMessageText.setText(message.getMessage() + "\n\n" + message.getTime() + " - " + message.getDate());
             } else {
 
                 holder.receiverMessageText.setVisibility(View.VISIBLE);
-                //holder.receiverProfileImage.setVisibility(View.VISIBLE);
-
-                //holder.receiverMessageText.setBackgroundResource(R.drawable.design_messages_receiver);
-                holder.receiverMessageText.setText(message.getMessage());
+                holder.receiverMessageText.setText(message.getMessage() + "\n\n" + message.getTime() + " - " + message.getDate());
             }
         }
         if (position == 0) {
-            // Ustawienie marginesu dla pierwszego elementu
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.setMargins(0, 24, 0, 0);
             holder.itemView.setLayoutParams(params);
         } else {
-            // Ustawienie zerowego marginesu dla pozostałych elementów
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.setMargins(0, 0, 0, 24);
             holder.itemView.setLayoutParams(params);
@@ -111,6 +109,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Messages
 
         public TextView senderMessageText, receiverMessageText;
         public CircleImageView receiverProfileImage;
+        public ImageView messageSenderPicture, messageReceiverPicture;
 
         public MessagesViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -118,6 +117,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Messages
             senderMessageText = itemView.findViewById(R.id.sender_layMessage);
             receiverMessageText = itemView.findViewById(R.id.receiver_layMessage);
             receiverProfileImage = itemView.findViewById(R.id.image_layMessage);
+            messageReceiverPicture = itemView.findViewById(R.id.message_receiver_image_view_layChatting);
+            messageSenderPicture = itemView.findViewById(R.id.message_sender_image_view_layChatting);
         }
     }
 }
