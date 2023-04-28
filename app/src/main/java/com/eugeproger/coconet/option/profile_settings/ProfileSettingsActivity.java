@@ -92,7 +92,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==Constant.GALLERY_PICK  &&  resultCode==RESULT_OK  &&  data!=null) {
+        if (requestCode==Constant.REQUEST_CODE_1 &&  resultCode==RESULT_OK  &&  data!=null) {
             Uri ImageUri = data.getData();
             if (resultCode == RESULT_OK) {
                 loadingBar.setTitle("Set profile image");
@@ -208,6 +208,6 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         Intent galleryIntent = new Intent();
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, Constant.GALLERY_PICK);
+        startActivityForResult(galleryIntent, Constant.REQUEST_CODE_1);
     }
 }
