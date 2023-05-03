@@ -252,8 +252,8 @@ public class ChatActivity extends AppCompatActivity {
 
         CharSequence options[] = new CharSequence[] {
                 "Image",
-                "PDF File",
-                "DOCX File",
+                "File",
+
 
         };
 
@@ -272,19 +272,11 @@ public class ChatActivity extends AppCompatActivity {
                     startActivityForResult(intent.createChooser(intent, "Select image"), Constant.REQUEST_CODE_2);
                 }
                 if (i == 1) {
-
-                    checker = Constant.PDF;
+                    checker = Constant.FILE;
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_GET_CONTENT);
-                    intent.setType(Type.APPLICATION_PDF);
-                    startActivityForResult(intent.createChooser(intent, "Select PDF file"), Constant.REQUEST_CODE_2);
-                }
-                if (i == 2) {
-                    checker = Constant.DOCX;
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
-                    intent.setType(Type.APPLICATION_DOCX);
-                    startActivityForResult(intent.createChooser(intent, "Select DOCX file"), Constant.REQUEST_CODE_2);
+                    intent.setType(Type.FILE);
+                    startActivityForResult(Intent.createChooser(intent, "Select file"), Constant.REQUEST_CODE_2);
                 }
             }
         });
