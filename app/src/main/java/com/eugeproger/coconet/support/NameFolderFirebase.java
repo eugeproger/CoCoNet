@@ -11,4 +11,5 @@ public class NameFolderFirebase {
     public static final String NOTIFICATIONS = "Notifications";
     public static final String USER_STATE = "User_state";
     public static final String IMAGE_FILES = "Image_files";
+    public static final String DOCUMENT_FILES = "Document_files";
 }
