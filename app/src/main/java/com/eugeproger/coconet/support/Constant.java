@@ -35,6 +35,5 @@ public class Constant {
     public static final String OFFLINE = "offline";
     public static final String TO = "to";
     public static final String MESSAGE_ID = "message_ID";
-    public static final String PDF = "pdf";
-    public static final String DOCX = "docx";
+    public static final String FILE = "file";
 }

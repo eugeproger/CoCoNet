@@ -1,5 +1,8 @@
 package com.eugeproger.coconet.tabs.chat;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +49,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Messages
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MessagesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MessagesViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String messageSenderID = auth.getCurrentUser().getUid();
         Message message = userMessages.get(position);
 
@@ -74,6 +77,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Messages
         holder.senderMessageText.setVisibility(View.GONE);
         holder.messageSenderPicture.setVisibility(View.GONE);
         holder.messageReceiverPicture.setVisibility(View.GONE);
+        holder.receivedFile.setVisibility(View.GONE);
+        holder.sentFile.setVisibility(View.GONE);
 
         if (fromMessageType.equals(Constant.TEXT)) {
 
@@ -93,6 +98,27 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Messages
             } else {
                 holder.messageReceiverPicture.setVisibility(View.VISIBLE);
                 Picasso.get().load(message.getMessage()).into(holder.messageReceiverPicture);
+            }
+        } else {
+            if (fromUserID.equals(messageSenderID)) {
+                holder.sentFile.setVisibility(View.VISIBLE);
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(userMessages.get(position).getMessage()));
+                        holder.itemView.getContext().startActivity(intent);
+                    }
+                });
+            } else {
+                holder.receivedFile.setVisibility(View.VISIBLE);
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(userMessages.get(position).getMessage()));
+                        holder.itemView.getContext().startActivity(intent);
+                    }
+                });
             }
         }
 
@@ -119,7 +145,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Messages
 
         public TextView senderMessageText, receiverMessageText;
         public CircleImageView receiverProfileImage;
-        public ImageView messageSenderPicture, messageReceiverPicture;
+
+        public ImageView messageSenderPicture, messageReceiverPicture, sentFile, receivedFile;
 
         public MessagesViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -129,6 +156,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Messages
             receiverProfileImage = itemView.findViewById(R.id.image_layMessage);
             messageReceiverPicture = itemView.findViewById(R.id.message_receiver_image_view_layChatting);
             messageSenderPicture = itemView.findViewById(R.id.message_sender_image_view_layChatting);
+            sentFile = itemView.findViewById(R.id.sender_file_layMessage);
+            receivedFile = itemView.findViewById(R.id.receiver_file_layMessage);
         }
     }
 }

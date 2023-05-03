@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_layMessages"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -20,8 +21,7 @@
                 android:layout_height="40dp"
                 android:layout_marginEnd="8dp"
                 android:layout_gravity="bottom"
-                android:src="@drawable/avatar_profile"
-                android:cropToPadding="true" />
+                android:src="@drawable/avatar_profile" />
     
             <EditText
                 android:id="@+id/receiver_layMessage"
@@ -33,6 +33,9 @@
                 android:paddingHorizontal="12dp"
                 android:layout_gravity="center"
                 android:text="Receiver" />
+
+
+
     
         </LinearLayout>
 
@@ -47,18 +50,56 @@
             android:text="Sender"
             android:layout_gravity="right"
             android:textColor="@color/white"/>
-        
-        <ImageView
-            android:id="@+id/message_sender_image_view_layChatting"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="right"/>
 
         <ImageView
             android:id="@+id/message_receiver_image_view_layChatting"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_gravity="left"/>
+            android:padding="1dp"
+            android:layout_gravity="left"
+            android:scaleType="centerCrop"
+            android:background="@drawable/design_image_receiver"
+            android:cropToPadding="true"
+            android:src="@drawable/test_1"/>
+
+
+        <ImageView
+            android:id="@+id/message_sender_image_view_layChatting"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="right"
+            android:background="@drawable/design_image_sender"
+            android:padding="1dp"
+            android:scaleType="centerCrop"
+            android:cropToPadding="true"/>
+
+
+        <ImageView
+            android:id="@+id/receiver_file_layMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="250dp"
+            android:background="@drawable/design_messages_receiver"
+            android:paddingVertical="6dp"
+            android:paddingHorizontal="12dp"
+            android:layout_gravity="left"
+            android:src="@drawable/icon_file_48" />
+
+        <ImageView
+            android:id="@+id/sender_file_layMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="250dp"
+            android:background="@drawable/design_messages_sender"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:text="Sender"
+            android:layout_gravity="right"
+            android:src="@drawable/icon_file_48"
+            app:tint="@color/white" />
+
+
+
 
     </LinearLayout>
 </RelativeLayout>
