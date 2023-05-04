@@ -16,9 +16,12 @@
         android:theme="@style/Theme.CoCoNet"
         tools:targetApi="31">
         <activity
+            android:name=".ImageViewerActivity"
+            android:exported="false" />
+        <activity
             android:name=".tabs.chat.ChatActivity"
             android:exported="false"
-            android:parentActivityName=".AppMainActivity"/>
+            android:parentActivityName=".AppMainActivity" />
         <activity
             android:name=".option.search.ProfileActivity"
             android:exported="false" />

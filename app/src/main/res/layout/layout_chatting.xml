@@ -80,10 +80,10 @@
             android:layout_height="wrap_content"
             android:maxWidth="250dp"
             android:background="@drawable/design_messages_receiver"
-            android:paddingVertical="6dp"
             android:paddingHorizontal="12dp"
             android:layout_gravity="left"
-            android:src="@drawable/icon_file_48" />
+            android:src="@drawable/icon_file"
+            app:tint="@color/black"/>
 
         <ImageView
             android:id="@+id/sender_file_layMessage"
@@ -92,10 +92,9 @@
             android:maxWidth="250dp"
             android:background="@drawable/design_messages_sender"
             android:paddingHorizontal="12dp"
-            android:paddingVertical="6dp"
             android:text="Sender"
             android:layout_gravity="right"
-            android:src="@drawable/icon_file_48"
+            android:src="@drawable/icon_file"
             app:tint="@color/white" />
 
 
