@@ -38,6 +38,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="8dp"
+            android:background="?attr/colorPrimary"
             android:src="@drawable/icon_attach_48_2"/>
 
         <EditText

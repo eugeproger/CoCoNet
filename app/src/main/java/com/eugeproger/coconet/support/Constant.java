@@ -36,4 +36,5 @@ public class Constant {
     public static final String TO = "to";
     public static final String MESSAGE_ID = "message_ID";
     public static final String FILE = "file";
+    public static final String URL = "url";
 }
