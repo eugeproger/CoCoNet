@@ -34,7 +34,6 @@
                 android:layout_marginTop="56dp"
                 android:src="@drawable/indicator_online_4"
                 android:visibility="gone" />
-
         </RelativeLayout>
 
         <LinearLayout
@@ -62,8 +61,6 @@
                 android:textAlignment="textStart"
                 android:textColor="?attr/colorPrimaryDark"
                 android:textSize="18sp" />
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -102,8 +99,6 @@
                 android:paddingVertical="5dp"
                 android:visibility="gone"
                 app:srcCompat="@drawable/icon_request" />
-
         </LinearLayout>
     </LinearLayout>
-
 </RelativeLayout>

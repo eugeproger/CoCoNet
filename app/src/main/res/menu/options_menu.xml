@@ -22,5 +22,4 @@
         app:showAsAction="never"
         android:title="@string/log_out">
     </item>
-
 </menu>

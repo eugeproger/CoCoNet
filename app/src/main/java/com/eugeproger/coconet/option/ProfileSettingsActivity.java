@@ -1,4 +1,4 @@
-package com.eugeproger.coconet.option.profile_settings;
+package com.eugeproger.coconet.option;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -19,6 +19,7 @@ import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.support.Constant;
 import com.eugeproger.coconet.support.ConfigurationFirebase;
 import com.eugeproger.coconet.support.NameFolderFirebase;
+import com.eugeproger.coconet.support.Type;
 import com.eugeproger.coconet.support.Utility;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -73,7 +74,9 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
         rootRef = ConfigurationFirebase.setRealtimeDatabaseRef();
-        userProfileImagesRef = FirebaseStorage.getInstance().getReference().child(NameFolderFirebase.PROFILE_IMAGES);
+        userProfileImagesRef = FirebaseStorage.getInstance()
+                .getReference()
+                .child(NameFolderFirebase.PROFILE_IMAGES);
     }
 
     @Override
@@ -99,40 +102,36 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                 loadingBar.setMessage("Profile image is updating...");
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
-
                 filePath = userProfileImagesRef.child(currentUserID + ".jpg");
-                filePath.putFile(ImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            Utility.showShortToast(ProfileSettingsActivity.this, "Profile image is uploaded successfully!");
-
-                            filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                public void onSuccess(Uri uri) {
-                                    final String downloadUrl = uri.toString();
-
-                                    rootRef.child(NameFolderFirebase.USERS).child(currentUserID).child(Constant.IMAGE).setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Utility.showShortToast(ProfileSettingsActivity.this, "Image is saved in database successfully!");
-                                                loadingBar.dismiss();
-                                            } else {
-                                                String message = task.getException().toString();
-                                                Utility.showErrorToast(ProfileSettingsActivity.this, message);
-                                                loadingBar.dismiss();
-                                            }
+                filePath.putFile(ImageUri).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Utility.showShortToast(ProfileSettingsActivity.this,
+                                "Profile image is uploaded successfully!"
+                        );
+                        filePath.getDownloadUrl().addOnSuccessListener(uri -> {
+                            final String downloadUrl = uri.toString();
+                            rootRef.child(NameFolderFirebase.USERS)
+                                    .child(currentUserID)
+                                    .child(Constant.IMAGE)
+                                    .setValue(downloadUrl)
+                                    .addOnCompleteListener(task1 -> {
+                                        if (task1.isSuccessful()) {
+                                            Utility.showShortToast(ProfileSettingsActivity.this,
+                                                    "Image is saved in database successfully!");
+                                            loadingBar.dismiss();
+                                        } else {
+                                            String message = task1.getException().toString();
+                                            Utility.showErrorToast(ProfileSettingsActivity.this,
+                                                    message
+                                            );
+                                            loadingBar.dismiss();
                                         }
                                     });
-                                }
-
-                            });
-                        } else {
-                            String message = task.getException().toString();
-
-                            Utility.showErrorToast(ProfileSettingsActivity.this, message);
-                            loadingBar.dismiss();
-                        }
+                        });
+                    } else {
+                        String message = task.getException().toString();
+                        Utility.showErrorToast(ProfileSettingsActivity.this, message);
+                        loadingBar.dismiss();
                     }
                 });
             }
@@ -153,34 +152,45 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             profileMap.put(Constant.UID, currentUserID);
             profileMap.put(Constant.NAME, setUserName);
             profileMap.put(Constant.BIO, setStatus);
-            rootRef.child(NameFolderFirebase.USERS).child(currentUserID).updateChildren(profileMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        sendUserToMainActivity();
-                        Utility.showShortToast(ProfileSettingsActivity.this, "Profile is updated successfully!");
-                    } else {
-                        String message = task.getException().toString();
-                        Utility.showErrorToast(ProfileSettingsActivity.this, message);
-                    }
+            rootRef.child(NameFolderFirebase.USERS)
+                    .child(currentUserID)
+                    .updateChildren(profileMap)
+                    .addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    sendUserToMainActivity();
+                    Utility.showShortToast(ProfileSettingsActivity.this,
+                            "Profile is updated successfully!"
+                    );
+                } else {
+                    String message = task.getException().toString();
+                    Utility.showErrorToast(ProfileSettingsActivity.this, message);
                 }
             });
         }
     }
 
     private void retrieveUserInfo() {
-        rootRef.child(NameFolderFirebase.USERS).child(currentUserID).addValueEventListener(new ValueEventListener() {
+        rootRef.child(NameFolderFirebase.USERS)
+                .child(currentUserID)
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if ((dataSnapshot.exists()) && (dataSnapshot.hasChild(Constant.NAME) && (dataSnapshot.hasChild(Constant.IMAGE)))) {
-                    String retrieveUserName = dataSnapshot.child(Constant.NAME).getValue().toString();
-                    String retrievesStatus = dataSnapshot.child(Constant.BIO).getValue().toString();
-                    String retrieveProfileImage = dataSnapshot.child(Constant.IMAGE).getValue().toString();
+                if ((dataSnapshot.exists()) &&
+                        (dataSnapshot.hasChild(Constant.NAME) &&
+                                (dataSnapshot.hasChild(Constant.IMAGE)))) {
+                    String retrieveUserName = dataSnapshot.child(Constant.NAME)
+                            .getValue().toString();
+                    String retrievesStatus = dataSnapshot.child(Constant.BIO)
+                            .getValue().toString();
+                    String retrieveProfileImage = dataSnapshot.child(Constant.IMAGE)
+                            .getValue().toString();
 
                     userName.setText(retrieveUserName);
                     userBio.setText(retrievesStatus);
-                    Picasso.get().load(retrieveProfileImage).placeholder(R.drawable.avatar_profile).into(userProfileImage);
-
+                    Picasso.get()
+                            .load(retrieveProfileImage)
+                            .placeholder(R.drawable.avatar_profile)
+                            .into(userProfileImage);
                 } else if ((dataSnapshot.exists()) && (dataSnapshot.hasChild(Constant.NAME))) {
                     String retrieveUserName = dataSnapshot.child(Constant.NAME).getValue().toString();
                     String retrievesStatus = dataSnapshot.child(Constant.BIO).getValue().toString();
@@ -188,7 +198,9 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                     userName.setText(retrieveUserName);
                     userBio.setText(retrievesStatus);
                 } else {
-                    Utility.showLengthToast(ProfileSettingsActivity.this, "Set and update your profile information.");
+                    Utility.showLengthToast(ProfileSettingsActivity.this,
+                            "Set and update your profile information."
+                    );
                 }
             }
             @Override
@@ -198,7 +210,9 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     }
 
     private void sendUserToMainActivity() {
-        Intent mainIntent = new Intent(ProfileSettingsActivity.this, AppMainActivity.class);
+        Intent mainIntent = new Intent(ProfileSettingsActivity.this,
+                AppMainActivity.class
+        );
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
         finish();
@@ -207,7 +221,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     private void sendUserToGallery() {
         Intent galleryIntent = new Intent();
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
+        galleryIntent.setType(Type.IMAGE);
         startActivityForResult(galleryIntent, Constant.REQUEST_CODE_1);
     }
 }

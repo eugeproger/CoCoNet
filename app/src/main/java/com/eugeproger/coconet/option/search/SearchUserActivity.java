@@ -26,7 +26,6 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SearchUserActivity extends AppCompatActivity {
-
     private Toolbar toolbar;
     private RecyclerView searchUsersRecyclerView;
     private TextView titleToolBar;
@@ -49,54 +48,58 @@ public class SearchUserActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         titleToolBar = toolbar.findViewById(R.id.title);
         titleToolBar.setText("Search user");
-
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        FirebaseRecyclerOptions<Contact> options = new FirebaseRecyclerOptions.Builder<Contact>().setQuery(userRef, Contact.class).build();
-
-        FirebaseRecyclerAdapter<Contact, SearchUserViewHolder> adapter = new FirebaseRecyclerAdapter<Contact, SearchUserViewHolder>(options) {
+        FirebaseRecyclerOptions<Contact> options = new FirebaseRecyclerOptions.Builder<Contact>()
+                .setQuery(userRef, Contact.class)
+                .build();
+        FirebaseRecyclerAdapter<Contact, SearchUserViewHolder> adapter =
+                new FirebaseRecyclerAdapter<Contact, SearchUserViewHolder>(options) {
             @NonNull
             @Override
-            public SearchUserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_user, parent,false);
+            public SearchUserViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
+                                                           int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.layout_user, parent,false);
                 SearchUserViewHolder viewHolder = new SearchUserViewHolder(view);
                 return viewHolder;
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull SearchUserViewHolder holder, int position, @NonNull Contact model) {
+            protected void onBindViewHolder(@NonNull SearchUserViewHolder holder,
+                                            int position,
+                                            @NonNull Contact model) {
                 holder.userName.setText(model.getName());
                 holder.userBio.setText(model.getBio());
                 if (holder.profileImage != null && model.getImage() != null) {
-                    Picasso.get().load(model.getImage()).placeholder(R.drawable.avatar_profile).into(holder.profileImage);
+                    Picasso.get()
+                            .load(model.getImage())
+                            .placeholder(R.drawable.avatar_profile)
+                            .into(holder.profileImage);
                 }
-
                 holder.itemView.setOnClickListener(view -> {
                     String visitUserID = getRef(position).getKey();
-                    Intent profileIntent = new Intent(SearchUserActivity.this, ProfileActivity.class);
+                    Intent profileIntent = new Intent(SearchUserActivity.this,
+                            ProfileActivity.class
+                    );
                     profileIntent.putExtra(Constant.VISIT_USER_ID, visitUserID);
                     startActivity(profileIntent);
                 });
             }
         };
         searchUsersRecyclerView.setAdapter(adapter);
-
         adapter.startListening();
     }
 
     public static class SearchUserViewHolder extends RecyclerView.ViewHolder {
-
         TextView userName, userBio;
         CircleImageView profileImage;
 
         public SearchUserViewHolder(@NonNull View itemView) {
             super(itemView);
-
             userName = itemView.findViewById(R.id.name_layUser);
             userBio = itemView.findViewById(R.id.bio_layUser);
             profileImage = itemView.findViewById(R.id.profile_image_layUser);

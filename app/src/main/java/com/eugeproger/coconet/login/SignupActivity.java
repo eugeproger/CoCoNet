@@ -25,7 +25,6 @@ import com.eugeproger.coconet.support.Utility;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 public class SignupActivity extends AppCompatActivity {
-
     private Button signUpButton;
     private EditText userSignupEmailField, userSignupPasswordField;
     private TextView logInLink;
@@ -71,26 +70,26 @@ public class SignupActivity extends AppCompatActivity {
             progressDialog.setMessage("Your account are creating...");
             progressDialog.setCanceledOnTouchOutside(true);
             progressDialog.show();
-            firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
+            firebaseAuth.createUserWithEmailAndPassword(email,password)
+                    .addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    String deviceToken = FirebaseInstanceId.getInstance().getToken();
 
-                        String deviceToken = FirebaseInstanceId.getInstance().getToken();
-
-                        String currentUserID = firebaseAuth.getCurrentUser().getUid();
-                        rootReference.child(NameFolderFirebase.USERS).child(currentUserID).setValue("");
-
-                        rootReference.child(NameFolderFirebase.USERS).child(currentUserID).child(Constant.DEVICE_TOKEN).setValue(deviceToken);
-
-                        sendUserToAppActivity();
-                        Utility.showLengthToast(SignupActivity.this, "Account created successfully");
-                        progressDialog.dismiss();
-                    } else {
-                        String message = task.getException().toString();
-                        Utility.showLengthToast(SignupActivity.this, "Error: " + message);
-                        progressDialog.dismiss();
-                    }
+                    String currentUserID = firebaseAuth.getCurrentUser().getUid();
+                    rootReference.child(NameFolderFirebase.USERS).child(currentUserID).setValue("");
+                    rootReference.child(NameFolderFirebase.USERS)
+                            .child(currentUserID)
+                            .child(Constant.DEVICE_TOKEN)
+                            .setValue(deviceToken);
+                    sendUserToAppActivity();
+                    Utility.showLengthToast(SignupActivity.this,
+                            "Account created successfully"
+                    );
+                    progressDialog.dismiss();
+                } else {
+                    String message = task.getException().toString();
+                    Utility.showLengthToast(SignupActivity.this, "Error: " + message);
+                    progressDialog.dismiss();
                 }
             });
         }
