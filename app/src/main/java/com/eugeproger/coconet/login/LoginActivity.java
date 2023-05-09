@@ -26,16 +26,6 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private DatabaseReference usersRef;
 
-    private void initializeElements() {
-        logInButton = findViewById(R.id.log_in_button);
-        phoneLogInButton = findViewById(R.id.phone_log_in_button);
-        userLoginEmailField = findViewById(R.id.user_login_email_field);
-        userLoginPasswordField = findViewById(R.id.user_login_password_field);
-        signUpLink = findViewById(R.id.sign_up_link);
-        createNewPasswordLink = findViewById(R.id.create_new_password_link);
-        progressDialog = new ProgressDialog(this);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +33,13 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         usersRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.USERS);
 
-        initializeElements();
+        logInButton = findViewById(R.id.log_in_button);
+        phoneLogInButton = findViewById(R.id.phone_log_in_button);
+        userLoginEmailField = findViewById(R.id.user_login_email_field);
+        userLoginPasswordField = findViewById(R.id.user_login_password_field);
+        signUpLink = findViewById(R.id.sign_up_link);
+        createNewPasswordLink = findViewById(R.id.create_new_password_link);
+        progressDialog = new ProgressDialog(this);
 
         signUpLink.setOnClickListener(view -> sendUserToSignupActivity());
         logInButton.setOnClickListener(view -> allowUserToLogIn());
