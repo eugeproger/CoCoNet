@@ -27,11 +27,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/phone_login_imageView"
+            android:background="@drawable/design_field_text"
+            android:drawableStart="@drawable/icon_phone_4"
             android:hint="@string/phone_number"
             android:inputType="phone"
             android:padding="4dp"
-            android:drawableStart="@drawable/icon_phone_4"
-            android:background="@drawable/design_field_text"/>
+            android:visibility="invisible" />
 
         <EditText
             android:id="@+id/verification_code_field"
@@ -42,7 +43,7 @@
             android:drawableStart="@drawable/icon_code_3"
             android:hint="@string/verification_code"
             android:padding="4dp"
-            android:visibility="invisible"
+            android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@+id/phone_number_field" />
 
         <Button
@@ -50,13 +51,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/phone_number_field"
-            android:padding="8dp"
             android:layout_marginTop="24dp"
-            android:text="@string/send_code"
-            android:textSize="18sp"
             android:background="@drawable/design_button_regular"
+            android:padding="8dp"
+            android:text="@string/send_code"
             android:textColor="@color/white"
-            app:backgroundTint="@color/black"/>
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:backgroundTint="@color/black" />
 
         <Button
             android:id="@+id/verify_button"
@@ -69,8 +71,6 @@
             android:text="@string/verify"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:visibility="invisible"
             app:backgroundTint="@color/black" />
-
         </RelativeLayout>
 </RelativeLayout>

@@ -1,8 +1,6 @@
 package com.eugeproger.coconet.login;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,20 +8,15 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.eugeproger.coconet.AppMainActivity;
 import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.support.ConfigurationFirebase;
 import com.eugeproger.coconet.support.Constant;
 import com.eugeproger.coconet.support.NameFolderFirebase;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.eugeproger.coconet.support.Utility;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdReceiver;
 
 public class LoginActivity extends AppCompatActivity {
     private Button logInButton, phoneLogInButton;
@@ -33,16 +26,6 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private DatabaseReference usersRef;
 
-    private void initializeElements() {
-        logInButton = findViewById(R.id.log_in_button);
-        phoneLogInButton = findViewById(R.id.phone_log_in_button);
-        userLoginEmailField = findViewById(R.id.user_login_email_field);
-        userLoginPasswordField = findViewById(R.id.user_login_password_field);
-        signUpLink = findViewById(R.id.sign_up_link);
-        createNewPasswordLink = findViewById(R.id.create_new_password_link);
-        progressDialog = new ProgressDialog(this);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,15 +33,20 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         usersRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.USERS);
 
-
-        initializeElements();
-
-
+        logInButton = findViewById(R.id.log_in_button);
+        phoneLogInButton = findViewById(R.id.phone_log_in_button);
+        userLoginEmailField = findViewById(R.id.user_login_email_field);
+        userLoginPasswordField = findViewById(R.id.user_login_password_field);
+        signUpLink = findViewById(R.id.sign_up_link);
+        createNewPasswordLink = findViewById(R.id.create_new_password_link);
+        progressDialog = new ProgressDialog(this);
 
         signUpLink.setOnClickListener(view -> sendUserToSignupActivity());
         logInButton.setOnClickListener(view -> allowUserToLogIn());
         phoneLogInButton.setOnClickListener(view -> {
-            Intent phoneLoginIntent = new Intent(LoginActivity.this, PhoneLoginActivity.class);
+            Intent phoneLoginIntent = new Intent(LoginActivity.this,
+                    PhoneLoginActivity.class
+            );
             startActivity(phoneLoginIntent);
         });
     }
@@ -76,31 +64,25 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.setMessage("Please wait...");
             progressDialog.setCanceledOnTouchOutside(true);
             progressDialog.show();
-            firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-
-                        String currentUserID = firebaseAuth.getCurrentUser().getUid();
-                        String deviceToken = FirebaseInstanceId.getInstance().getToken();
-
-                        usersRef.child(currentUserID).child(Constant.DEVICE_TOKEN).setValue(deviceToken).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    sendUserToAppMainActivity();
-                                    Utility.showShortToast(LoginActivity.this, "Logged in successful");
-                                    progressDialog.dismiss();
-                                }
-                            }
-                        });
-
-
-                    } else {
-                        String message = task.getException().toString();
-                        Utility.showLengthToast(LoginActivity.this, "Error: " + message);
-                        progressDialog.dismiss();
-                    }
+            firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    String currentUserID = firebaseAuth.getCurrentUser().getUid();
+                    String deviceToken = FirebaseInstanceId.getInstance().getToken();
+                    usersRef.child(currentUserID)
+                            .child(Constant.DEVICE_TOKEN)
+                            .setValue(deviceToken)
+                            .addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            sendUserToAppMainActivity();
+                            Utility.showShortToast(LoginActivity.this,
+                                    "Logged in successful");
+                            progressDialog.dismiss();
+                        }
+                    });
+                } else {
+                    String message = task.getException().toString();
+                    Utility.showLengthToast(LoginActivity.this, "Error: " + message);
+                    progressDialog.dismiss();
                 }
             });
         }

@@ -18,7 +18,6 @@
         android:contentDescription="@string/signup_image"
         app:srcCompat="@drawable/avatar_signup"/>
 
-
     <TextView
         android:id="@+id/hello_textView"
         android:layout_width="match_parent"
@@ -113,6 +112,5 @@
             android:text="@string/log_in"
             android:textStyle="bold"
             android:textColor="?attr/colorAccent"/>
-
     </LinearLayout>
 </RelativeLayout>

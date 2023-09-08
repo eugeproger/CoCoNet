@@ -1,4 +1,4 @@
-package com.eugeproger.coconet.tabs.contact;
+package com.eugeproger.coconet.tabs;
 
 import android.os.Bundle;
 
@@ -42,14 +42,12 @@ public class ContactsFragment extends Fragment {
     private String currentUserID;
 
     public ContactsFragment() {
-        // Required empty public constructor
-    }
 
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -62,7 +60,9 @@ public class ContactsFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         currentUserID = auth.getCurrentUser().getUid();
 
-        contactsRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.CONTACTS).child(currentUserID);
+        contactsRef = ConfigurationFirebase.setRealtimeDatabaseRef()
+                .child(NameFolderFirebase.CONTACTS)
+                .child(currentUserID);
         usersRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.USERS);
 
 
@@ -73,31 +73,42 @@ public class ContactsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Contact>().setQuery(contactsRef, Contact.class).build();
-
-        final FirebaseRecyclerAdapter<Contact, ContactsViewHolder> adapter = new FirebaseRecyclerAdapter<Contact, ContactsViewHolder>(options) {
+        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Contact>()
+                .setQuery(contactsRef, Contact.class).build();
+        final FirebaseRecyclerAdapter<Contact, ContactsViewHolder> adapter =
+                new FirebaseRecyclerAdapter<Contact, ContactsViewHolder>(options) {
             @NonNull
             @Override
             public ContactsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_user, parent,false);
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.layout_user, parent,false);
                 ContactsViewHolder viewHolder = new ContactsViewHolder(view);
                 return viewHolder;
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull ContactsViewHolder holder, int position, @NonNull Contact model) {
+            protected void onBindViewHolder(@NonNull ContactsViewHolder holder,
+                                            int position,
+                                            @NonNull Contact model) {
                 String userIDs = getRef(position).getKey();
                 usersRef.child(userIDs).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                         if (snapshot.exists()) {
-
-                            if (snapshot.child(NameFolderFirebase.USER_STATE).hasChild(Constant.STATE)) {
-                                String state = snapshot.child(NameFolderFirebase.USER_STATE).child(Constant.STATE).getValue().toString();
-                                String date = snapshot.child(NameFolderFirebase.USER_STATE).child(Constant.DATE).getValue().toString();
-                                String time = snapshot.child(NameFolderFirebase.USER_STATE).child(Constant.TIME).getValue().toString();
-
+                            if (snapshot.child(NameFolderFirebase.USER_STATE)
+                                    .hasChild(Constant.STATE)) {
+                                String state = snapshot.child(NameFolderFirebase.USER_STATE)
+                                        .child(Constant.STATE)
+                                        .getValue()
+                                        .toString();
+                                String date = snapshot.child(NameFolderFirebase.USER_STATE)
+                                        .child(Constant.DATE)
+                                        .getValue()
+                                        .toString();
+                                String time = snapshot.child(NameFolderFirebase.USER_STATE)
+                                        .child(Constant.TIME)
+                                        .getValue()
+                                        .toString();
                                 if (state.equals(Constant.ONLINE)) {
                                     holder.onlineImage.setVisibility(View.VISIBLE);
                                 } else if (state.equals(Constant.OFFLINE)) {
@@ -105,27 +116,35 @@ public class ContactsFragment extends Fragment {
                                 }
                             } else {
                                 holder.onlineImage.setVisibility(View.GONE);
-
                             }
-
                             if (snapshot.hasChild(Constant.IMAGE)) {
-                                String profileImage = snapshot.child(Constant.IMAGE).getValue().toString();
-                                String profileBio = snapshot.child(Constant.BIO).getValue().toString();
-                                String profileName = snapshot.child(Constant.NAME).getValue().toString();
-
+                                String profileImage = snapshot.child(Constant.IMAGE)
+                                        .getValue()
+                                        .toString();
+                                String profileBio = snapshot.child(Constant.BIO)
+                                        .getValue()
+                                        .toString();
+                                String profileName = snapshot.child(Constant.NAME)
+                                        .getValue()
+                                        .toString();
                                 holder.userName.setText(profileName);
                                 holder.userBio.setText(profileBio);
-                                Picasso.get().load(profileImage).placeholder(R.drawable.avatar_profile).into(holder.userImage);
+                                Picasso.get()
+                                        .load(profileImage)
+                                        .placeholder(R.drawable.avatar_profile)
+                                        .into(holder.userImage);
                             } else {
-                                String profileBio = snapshot.child(Constant.BIO).getValue().toString();
-                                String profileName = snapshot.child(Constant.NAME).getValue().toString();
-
+                                String profileBio = snapshot.child(Constant.BIO)
+                                        .getValue()
+                                        .toString();
+                                String profileName = snapshot.child(Constant.NAME)
+                                        .getValue()
+                                        .toString();
                                 holder.userName.setText(profileName);
                                 holder.userBio.setText(profileBio);
                             }
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
@@ -133,25 +152,21 @@ public class ContactsFragment extends Fragment {
                 });
             }
         };
-
         mContactsList.setAdapter(adapter);
         adapter.startListening();
     }
 
     public static class ContactsViewHolder extends RecyclerView.ViewHolder {
-
         TextView userName, userBio;
         CircleImageView userImage;
         ImageView onlineImage;
 
         public ContactsViewHolder(@NonNull View itemView) {
             super(itemView);
-
             userName = itemView.findViewById(R.id.name_layUser);
             userBio = itemView.findViewById(R.id.bio_layUser);
             userImage = itemView.findViewById(R.id.profile_image_layUser);
             onlineImage = itemView.findViewById(R.id.online_image_layUser);
-
         }
     }
 }

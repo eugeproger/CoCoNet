@@ -1,8 +1,8 @@
 package com.eugeproger.coconet.support;
 
 public class Constant {
-
-    public static final String REALTIME_DATABASE_LINK = "https://coconet-20230422-default-rtdb.europe-west1.firebasedatabase.app/";
+    public static final String REALTIME_DATABASE_LINK =
+            "https://coconet-20230422-default-rtdb.europe-west1.firebasedatabase.app/";
     public static final int REQUEST_CODE_1 = 1;
     public static final int REQUEST_CODE_2 = 2;
     public static final String GROUP_NAME = "group_name";

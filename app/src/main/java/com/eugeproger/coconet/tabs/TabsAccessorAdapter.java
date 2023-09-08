@@ -1,4 +1,4 @@
-package com.eugeproger.coconet.tabs.adapter;
+package com.eugeproger.coconet.tabs;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -6,9 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.eugeproger.coconet.tabs.request.RequestsFragment;
 import com.eugeproger.coconet.tabs.chat.ChatsFragment;
-import com.eugeproger.coconet.tabs.contact.ContactsFragment;
 import com.eugeproger.coconet.tabs.group.GroupsFragment;
 
 public class TabsAccessorAdapter extends FragmentPagerAdapter {
@@ -16,7 +14,6 @@ public class TabsAccessorAdapter extends FragmentPagerAdapter {
     public TabsAccessorAdapter(@NonNull FragmentManager fm) {
         super(fm);
     }
-
     public TabsAccessorAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
@@ -41,7 +38,6 @@ public class TabsAccessorAdapter extends FragmentPagerAdapter {
             default:
                 return null;
         }
-
     }
 
     @Override
@@ -65,5 +61,4 @@ public class TabsAccessorAdapter extends FragmentPagerAdapter {
                 return null;
         }
     }
-
 }

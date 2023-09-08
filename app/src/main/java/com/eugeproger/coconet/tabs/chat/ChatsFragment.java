@@ -36,21 +36,20 @@ public class ChatsFragment extends Fragment {
     private FirebaseAuth auth;
     private String currentUserID = "";
 
-
     public ChatsFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         privateChatsView = inflater.inflate(R.layout.fragment_chats, container, false);
 
         auth = FirebaseAuth.getInstance();
         currentUserID = auth.getCurrentUser().getUid();
-        chatsRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.CONTACTS).child(currentUserID);
+        chatsRef = ConfigurationFirebase.setRealtimeDatabaseRef()
+                .child(NameFolderFirebase.CONTACTS)
+                .child(currentUserID);
         usersRef = ConfigurationFirebase.setRealtimeDatabaseRef().child(NameFolderFirebase.USERS);
 
         chats = privateChatsView.findViewById(R.id.view_chatsFrg);
@@ -61,20 +60,24 @@ public class ChatsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        FirebaseRecyclerOptions<Contact> options = new FirebaseRecyclerOptions.Builder<Contact>()
+                .setQuery(chatsRef, Contact.class)
+                .build();
 
-        FirebaseRecyclerOptions<Contact> options = new FirebaseRecyclerOptions.Builder<Contact>().setQuery(chatsRef, Contact.class).build();
-
-        FirebaseRecyclerAdapter<Contact, ChatsViewHolder> adapter = new FirebaseRecyclerAdapter<Contact, ChatsViewHolder>(options) {
+        FirebaseRecyclerAdapter<Contact, ChatsViewHolder> adapter =
+                new FirebaseRecyclerAdapter<Contact, ChatsViewHolder>(options) {
             @NonNull
             @Override
             public ChatsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_user, parent,false);
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.layout_user, parent,false);
                 return new ChatsViewHolder(view);
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull ChatsViewHolder holder, int position, @NonNull Contact model) {
+            protected void onBindViewHolder(@NonNull ChatsViewHolder holder,
+                                            int position,
+                                            @NonNull Contact model) {
                 final String userIDs = getRef(position).getKey();
                 final String[] image = {Constant.DEFAULT_IMAGE};
                 usersRef.child(userIDs).addValueEventListener(new ValueEventListener() {
@@ -83,19 +86,30 @@ public class ChatsFragment extends Fragment {
                         if (snapshot.exists()) {
                             if (snapshot.hasChild(Constant.IMAGE)) {
                                 image[0] = snapshot.child(Constant.IMAGE).getValue().toString();
-                                Picasso.get().load(image[0]).placeholder(R.drawable.avatar_profile).into(holder.profileImage);
+                                Picasso.get()
+                                        .load(image[0])
+                                        .placeholder(R.drawable.avatar_profile)
+                                        .into(holder.profileImage);
                             }
 
                             final String name = snapshot.child(Constant.NAME).getValue().toString();
                             final String bio = snapshot.child(Constant.BIO).getValue().toString();
                             holder.userName.setText(name);
-                            //holder.userBio.setText("last seen ");
 
-                            if (snapshot.child(NameFolderFirebase.USER_STATE).hasChild(Constant.STATE)) {
-                                String state = snapshot.child(NameFolderFirebase.USER_STATE).child(Constant.STATE).getValue().toString();
-                                String date = snapshot.child(NameFolderFirebase.USER_STATE).child(Constant.DATE).getValue().toString();
-                                String time = snapshot.child(NameFolderFirebase.USER_STATE).child(Constant.TIME).getValue().toString();
-
+                            if (snapshot.child(NameFolderFirebase.USER_STATE)
+                                    .hasChild(Constant.STATE)) {
+                                String state = snapshot.child(NameFolderFirebase.USER_STATE)
+                                        .child(Constant.STATE)
+                                        .getValue()
+                                        .toString();
+                                String date = snapshot.child(NameFolderFirebase.USER_STATE)
+                                        .child(Constant.DATE)
+                                        .getValue()
+                                        .toString();
+                                String time = snapshot.child(NameFolderFirebase.USER_STATE)
+                                        .child(Constant.TIME)
+                                        .getValue()
+                                        .toString();
                                 if (state.equals(Constant.ONLINE)) {
                                     holder.userBio.setText(Constant.ONLINE);
                                 } else if (state.equals(Constant.OFFLINE)) {
@@ -103,22 +117,16 @@ public class ChatsFragment extends Fragment {
                                 }
                             } else {
                                 holder.userBio.setText(Constant.OFFLINE);
-
                             }
-
-                            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    Intent chatIntent = new Intent(getContext(), ChatActivity.class);
-                                    chatIntent.putExtra(Constant.VISIT_USER_ID, userIDs);
-                                    chatIntent.putExtra(Constant.VISIT_USER_NAME, name);
-                                    chatIntent.putExtra(Constant.VISIT_USER_IMAGE, image[0]);
-                                    startActivity(chatIntent);
-                                }
+                            holder.itemView.setOnClickListener(view -> {
+                                Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+                                chatIntent.putExtra(Constant.VISIT_USER_ID, userIDs);
+                                chatIntent.putExtra(Constant.VISIT_USER_NAME, name);
+                                chatIntent.putExtra(Constant.VISIT_USER_IMAGE, image[0]);
+                                startActivity(chatIntent);
                             });
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
@@ -135,7 +143,6 @@ public class ChatsFragment extends Fragment {
         TextView userName, userBio;
         public ChatsViewHolder(@NonNull View itemView) {
             super(itemView);
-
             profileImage = itemView.findViewById(R.id.profile_image_layUser);
             userName = itemView.findViewById(R.id.name_layUser);
             userBio = itemView.findViewById(R.id.bio_layUser);
