@@ -48,6 +48,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:8.0.2'
     implementation 'com.google.firebase:firebase-messaging:23.1.2'
     implementation 'com.google.firebase:firebase-iid:21.1.0'
+    implementation 'com.google.firebase:firebase-auth:21.0.3'
 
 
     runtimeOnly 'com.google.android.material:material:1.8.0'
