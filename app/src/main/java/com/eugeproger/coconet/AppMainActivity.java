@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.eugeproger.coconet.login.LoginActivity;
-import com.eugeproger.coconet.option.profile_settings.ProfileSettingsActivity;
+import com.eugeproger.coconet.option.ProfileSettingsActivity;
 import com.eugeproger.coconet.option.search.SearchUserActivity;
 import com.eugeproger.coconet.support.Constant;
 import com.eugeproger.coconet.support.NameFolderFirebase;
@@ -25,7 +25,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.eugeproger.coconet.tabs.adapter.TabsAccessorAdapter;
+import com.eugeproger.coconet.tabs.TabsAccessorAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -62,9 +62,7 @@ public class AppMainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.main_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-
         auth = FirebaseAuth.getInstance();
-
 
         firebaseDatabase = FirebaseDatabase.getInstance(Constant.REALTIME_DATABASE_LINK);
         rootReference = firebaseDatabase.getReference();
@@ -104,7 +102,9 @@ public class AppMainActivity extends AppCompatActivity {
 
     private void verifyUserExistence() {
         currentUserID = auth.getCurrentUser().getUid();
-        rootReference.child(NameFolderFirebase.USERS).child(currentUserID).addValueEventListener(new ValueEventListener() {
+        rootReference.child(NameFolderFirebase.USERS)
+                .child(currentUserID)
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(Constant.NAME).exists()) {
@@ -120,13 +120,17 @@ public class AppMainActivity extends AppCompatActivity {
     }
 
     private void sendUserToMyProfileActivity() {
-        Intent profileIntent = new Intent(AppMainActivity.this, ProfileSettingsActivity.class);
+        Intent profileIntent = new Intent(AppMainActivity.this,
+                ProfileSettingsActivity.class
+        );
         startActivity(profileIntent);
     }
 
     private void holdUserOnProfileActivity() {
         finish();
-        Intent profileIntent = new Intent(AppMainActivity.this, ProfileSettingsActivity.class);
+        Intent profileIntent = new Intent(AppMainActivity.this,
+                ProfileSettingsActivity.class
+        );
         startActivity(profileIntent);
         profileIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
@@ -140,7 +144,9 @@ public class AppMainActivity extends AppCompatActivity {
     }
 
     private void sendUserToSearchUserActivity() {
-        Intent searchUserIntent= new Intent(AppMainActivity.this, SearchUserActivity.class);
+        Intent searchUserIntent= new Intent(AppMainActivity.this,
+                SearchUserActivity.class
+        );
         startActivity(searchUserIntent);
     }
 
@@ -176,40 +182,35 @@ public class AppMainActivity extends AppCompatActivity {
     }
 
     private void RequestNewGroup() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(AppMainActivity.this, R.style.AlertDialog);
+        AlertDialog.Builder builder = new AlertDialog.Builder(AppMainActivity.this,
+                R.style.AlertDialog
+        );
 
         final EditText groupNameField = new EditText(AppMainActivity.this);
         groupNameField.setHint("Group name");
         builder.setView(groupNameField);
 
-        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String groupName = groupNameField.getText().toString();
-                if (TextUtils.isEmpty(groupName)) {
-                    Utility.showLengthToast(AppMainActivity.this, "Group is not created. Please, write a name of group.");
-                } else {
-                    createGroup(groupName);
-                }
+        builder.setPositiveButton("Create", (dialogInterface, i) -> {
+            String groupName = groupNameField.getText().toString();
+            if (TextUtils.isEmpty(groupName)) {
+                Utility.showLengthToast(AppMainActivity.this,
+                        "Group is not created. Please, write a name of group."
+                );
+            } else {
+                createGroup(groupName);
             }
         });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
+        builder.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.cancel());
         builder.show();
     }
 
     private void createGroup(String groupName) {
-        rootReference.child(NameFolderFirebase.GROUPS).child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Utility.showLengthToast(AppMainActivity.this, groupName + "group is created successfully.");
-                }
+        rootReference.child(NameFolderFirebase.GROUPS)
+                .child(groupName).setValue("")
+                .addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Utility.showLengthToast(AppMainActivity.this,
+                        groupName + "group is created successfully.");
             }
         });
     }
@@ -230,6 +231,9 @@ public class AppMainActivity extends AppCompatActivity {
         onlineStates.put(Constant.STATE, state);
 
         currentUserID = auth.getCurrentUser().getUid();
-        rootReference.child(NameFolderFirebase.USERS).child(currentUserID).child(NameFolderFirebase.USER_STATE).updateChildren(onlineStates);
+        rootReference.child(NameFolderFirebase.USERS)
+                .child(currentUserID)
+                .child(NameFolderFirebase.USER_STATE)
+                .updateChildren(onlineStates);
     }
 }

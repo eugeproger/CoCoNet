@@ -13,4 +13,10 @@
         <item name="tabBackground">@color/gray_6</item>
 
     </style>
+    <style name="Theme.CoCoNet.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.CoCoNet.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.CoCoNet.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

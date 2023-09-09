@@ -11,8 +11,6 @@
         layout="@layout/layout_app_bar">
     </include>
 
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chats_chatAct"
         android:layout_width="match_parent"
@@ -20,7 +18,6 @@
         android:layout_marginHorizontal="16dp"
         android:layout_below="@+id/tollBar_chatAct"
         android:layout_above="@id/input_bar_box_chatAct"/>
-
 
     <LinearLayout
         android:id="@+id/input_bar_box_chatAct"
@@ -49,8 +46,7 @@
             android:background="@drawable/design_field_message"
             android:padding="10dp"
             android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp"
-            />
+            android:layout_marginTop="8dp" />
 
         <ImageButton
             android:id="@+id/send_message_button_chatAct"

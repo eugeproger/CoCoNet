@@ -1,7 +1,6 @@
 package com.eugeproger.coconet.simple;
 
 public class Message {
-
     private String from, message, type, to, messageID, time, date, name;
 
     public Message() {

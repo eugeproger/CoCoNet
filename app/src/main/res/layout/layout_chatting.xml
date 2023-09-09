@@ -33,10 +33,6 @@
                 android:paddingHorizontal="12dp"
                 android:layout_gravity="center"
                 android:text="Receiver" />
-
-
-
-    
         </LinearLayout>
 
         <EditText
@@ -59,9 +55,7 @@
             android:layout_gravity="left"
             android:scaleType="centerCrop"
             android:background="@drawable/design_image_receiver"
-            android:cropToPadding="true"
-            android:src="@drawable/test_1"/>
-
+            android:cropToPadding="true" />
 
         <ImageView
             android:id="@+id/message_sender_image_view_layChatting"
@@ -72,7 +66,6 @@
             android:padding="1dp"
             android:scaleType="centerCrop"
             android:cropToPadding="true"/>
-
 
         <ImageView
             android:id="@+id/receiver_file_layMessage"
@@ -96,9 +89,5 @@
             android:layout_gravity="right"
             android:src="@drawable/icon_file"
             app:tint="@color/white" />
-
-
-
-
     </LinearLayout>
 </RelativeLayout>

@@ -46,7 +46,5 @@
             android:layout_marginLeft="16dp"
             android:src="@drawable/avatar_profile"
             android:cropToPadding="true" />
-
     </LinearLayout>
-
 </RelativeLayout>

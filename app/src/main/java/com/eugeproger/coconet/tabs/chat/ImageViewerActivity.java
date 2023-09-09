@@ -1,15 +1,15 @@
-package com.eugeproger.coconet;
+package com.eugeproger.coconet.tabs.chat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.eugeproger.coconet.R;
 import com.eugeproger.coconet.support.Constant;
 import com.squareup.picasso.Picasso;
 
 public class ImageViewerActivity extends AppCompatActivity {
-
     private ImageView imageView;
     private String imageUrl;
 

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".option.search.ProfileActivity">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp">
-
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/avatar_activity_profile"
@@ -38,9 +36,7 @@
         android:layout_marginTop="24dp"
         android:textAlignment="center"
         android:text="User name"
-        android:textSize="36sp"
-        />
-
+        android:textSize="36sp" />
 
     <TextView
         android:id="@+id/user_bio_activity_profile"
@@ -79,10 +75,6 @@
         android:textSize="18sp"
         android:visibility="invisible"
         app:backgroundTint="@color/black" />
-
         </RelativeLayout>
-
     </ScrollView>
-
-
 </RelativeLayout>

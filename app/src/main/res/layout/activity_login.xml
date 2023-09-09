@@ -84,8 +84,6 @@
                     android:background="@drawable/design_empty" />
             </LinearLayout>
 
-
-
             <LinearLayout
                 android:id="@+id/forgotten_password_linearLayout"
                 android:layout_width="wrap_content"
@@ -111,9 +109,7 @@
                     android:text="@string/click"
                     android:textStyle="bold"
                     android:textColor="?attr/colorAccent"/>
-
             </LinearLayout>
-
 
             <Button
                 android:id="@+id/log_in_button"

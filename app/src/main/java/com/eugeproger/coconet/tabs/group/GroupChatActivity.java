@@ -140,7 +140,7 @@ public class GroupChatActivity extends AppCompatActivity {
             Utility.showShortToast(this, "Write message");
         } else {
             Calendar calendarForDate = Calendar.getInstance();
-            SimpleDateFormat currentDateFormat = new SimpleDateFormat("dd, mm, yyyy");
+            SimpleDateFormat currentDateFormat = new SimpleDateFormat("MMM, dd, yyyy");
             currentDate = currentDateFormat.format(calendarForDate.getTime());
 
             Calendar calendarForTime = Calendar.getInstance();
